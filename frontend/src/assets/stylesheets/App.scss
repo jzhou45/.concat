@@ -1,6 +1,7 @@
 @import './variables.scss';
 @import './reset.scss';
 @import './splash/splash.scss';
+@import './splash/splash-first-page.scss';
 @import "./splash/splash_navbar.scss";
 
 @font-face {
@@ -53,6 +54,8 @@
 }
 
 #root {
+    background-color: $background-color;
+    font-family: $default-font;
     position: absolute; 
     left: 0; 
     right: 0; 
