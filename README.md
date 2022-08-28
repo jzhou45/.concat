@@ -1,6 +1,6 @@
 # .concat
 <p align="center">
-  <img width="300" height="300" src=">
+  <img width="300" height="300" src="https://github.com/jzhou45/.concat/blob/main/frontend/src/assets/images/concat_logo.png">
 </p>
 
 ## Background 
