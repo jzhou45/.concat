@@ -1,8 +1,10 @@
 @import './variables.scss';
 @import './reset.scss';
 @import './splash/splash.scss';
+@import './splash/splash-first-page.scss';
 
 #root {
+    background-color: $background-color;
     font-family: $default-font;
     position: absolute; 
     left: 0; 

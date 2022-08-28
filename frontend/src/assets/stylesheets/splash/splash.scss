@@ -8,10 +8,54 @@
     scroll-snap-type: y mandatory;
     overflow-x: hidden;
     scroll-behavior: smooth;
+
+    section {
+        color: $default-white;
+        scroll-snap-align: start;
+        width: 100%;
+        height: 100vh; 
+
+        > div {
+            height: 100%;
+            width: 100%;
+        }
+    }
 }
 
-.splash-first-page {
-    width: 100%;
-    height: 100vh; 
-    background-color: $background-color;
+.splash-second-page .splash-instructions-left{
+    background-color: $default-blue;
+}
+
+.splash-third-page .splash-instructions-right {
+    background-color: $default-lightblue;
+}
+
+.splash-fourth-page .splash-instructions-left {
+    background-color: $default-white;
+}
+
+
+.splash-instructions-left, .splash-instructions-right {
+    height: 100%;
+    width: 50%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.splash-text {
+    width: 200px;
+
+    h1 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+}
+
+.splash-second-page, .splash-third-page, .splash-third-page, .splash-fourth-page {
+    display: flex; 
+    flex-direction: row;
 }

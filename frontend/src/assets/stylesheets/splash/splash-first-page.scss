@@ -1,0 +1,42 @@
+@import '../variables.scss';
+
+.splash-first-page {
+    height: 100%;
+    width: 100%;
+    
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.splash-title-container {
+    color: $default-white;
+    font-size: 60px;
+
+    display: flex; 
+    flex-direction: row; 
+}
+
+.splash-title-con {
+    animation-name: bounce-right;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+}
+
+.splash-title-cat {
+    animation-name: bounce-left;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+
+@keyframes bouncing-left {
+    0% {transform: translateX(40px)}
+    20% {transform: translateX(20px);}
+    50% {transform: translateX(0px);}
+    40% {transform: translateX(10px);} 
+    60% {transform: translateX(20px);} 
+    80% {transform: translateX(10px);} 
+    100% {transform: translateX(0);} 
+}
