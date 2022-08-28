@@ -1,0 +1,21 @@
+@import './variables.scss';
+@import './reset.scss';
+@import './splash/splash.scss';
+
+#root {
+    position: absolute; 
+    left: 0; 
+    right: 0; 
+    height: 100%;
+    width: 100%;
+}
+
+#root::-webkit-scrollbar {
+    display: none;
+}
+
+.hide { 
+    visibility: hidden;
+    opacity: 0;
+    display: none;
+}
