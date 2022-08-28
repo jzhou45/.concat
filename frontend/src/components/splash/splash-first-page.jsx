@@ -1,13 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-const SplashOneContainer = () => {
+const SplashFirstPageContainer = () => {
 
     const content = () => {
         return (
         <div className='splash-first-page'>
-            <div className="splash-title">
-                <h1>.concat</h1>
+            <div className="splash-title-container">
+                <div className='splash-title-con'>.con</div>
+                <div className='splash-title-cat'>cat</div>
             </div>
             <div className='splash-motto-container'>
 
@@ -19,4 +20,4 @@ const SplashOneContainer = () => {
     return content()
 }
 
-export default SplashOneContainer
+export default SplashFirstPageContainer
