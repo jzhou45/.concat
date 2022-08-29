@@ -2,20 +2,22 @@ import React, {useState, useEffect} from 'react'
 import { connect } from 'react-redux'
 import LoadingContainer from '../util/loading_container'
 import RoomItemContainer from './room_item'
-import Logo from '../../assets/images/concat_logo.png'
+import { fetchRooms } from '../../actions/room_actions'
+
 
 const RoomsPageContainer = (props) => {
 
     const currentUser = props.currentUser.username
-    // change everything with currentUser to currentUser.username
 
-    // const { fetchUserRooms, currentUser } = props
+    const { fetchRooms, rooms} = props
+
+    useEffect( () => {
+        fetchRooms().finally(() => setLoading(false))
+    }, [])
     
-    // const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true)
 
-    // useEffect( () => {
-    //     fetchUserRooms(user).finally(() => setLoading(false))
-    // }, [])
+    const userRooms = Object.keys(rooms).map((roomId) => rooms[roomId])
     
     const content = () => {
         return (
@@ -27,8 +29,13 @@ const RoomsPageContainer = (props) => {
                 </div>
                 <div className='rooms-container'>
                     <div className='rooms'>
-                        {<RoomItemContainer roomName={"Personal Room "} roomPhotoUrl={"default"} currentUser={currentUser}/>}
-                        {<RoomItemContainer roomName={"testing"} roomPhotoUrl={ "https://fs-pinteresting-dev.s3.amazonaws.com/png/01.png"}/> }
+                        {userRooms.map((room, i) => <RoomItemContainer 
+                            key={i}
+                            currentUser={currentUser}
+                            roomName={room.name} 
+                            roomPhotoUrl={room.roomPhotoUrl} 
+                            solo={room.solo}
+                            /> )}
                         {<RoomItemContainer roomName={"Create Room"}/>}
                     </div>
                 </div>
@@ -36,18 +43,20 @@ const RoomsPageContainer = (props) => {
         )
     }
 
-    // return loading ? <LoadingContainer/> : content()
-    return content()
+    return loading ? <LoadingContainer/> : content()
 }
 
-const mSTP = ({session: {user}}) => {
+const mSTP = ({session: {user}, rooms}) => {
     return {
-        currentUser: user
+        currentUser: user, 
+        rooms
     }
 }
 
-// const mDTP = (dispatch) => {
-//     fetchUserRooms: (user) => dispatch(fetchUserRooms(user))
-// }
+const mDTP = (dispatch) => {
+    return {
+        fetchRooms: () => dispatch(fetchRooms())
+    }
+}
 
-export default connect(mSTP, null)(RoomsPageContainer)
+export default connect(mSTP, mDTP)(RoomsPageContainer)

@@ -6,6 +6,7 @@
 @import "./session_form/session-form.scss";
 @import './nav/nav.scss';
 @import './rooms/rooms.scss';
+@import './rooms/room_options.scss';
 
 @font-face {
     font-family: "Manrope";
@@ -83,6 +84,17 @@
     display: none;
 }
 
-.loading-container img {
-    filter: brightness(0)
+.loading-container {
+    height: 100%;
+    width: 100%;
+    margin-left: 100px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        filter: invert(100)
+    }
 }
