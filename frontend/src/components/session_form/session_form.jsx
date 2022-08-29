@@ -34,7 +34,7 @@ const SessionForm = props => {
         props.processForm(user).then(() => {
             if (Object.values(props.session).length > 0) {
                 history.push("/rooms");
-                props.closeModal();
+                closeModal();
             };
         });
     };
@@ -48,12 +48,17 @@ const SessionForm = props => {
     let password2Error;
     if (props.errors.password2) password2Error = "input-error";
 
+    const closeModal = () => {
+        props.closeModal();
+        props.clearSessionErrors();
+    };
+
     return(
         <div className="session-form-div">
             <form className="session-form" onSubmit={handleSubmit}>
 
                 <div className="close-button-div">
-                    <img src={closeButton} alt="close" className="close-button" onClick={props.closeModal}/>
+                    <img src={closeButton} alt="close" className="close-button" onClick={closeModal}/>
                 </div>
 
                 <img src={logo} alt="logo" className="form-logo"/>
