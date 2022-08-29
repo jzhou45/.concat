@@ -1,6 +1,7 @@
 @import '../variables.scss';
 
 .logged-in-nav-container {
+    position: fixed;
     height: 100%;
     width: 300px;
     background-color: $default-blue;

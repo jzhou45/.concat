@@ -1,0 +1,115 @@
+@import '../variables.scss';
+
+.rooms-page-container {
+    height: 100%;
+    width: calc(100% - 300px);
+    padding-left: 300px;
+    
+    display: flex; 
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.rooms-header {
+    width: 100%;
+    height: 10%;
+
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+}
+
+.rooms-header-title {
+    margin-left: 20px;
+    font-size: $logo-font-size;
+    color: $default-white;
+    font-weight: 700;
+}
+
+.rooms-container {
+    height: 75%;
+    width: 80%;
+    background: $default-lightblue;
+    border-radius: $div-border-radius;
+
+    display: flex; 
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.room-container {
+    width: 150px;
+    height: 180px;
+    background-color: $background-color;
+    border-radius: $div-border-radius;
+    margin: 20px;
+    cursor: pointer;
+
+    display: flex; 
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.rooms {
+    width: 90%;
+    height: 90%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.div-image {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: rgb(239, 239, 239);
+    position: relative;
+}
+
+.room-photo-container {
+    background-color: $default-white;
+    border-radius: $button-border-radius;
+    height: 120px;
+    width: 120px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+
+    img {
+        display: block;
+        max-width:100%;
+        max-height:100%;
+        width: auto;
+        height: auto;
+    }
+}
+
+.room-title {
+    color: $default-white;
+}
+
+.create-room {
+    background-color: $default-blue;
+}
+
+img.plus {
+    filter: invert(100);
+    height: 70px;
+    width: 70px;
+    margin-top: calc(50% - 35px) ;
+
+    &:hover {
+        filter: invert(72%) sepia(61%) saturate(11%) hue-rotate(32deg) brightness(104%) contrast(94%);
+    }
+}

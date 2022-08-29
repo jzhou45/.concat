@@ -26,7 +26,7 @@
     background-color: $default-lightgray;
     align-items: center;
     box-shadow: 0 2px 4px $default-black, 0 8px 16px $default-black;
-    border-radius: 25px;
+    border-radius: $div-border-radius
 }
 
 .form-logo{
