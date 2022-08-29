@@ -3,7 +3,7 @@ import SessionForm from "./session_form";
 import { closeModal } from "../../actions/modal_actions";
 
 const mapStateToProps = state => ({
-    formType: "signup"
+    formType: "Signup"
 });
 
 const mapDispatchToProps = dispatch => ({
