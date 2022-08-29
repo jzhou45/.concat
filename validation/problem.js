@@ -12,6 +12,25 @@ module.exports = function validateProblemInput(data) {
     data.testCase2 = validText(data.testCase2) ? data.testCase2 : ''
     data.solution2 = validText(data.solution2) ? data.solution2 : ''
 
-    
+    if (Validator.isEmpty(data.title)) {
+        errors.title= 'Title field is required';
+    }
+
+    if (Validator.isEmpty(data.description)) {
+        errors.description= 'Description field is required';
+    }
+
+    if (Validator.isEmpty(data.testCase)) {
+        errors.testCase= 'TestCase field is required';
+    }
+
+    if (Validator.isEmpty(data.solution)) {
+        errors.solution= 'Solution field is required';
+    }
+
+    return {
+        errors,
+        isValid: Object.keys(errors).length === 0
+    }
 
 };

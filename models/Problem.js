@@ -22,7 +22,7 @@ const ProblemSchema = new Schema ({
             type: String
         },
         solution2: {
-            type: String,
+            type: String
         },
 });
 
