@@ -6,7 +6,7 @@ import Splash from './splash/splash';
 import Nav from './nav/nav'
 import Rooms from './rooms/rooms'
 import css from "../assets/stylesheets/App.scss"
-
+import Problems from './problems/problems';
 
 const App = () => (
     <div>
@@ -15,7 +15,8 @@ const App = () => (
         </header>
         <Modal />
         <Switch>
-            <ProtectedRoute path={"/rooms"} component={Rooms}/>
+            <ProtectedRoute exact path={"/rooms"} component={Rooms}/>
+            <ProtectedRoute exact path={"/rooms/:roomsId"} component={Problems}/>
             <AuthRoute exact path={"/"} component={Splash} />
         </Switch>
     </div>
