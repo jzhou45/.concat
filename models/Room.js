@@ -17,7 +17,11 @@ const RoomSchema = new Schema({
     problems: [{
         type: Schema.Types.ObjectId,
         ref: 'Problem'
-    }]
+    }],
+    roomPhotoUrl: {
+        type: String,
+        required: true
+    }
   }, {
     timestamps: true
 });

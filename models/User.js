@@ -13,11 +13,7 @@ const UserSchema = new Schema({
     rooms: [{
         type: Schema.Types.ObjectId,
         ref: 'Room'
-    }],
-    testCases: [
-        [{ type: String },
-        { type: String }]
-    ]
+    }]
   }, {
     timestamps: true
 });

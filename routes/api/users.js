@@ -8,6 +8,7 @@ const keys = require('../../config/keys');
 const passport = require('passport');
 const validateSignupInput = require('../../validation/signup');
 const validateLoginInput = require('../../validation/login');
+const roomPhotoUrls = require('../../util/room-photo-url');
 
 router.post('/signup', (req, res) => {
     const { errors, isValid } = validateSignupInput(req.body);
@@ -38,13 +39,22 @@ router.post('/signup', (req, res) => {
                     const soloRoom = new Room({
                         name: `${user.username}'s Room`,
                         solo: true,
-                        users: [user.id]
+                        users: [user.id],
+                        roomPhotoUrl: roomPhotoUrls[Math.floor(Math.random() * 25)]
                     });
                     soloRoom.save()
 
                     newUser.rooms.push(soloRoom.id);
                     newUser.save()
-                        .then(user => res.json(user))
+                        .then(({ id, username }) => {
+                            Room.find({ users: id })
+                                .then(rooms => res.json({
+                                    id,
+                                    username,
+                                    rooms: rooms.map(room => room.id)
+                                }))
+                                .catch(err => console.log(err));
+                        })
                         .catch(err => console.log(err));
                 })
                 .catch(err => console.log(err));
@@ -71,7 +81,7 @@ router.post('/login', (req, res) => {
           errors.username = 'User not found';
           return res.status(404).json(errors);
         }
-  
+
         bcrypt.compare(password, user.password)
           .then(isMatch => {
             if (isMatch) {
@@ -98,11 +108,9 @@ router.post('/login', (req, res) => {
 router.get('/rooms',
     passport.authenticate('jwt', { session: false }),
     (req, res) => {
-        const user = req.user;
-
-        Room.find({ users: req.params.userId })
+        Room.find({ users: req.user.id })
         .then(rooms => res.json(rooms))
-        .catch(err => res.status(404).json({ usernotfound: 'User does not exist' }));
+        .catch(err => console.log(err));
     }
 );
 

@@ -4,10 +4,15 @@ const passport = require('passport');
 const Room = require('../../models/Room');
 const User = require('../../models/User');
 const validateRoomInput = require('../../validation/rooms');
+const roomPhotoUrls = require('../../util/room-photo-url');
+
+const roomResponse = ({ id, name, solo, users, problems, roomPhotoUrl }) => {
+    return { id, name, solo, users, problems, roomPhotoUrl };
+};
 
 router.get('/:id', (req, res) => {
     Room.findById(req.params.id)
-        .then(room => res.json(room))
+        .then(room => res.json(roomResponse(room)))
         .catch(err => res.status(404).json({ noroomfound: 'No room found with that ID' }));
 });
 
@@ -23,14 +28,15 @@ router.post('/',
 
         const newRoom = new Room({
             name: req.body.name,
-            users: [user.id]
+            users: [user.id],
+            roomPhotoUrl: roomPhotoUrls[Math.floor(Math.random() * 25)]
         });
 
         newRoom.save().then(room => {
             user.rooms.push(newRoom.id);
             user.save();
 
-            res.json(room);
+            return res.json(roomResponse(room));
         });
     }
 );
@@ -54,7 +60,7 @@ router.patch('/:id/rename',
                 } else {
                     room.name = req.body.name;
                     room.save()
-                        .then(room => res.json(room))
+                        .then(room => res.json(roomResponse(room)))
                         .catch(err => console.log(err));
                 }
             })
@@ -79,7 +85,7 @@ router.patch('/:id/join',
 
                     room.users.push(user.id);
                     room.save()
-                        .then(room => res.json(room))
+                        .then(room => res.json(roomResponse(room)))
                         .catch(err => console.log(err));
                 }
             })
@@ -106,11 +112,11 @@ router.patch('/:id/leave',
 
                     if (room.users.length === 0) {
                         Room.findByIdAndDelete(room.id)
-                            .then(room => res.json(room))
+                            .then(room => res.json({ roomdeleted: true }))
                             .catch(err => console.log(err));
                     } else {
                         room.save()
-                            .then(room => res.json(room))
+                            .then(room => res.json(roomResponse(room)))
                             .catch(err => console.log(err));
                     }
                 }
@@ -119,26 +125,27 @@ router.patch('/:id/leave',
     }
 );
 
-// router.delete('/:id',
-//     passport.authenticate('jwt', { session: false }),
-//     (req, res) => {
-//         const user = req.user;
+router.delete('/:id',
+    passport.authenticate('jwt', { session: false }),
+    (req, res) => {
+        const user = req.user;
 
-//         Room.findById(req.params.id)
-//             .then(room => {
-//                 if (!room.users.includes(user.id)) {
-//                     return res.status(400).json({ usernotinroom: 'User is not in this room' });
-//                 } else if (room.solo) {
-//                     return res.status(400).json({ soloroom: 'Users cannot delete a solo room' });
-//                 } else {
-//                     User.updateMany({ rooms: room.id }, { $pull: { rooms: room.id } })
-//                         .then(data => console.log(data));
-//                     Room.findByIdAndDelete(room.id)
-//                         .then(room => res.json({ success: true }));
-//                 }
-//             })
-//             .catch(err => res.status(404).json({ noroomfound: 'No room found with that ID' }));
-//     }
-// );
+        Room.findById(req.params.id)
+            .then(room => {
+                if (!room.users.includes(user.id)) {
+                    return res.status(400).json({ usernotinroom: 'User is not in this room' });
+                } else if (room.solo) {
+                    return res.status(400).json({ soloroom: 'Users cannot delete a solo room' });
+                } else {
+                    User.updateMany({ rooms: room.id }, { $pull: { rooms: room.id } })
+                        .then(() => {
+                            Room.findByIdAndDelete(room.id)
+                                .then(() => res.json({ success: true }));
+                        });
+                }
+            })
+            .catch(err => res.status(404).json({ noroomfound: 'No room found with that ID' }));
+    }
+);
 
 module.exports = router;
