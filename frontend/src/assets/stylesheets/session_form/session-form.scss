@@ -58,7 +58,7 @@
     cursor: pointer;
 }
 
-.session-form > input {
+.session-form > input, .session-form > div > input {
     height: 50px;
     width: 350px;
     background-color: $default-lightestgray;
@@ -70,14 +70,14 @@
     color: $default-white;
 }
 
-.session-form > input::placeholder{
+.session-form > input::placeholder, .session-form > div > input::placeholder{
     color: $background-color;
     font-family: $default-font;
     font-size: 18px;
 }
 
 .session-form > button{
-    margin-top: 80px;
+    margin-top: 30px;
     height: 50px;
     width: 360px;
     border-radius: 25px;

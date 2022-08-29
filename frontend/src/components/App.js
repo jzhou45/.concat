@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from './modal/modal_container';
-// import { AuthRoute, ProtectedRoute } from '../util/route_util';
+import { AuthRoute, ProtectedRoute } from '../util/routes_util';
 import { Route, Switch } from 'react-router-dom';
 import Splash from './splash/splash';
 import Nav from './nav/nav'
@@ -13,8 +13,10 @@ const App = () => (
             <Nav/>
         </header>
         <Modal />
-        <Route exact path={"/"} component={Splash} />
-        <Route path={"/rooms"} component={Rooms}/>
+        <Switch>
+            <ProtectedRoute path={"/rooms"} component={Nav}/>
+            <AuthRoute exact path={"/"} component={Splash} />
+        </Switch>
     </div>
 );
 
