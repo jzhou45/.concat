@@ -3,13 +3,14 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const User = require('../../models/User');
+const Room = require('../../models/Room');
 const keys = require('../../config/keys');
 const passport = require('passport');
-const validateRegisterInput = require('../../validation/register');
+const validateSignupInput = require('../../validation/signup');
 const validateLoginInput = require('../../validation/login');
 
-router.post('/register', (req, res) => {
-    const { errors, isValid } = validateRegisterInput(req.body);
+router.post('/signup', (req, res) => {
+    const { errors, isValid } = validateSignupInput(req.body);
 
     if (!isValid) {
         return res.status(400).json(errors);
@@ -24,7 +25,6 @@ router.post('/register', (req, res) => {
         } else {
           // Otherwise create a new user
           const newUser = new User({
-            handle: req.body.handle,
             username: req.body.username,
             password: req.body.password
           });
@@ -34,7 +34,19 @@ router.post('/register', (req, res) => {
               if (err) throw err;
               newUser.password = hash;
               newUser.save()
-                .then(user => res.json(user))
+                .then(user => {
+                    const soloRoom = new Room({
+                        name: `${user.username}'s Room`,
+                        solo: true,
+                        users: [user.id]
+                    });
+                    soloRoom.save()
+
+                    newUser.rooms.push(soloRoom.id);
+                    newUser.save()
+                        .then(user => res.json(user))
+                        .catch(err => console.log(err));
+                })
                 .catch(err => console.log(err));
             });
           });
@@ -63,7 +75,7 @@ router.post('/login', (req, res) => {
         bcrypt.compare(password, user.password)
           .then(isMatch => {
             if (isMatch) {
-                const payload = {id: user.id, handle: user.handle};
+                const payload = {id: user.id, username: user.username};
 
                 jwt.sign(
                   payload,
@@ -83,11 +95,15 @@ router.post('/login', (req, res) => {
       });
 });
 
-router.get('/current', passport.authenticate('jwt', {session: false}), (req, res) => {
-    res.json({
-        id: req.user.id,
-        username: req.user.username
-    });
-  })
+router.get('/rooms',
+    passport.authenticate('jwt', { session: false }),
+    (req, res) => {
+        const user = req.user;
+
+        Room.find({ users: req.params.userId })
+        .then(rooms => res.json(rooms))
+        .catch(err => res.status(404).json({ usernotfound: 'User does not exist' }));
+    }
+);
 
 module.exports = router;
