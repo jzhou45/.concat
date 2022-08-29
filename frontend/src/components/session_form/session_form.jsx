@@ -31,10 +31,26 @@ const SessionForm = props => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const user = Object.assign({}, state);
-        props.closeModal()
         props.processForm(user).then(() => {
-            history.push("/rooms")
+            if (Object.values(props.session).length > 0) {
+                history.push("/rooms");
+                closeModal();
+            };
         });
+    };
+
+    let usernameError;
+    if (props.errors.username) usernameError = "input-error";
+
+    let passwordError;
+    if (props.errors.password) passwordError = "input-error";
+
+    let password2Error;
+    if (props.errors.password2) password2Error = "input-error";
+
+    const closeModal = () => {
+        props.closeModal();
+        props.clearSessionErrors();
     };
 
     return(
@@ -42,7 +58,7 @@ const SessionForm = props => {
             <form className="session-form" onSubmit={handleSubmit}>
 
                 <div className="close-button-div">
-                    <img src={closeButton} alt="close" className="close-button" onClick={props.closeModal}/>
+                    <img src={closeButton} alt="close" className="close-button" onClick={closeModal}/>
                 </div>
 
                 <img src={logo} alt="logo" className="form-logo"/>
@@ -50,15 +66,19 @@ const SessionForm = props => {
                 <span>.concat</span>
 
                 <label htmlFor="username"></label>
-                <input type="text" name="username" placeholder="Username" value={state.username} onChange={update("username")} />
+                <input type="text" name="username" placeholder="Username" value={state.username} onChange={update("username")} className={usernameError} />
+                {(props.errors.username) ? <p className="error">{props.errors.username}</p> :null }
+
 
                 <label htmlFor="password"></label>
-                <input type="password" name="password" placeholder="Password" value={state.password} onChange={update("password")} />
+                <input type="password" name="password" placeholder="Password" value={state.password} onChange={update("password")} className={passwordError} />
+                {(props.errors.password) ? <p className="error">{props.errors.password}</p> :null }
 
                 {(props.formType === "Signup") ? 
                 <div>
                     <label htmlFor="confirm-password"></label>
-                    <input type="password" name="confirm-password" placeholder="Retype password" value={state.password2} onChange={update("password2")} />
+                    <input type="password" name="confirm-password" placeholder="Retype password" value={state.password2} onChange={update("password2")} className={password2Error} />
+                    {(props.errors.password2) ? <p className="error">{props.errors.password2}</p> :null }
                 </div> : null}
 
                 <button type="submit">{(props.formType === "Login") ? "Log in" : "Create an account"}</button>
