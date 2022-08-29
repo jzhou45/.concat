@@ -21,6 +21,7 @@
 }
 
 .splash-title-con {
+    z-index: 2;
     animation-name: bouncing-right;
     animation-duration: 2s;
     animation-timing-function:ease-in-out;
@@ -28,6 +29,7 @@
 }
 
 .splash-title-cat {
+    z-index: 2;
     animation-name: bouncing-left;
     animation-duration: 2s;
     animation-timing-function:ease-in-out;
@@ -35,6 +37,7 @@
 }
 
 .splash-title-logo {
+    z-index: 1;
     height: 50px;
     width: 50px;
     display: flex;
