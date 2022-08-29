@@ -10,6 +10,10 @@ const roomResponse = ({ id, name, solo, users, problems, roomPhotoUrl }) => {
     return { id, name, solo, users, problems, roomPhotoUrl };
 };
 
+const userResponse = ({ id, username, rooms }) => {
+    return { id, username, rooms };
+};
+
 router.get('/',
     passport.authenticate('jwt', { session: false }),
     (req, res) => {
@@ -121,11 +125,11 @@ router.patch('/:id/leave',
 
                     if (room.users.length === 0) {
                         Room.findByIdAndDelete(room.id)
-                            .then(room => res.json({ roomdeleted: true }))
+                            .then(room => res.json(userResponse(user)))
                             .catch(err => console.log(err));
                     } else {
                         room.save()
-                            .then(room => res.json(roomResponse(room)))
+                            .then(room => res.json(userResponse(user)))
                             .catch(err => console.log(err));
                     }
                 }
