@@ -24,6 +24,10 @@ const ProblemSchema = new Schema ({
         solution2: {
             type: String
         },
+        seed: {
+            type: Boolean,
+            default: false
+        }
 });
 
 module.exports = Problem = mongoose.model('problem', ProblemSchema);
