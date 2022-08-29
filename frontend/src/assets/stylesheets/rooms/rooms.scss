@@ -64,16 +64,6 @@
     flex-wrap: wrap;
 }
 
-.div-image {
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-color: rgb(239, 239, 239);
-    position: relative;
-}
 
 .room-photo-container {
     background-color: $default-white;
@@ -112,4 +102,12 @@ img.plus {
     &:hover {
         filter: invert(72%) sepia(61%) saturate(11%) hue-rotate(32deg) brightness(104%) contrast(94%);
     }
+}
+
+.default-room {
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    color: $default-blue;
+    font-weight: 400;
 }
