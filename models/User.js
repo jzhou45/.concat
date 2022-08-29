@@ -3,13 +3,21 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
     username: {
-      type: String,
-      required: true
+        type: String,
+        required: true
     },
     password: {
-      type: String,
-      required: true
-    }
+        type: String,
+        required: true
+    },
+    rooms: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Room'
+    }],
+    testCases: [
+        [{ type: String },
+        { type: String }]
+    ]
   }, {
     timestamps: true
 });
