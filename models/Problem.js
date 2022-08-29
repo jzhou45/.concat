@@ -10,13 +10,20 @@ const ProblemSchema = new Schema ({
             type: String,
             required: true
         },
-        testCases: {
-            type: Map,
-            of: String
-        }
+        testCase: {
+            type: String,
+            required: true
+        },
+        solution: {
+            type: String,
+            required: true
+        },
+        testCase2: {
+            type: String
+        },
+        solution2: {
+            type: String,
+        },
 });
-
-// In order to set the testCases, please use set().
-// Example, problem1.testCases.set('victor', 'rotciv')
 
 module.exports = Problem = mongoose.model('problem', ProblemSchema);
