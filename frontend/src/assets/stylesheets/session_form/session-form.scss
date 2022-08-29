@@ -1,0 +1,104 @@
+.modal-background{
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    z-index: 4;
+    background-color: $modal-background-color;
+}
+
+.session-form-div{
+    position: fixed;
+    margin-top: calc(50vh - 240px);
+    margin-left: calc(50vw - 242px);
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    opacity: 100%;
+}
+
+.session-form{
+    display: flex;
+    flex-direction: column;
+    height: 480px;
+    width: 484px;
+    background-color: $default-lightgray;
+    align-items: center;
+    box-shadow: 0 2px 4px $default-black, 0 8px 16px $default-black;
+    border-radius: 25px;
+}
+
+.form-logo{
+    height: 30px;
+    width: 30px;
+}
+
+.session-form > span{
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-size: 25px;
+    font-weight: 700;
+    font-family: $logo-font;
+}
+
+.close-button-div{
+    display: flex;
+    justify-content: flex-end;
+    width: calc(100% - 25px);
+    margin-top: 5px;
+}
+
+.close-button{
+    height: 40px;
+    width: 40px;
+}
+
+.close-button:hover{
+    cursor: pointer;
+}
+
+.session-form > input {
+    height: 50px;
+    width: 350px;
+    background-color: $default-lightestgray;
+    border: 1px solid $background-color;
+    border-radius: 15px;
+    margin-top: 15px;
+    padding-left: 10px;
+    font-size: 18px;
+    color: $default-white;
+}
+
+.session-form > input::placeholder{
+    color: $background-color;
+    font-family: $default-font;
+    font-size: 18px;
+}
+
+.session-form > button{
+    margin-top: 80px;
+    height: 50px;
+    width: 360px;
+    border-radius: 25px;
+    background-color: $default-blue;
+    border: none;
+    font-family: $default-font;
+    color: $default-white;
+    font-size: 20px;
+}
+
+.session-form > button:hover{
+    filter: brightness(0.8);
+    cursor: pointer;
+}
+
+.session-form p{
+    margin-top: 18px;
+    color: $default-lightblue;
+}
+
+.session-form p:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
