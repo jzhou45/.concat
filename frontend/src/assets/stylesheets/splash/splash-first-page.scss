@@ -12,31 +12,79 @@
 
 .splash-title-container {
     color: $default-white;
+    font-family: $logo-font;
     font-size: 60px;
+    font-weight: $logo-font-weight;
 
     display: flex; 
     flex-direction: row; 
 }
 
 .splash-title-con {
-    animation-name: bounce-right;
+    animation-name: bouncing-right;
     animation-duration: 2s;
+    animation-timing-function:ease-in-out;
     animation-iteration-count: 1;
 }
 
 .splash-title-cat {
-    animation-name: bounce-left;
+    animation-name: bouncing-left;
     animation-duration: 2s;
-    animation-iteration-count: infinite;
+    animation-timing-function:ease-in-out;
+    animation-iteration-count: 1;
+}
+
+.splash-title-logo {
+    height: 50px;
+    width: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    img { 
+    animation-duration: 4s;
+    animation-iteration-count: 1;
+    animation-name: fade-in;
+    height: 170px;
+    
+    }
 }
 
 
 @keyframes bouncing-left {
-    0% {transform: translateX(40px)}
-    20% {transform: translateX(20px);}
-    50% {transform: translateX(0px);}
-    40% {transform: translateX(10px);} 
-    60% {transform: translateX(20px);} 
-    80% {transform: translateX(10px);} 
-    100% {transform: translateX(0);} 
+    0% {transform: translateX(500px);}
+    30% {transform: translateX(0px)}
+    40% {transform: translateX(50px);} 
+    55% {transform: translateX(0px);}
+    65% {transform: translateX(25px);}
+    85% {transform: translateX(0px);} 
 }
+
+@keyframes bouncing-right {
+    0% {transform: translateX(-500px)}
+    30% {transform: translateX(0px);} 
+    40% {transform: translateX(-50px);} 
+    55% {transform: translateX(0px);} 
+    65% {transform: translateX(-25px);} 
+    85% {transform: translateX(0px);} 
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    
+    10% {
+        opacity: 0;
+    }
+    
+    20% {
+        opacity: 0;
+    }
+  
+    to {
+        opacity: 1;
+    }
+}
+
