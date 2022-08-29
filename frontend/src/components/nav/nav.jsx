@@ -1,13 +1,19 @@
 import React from 'react'
 import logo from '../../assets/images/concat_logo.png'
-// import logout
+import { logout } from '../../actions/session_actions'
 import { connect } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
-const LoggedInNav = ({currentUser}) => {
+const LoggedInNav = (props) => {
 
-    // const handleLogout = () => {
-    //     logout()
-    // }
+    const currentUser = props.currentUser?.username
+    const history = useHistory()
+
+    const handleLogout = (e) => {
+        e.preventDefault()
+        props.logout()
+        history.push('/')
+    }
 
     const content = () => {
         return (
@@ -18,7 +24,7 @@ const LoggedInNav = ({currentUser}) => {
                     <div className="logged-in-nav-user">
                         <h1>Welcome {currentUser} </h1>
                     </div>
-                    <div className='logout-button'>
+                    <div onClick={handleLogout} className='logout-button'>
                         <div>
                             Logout
                         </div>
@@ -28,17 +34,20 @@ const LoggedInNav = ({currentUser}) => {
         )
     }
 
-    return content()
+    return currentUser ? content() : ""
 }
 
-// const mSTP = ({session, entities: {users}}) => {
-//     currentUser: users[session.id]
-// }
+const mSTP = ({session: {user}}) => {
+    return {
+        currentUser: user
+    }
+}
 
-// const mDTP = (dispatch) => {
-//     logout: () => dispatch(logout)
-// }
+const mDTP = (dispatch) => {
+    return {
+        logout: () => dispatch(logout())
+    }
+}
 
-// export default connect(mSTP, mDTP)(LoggedInNav)
-export default LoggedInNav
+export default connect(mSTP, mDTP)(LoggedInNav)
 

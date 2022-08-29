@@ -1,15 +1,24 @@
-import React from "react";
+import React, {useEffect} from "react";
 import closeButton from "../../assets/images/close.png";
 import logo from "../../assets/images/concat_logo.png";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { clearErrors } from "../../actions/session_actions";
+import { useDispatch } from "react-redux";
 
 const SessionForm = props => {
+
+    const dispatch = useDispatch() 
+
     const [state, setState] = useState({
         username: '',
         password: '',
         password2: ''
     });
+
+    useEffect(() => {
+        dispatch(clearErrors)
+    }, [dispatch])
 
     const history = useHistory();
 
@@ -22,6 +31,7 @@ const SessionForm = props => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const user = Object.assign({}, state);
+        props.closeModal()
         props.processForm(user).then(() => {
             history.push("/rooms")
         });
