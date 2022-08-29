@@ -2,6 +2,7 @@ import React from "react";
 import closeButton from "../../assets/images/close.png";
 import logo from "../../assets/images/concat_logo.png";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const SessionForm = props => {
     const [state, setState] = useState({
@@ -9,6 +10,8 @@ const SessionForm = props => {
         password: '',
         password2: ''
     });
+
+    const history = useHistory();
 
     const update = field => {
         return e => setState({
@@ -19,8 +22,10 @@ const SessionForm = props => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const user = Object.assign({}, state);
-        props.processForm(user)
-    }
+        props.processForm(user).then(() => {
+            if (props.session) history.push("/rooms")
+        });
+    };
 
     return(
         <div className="session-form-div">
