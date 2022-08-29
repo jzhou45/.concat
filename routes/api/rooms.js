@@ -157,11 +157,7 @@ router.delete('/:id',
                                     const updatedUsers = users.map(user => {
                                         user.rooms.pull(room.id);
                                         user.save();
-                                        return {
-                                            id: user.id,
-                                            username: user.username,
-                                            rooms: user.rooms
-                                        };
+                                        return userResponse(user);
                                     });
                                     return res.json(updatedUsers);
                                 });
