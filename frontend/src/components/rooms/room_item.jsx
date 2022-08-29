@@ -18,8 +18,12 @@ const RoomItemContainer = (props) => {
                         ...
                     </div>
                     <div ref={openRef} className={`room-options-menu ${open ? "open" : "hide"}`}>
-                        <div>Rename room</div>
-                        <div>Leave room</div>
+                        <div>
+                            <p>Rename room</p>
+                        </div>
+                        <div>
+                            <p>Leave room</p>
+                        </div>
                     </div>
                 </div>
                 <div className={`room-photo-container ${!roomPhotoUrl ? "create-room" : ""}`}>

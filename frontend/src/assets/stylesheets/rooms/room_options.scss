@@ -25,20 +25,42 @@
 }
 
 .room-options-menu {
+    cursor:auto;
     position: absolute; 
     top: 30px;
     z-index: 2;
 
     background-color: $default-white;   
-    height: 100px;
-    width: 200px; 
-    border-radius: $button-border-radius;
+    height: 60px;
+    width: 150px; 
+    border-radius: 5px;
     
     display: flex;
     flex-direction: column;
-    align-items: center;
-
+    align-items: space-between;
+    justify-content: center;
+    
     box-shadow: $box-shadow;
 
     color: $default-black;
+
+    div {
+        font-size: 15px;
+        cursor: pointer;
+
+        width: 130px;
+        height: 20px;
+        border-radius: 8px;
+        margin-left: 10px;
+        text-indent: 8px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+
+        &:hover {
+            background-color: $default-gray-hover;
+        }
+    }
 }
