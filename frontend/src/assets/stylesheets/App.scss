@@ -4,6 +4,7 @@
 @import './splash/splash-first-page.scss';
 @import "./splash/splash_navbar.scss";
 @import "./session_form/session-form.scss";
+@import './nav/nav.scss';
 
 @font-face {
     font-family: "Manrope";
@@ -64,6 +65,11 @@
     width: 100%;
     overflow: scroll;
     scroll-snap-type: y mandatory;
+
+    > div {
+        height: 100%;
+        width: 100%;
+    }
 }
 
 #root::-webkit-scrollbar {

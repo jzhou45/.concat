@@ -1,5 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import logo from '../../assets/images/concat_logo.png'
 
 const SplashFirstPageContainer = () => {
