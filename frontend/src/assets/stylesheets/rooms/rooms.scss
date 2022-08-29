@@ -16,12 +16,12 @@
     height: 10%;
 
     display: flex; 
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    align-items: center;
 }
 
 .rooms-header-title {
-    margin-left: 20px;
+    margin-left: 130px;
     font-size: $logo-font-size;
     color: $default-white;
     font-weight: 700;
@@ -39,11 +39,13 @@
     align-items: center;
 }
 
+
 .room-container {
+    position: relative;
     width: 150px;
-    height: 180px;
+    height: 190px;
     background-color: $background-color;
-    border-radius: $div-border-radius;
+    border-radius: $button-border-radius;
     margin: 20px;
     cursor: pointer;
 
@@ -82,11 +84,21 @@
         max-height:100%;
         width: auto;
         height: auto;
+        object-fit: contain;
+    }
+
+    &:hover {
+        filter: brightness(.8);
     }
 }
 
 .room-title {
     color: $default-white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
 }
 
 .create-room {
