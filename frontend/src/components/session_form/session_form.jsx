@@ -23,7 +23,7 @@ const SessionForm = props => {
         e.preventDefault();
         const user = Object.assign({}, state);
         props.processForm(user).then(() => {
-            if (props.session) history.push("/rooms")
+            history.push("/rooms")
         });
     };
 

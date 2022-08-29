@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import Splash from './splash/splash';
 import Nav from './nav/nav'
 import Rooms from './rooms/rooms'
+import css from "../assets/stylesheets/App.scss"
 
 
 const App = () => (
@@ -14,7 +15,7 @@ const App = () => (
         </header>
         <Modal />
         <Switch>
-            <ProtectedRoute path={"/rooms"} component={Nav}/>
+            <ProtectedRoute path={"/rooms"} component={Rooms}/>
             <AuthRoute exact path={"/"} component={Splash} />
         </Switch>
     </div>
