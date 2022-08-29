@@ -19,8 +19,9 @@ const SessionForm = props => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const user = Object.assign({}, state);
-        props.processForm(user)
-    }
+        props.processForm(user);
+        if (props.formType === "Signup") props.login(user);
+    };
 
     return(
         <div className="session-form-div">
@@ -32,7 +33,7 @@ const SessionForm = props => {
 
                 <img src={logo} alt="logo" className="form-logo"/>
 
-                <span>Welcome to .concat</span>
+                <span>.concat</span>
 
                 <label htmlFor="username"></label>
                 <input type="text" name="username" placeholder="Username" value={state.username} onChange={update("username")} />
