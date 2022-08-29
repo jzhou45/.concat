@@ -3,13 +3,13 @@ import { connect } from 'react-redux'
 import LoadingContainer from '../util/loading_container'
 import RoomItemContainer from './room_item'
 import { fetchRooms } from '../../actions/room_actions'
-
+import { openModal } from '../../actions/modal_actions'
 
 const RoomsPageContainer = (props) => {
 
     const currentUser = props.currentUser.username
 
-    const { fetchRooms, rooms} = props
+    const { fetchRooms, rooms, openModal} = props
 
     useEffect( () => {
         fetchRooms().finally(() => setLoading(false))
@@ -18,6 +18,11 @@ const RoomsPageContainer = (props) => {
     const [loading, setLoading] = useState(true)
 
     const userRooms = Object.keys(rooms).map((roomId) => rooms[roomId])
+
+    const handleCreateClick = (e) => {
+        e.preventDefault()
+        openModal("createroom")
+    }
     
     const content = () => {
         return (
@@ -36,7 +41,9 @@ const RoomsPageContainer = (props) => {
                             roomPhotoUrl={room.roomPhotoUrl} 
                             solo={room.solo}
                             /> )}
-                        {<RoomItemContainer roomName={"Create Room"}/>}
+                        <div onClick={handleCreateClick}>
+                            {<RoomItemContainer roomName={"Create Room"}/>}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -55,7 +62,8 @@ const mSTP = ({session: {user}, rooms}) => {
 
 const mDTP = (dispatch) => {
     return {
-        fetchRooms: () => dispatch(fetchRooms())
+        fetchRooms: () => dispatch(fetchRooms()), 
+        openModal: (formType) => dispatch(openModal(formType))
     }
 }
 

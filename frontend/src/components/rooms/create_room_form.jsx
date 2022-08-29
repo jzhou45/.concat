@@ -4,13 +4,21 @@ import { createRoom } from "../../actions/room_actions";
 
 const CreateRoomForm = (props) => {
     
-    const {roomData} = props
+    const {createRoom} = props
+
+    const content = () => {
+        return (
+            <div className="create-room-form">
+                
+            </div>
+        )
+    }
 
 }
 
 const mDTP = (dispatch) => {
     return {
-        createRoom: dispatch => createRoom(roomData)
+        createRoom: roomData => dispatch(createRoom(roomData))
     }
 }
 
