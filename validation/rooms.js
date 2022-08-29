@@ -10,6 +10,10 @@ module.exports = function validateRoomInput(data) {
     errors.name = 'Room name is required';
   }
 
+  if (!Validator.isLength(data.name, { max: 20 })) {
+    errors.username = 'Room name cannot be more than 20 characters';
+  }
+
   return {
     errors,
     isValid: Object.keys(errors).length === 0
