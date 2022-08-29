@@ -37,7 +37,7 @@ const SessionForm = props => {
 
                 <img src={logo} alt="logo" className="form-logo"/>
 
-                <span>Welcome to .concat</span>
+                <span>.concat</span>
 
                 <label htmlFor="username"></label>
                 <input type="text" name="username" placeholder="Username" value={state.username} onChange={update("username")} />
