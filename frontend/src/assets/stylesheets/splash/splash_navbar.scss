@@ -5,16 +5,17 @@
     justify-content: space-between;
     font-family: $logo-font;
     background-color: $default-black;
-    height: 50px;
+    height: 60px;
     position: sticky;
     overflow: hidden;
     width: 100vw;
     top: 0;
+    z-index: 3;
 }
 
 .logo-div{
     font-weight: $logo-font-weight;
-    font-size: 30px;
+    font-size: 35px;
     margin: 5px 20px;
     color: $logo-font-color;
     display: flex;
@@ -23,8 +24,8 @@
 }
 
 .logo-div > img{
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
     filter: invert(100);
     margin-top: 5px;
 }
@@ -36,10 +37,10 @@
 
 .splash-navbar-buttons > button{
     border: none;
-    height: 30px;
+    height: 35px;
     width: 150px;
     border-radius: 20px;
-    margin: 10px 0;
+    margin: 13px 0;
     margin-right: 20px;
     font-size: 15px;
     color: white;
