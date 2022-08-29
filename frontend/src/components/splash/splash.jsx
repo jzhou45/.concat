@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import SplashNavBar from './splash_navbar'
+import SplashNavbarContainer from './splash_navbar_container'
 import SplashFirstPageContainer from './splash-first-page'
 import SplashInstructionPageContainer from './splash-instruction-page'
 
@@ -9,7 +9,7 @@ const SplashContainer = () => {
     const content = () => {
         return (
           <div className='splash-container'>
-              <SplashNavBar />
+              <SplashNavbarContainer />
               <section className='splash-first-page-container'>
                   <SplashFirstPageContainer/>
               </section>

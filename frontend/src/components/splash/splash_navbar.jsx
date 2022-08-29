@@ -1,7 +1,14 @@
 import React from "react";
 import logo from "../../assets/images/concat_logo.png"
 
-const SplashNavBar = () => {
+const SplashNavBar = (props) => {
+    const handleClick = (formType) => {
+        return e => {
+            e.preventDefault();
+            props.openModal(formType);
+        };
+    };
+
     const content = () => {
         return(
             <div className="splash-navbar">
@@ -11,8 +18,8 @@ const SplashNavBar = () => {
                     <p>at</p>
                 </div>
                 <div className="splash-navbar-buttons">
-                    <button>Login</button>
-                    <button>Signup</button>
+                    <button onClick={handleClick("login")}>Login</button>
+                    <button onClick={handleClick("signup")}>Signup</button>
                 </div>
             </div>
         );
