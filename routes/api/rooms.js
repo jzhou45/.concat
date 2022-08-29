@@ -10,6 +10,15 @@ const roomResponse = ({ id, name, solo, users, problems, roomPhotoUrl }) => {
     return { id, name, solo, users, problems, roomPhotoUrl };
 };
 
+router.get('/',
+    passport.authenticate('jwt', { session: false }),
+    (req, res) => {
+        Room.find({ users: req.user.id })
+        .then(rooms => res.json(rooms.map(room => roomResponse(room))))
+        .catch(err => console.log(err));
+    }
+);
+
 router.get('/:id', (req, res) => {
     Room.findById(req.params.id)
         .then(room => res.json(roomResponse(room)))
@@ -137,10 +146,21 @@ router.delete('/:id',
                 } else if (room.solo) {
                     return res.status(400).json({ soloroom: 'Users cannot delete a solo room' });
                 } else {
-                    User.updateMany({ rooms: room.id }, { $pull: { rooms: room.id } })
-                        .then(() => {
-                            Room.findByIdAndDelete(room.id)
-                                .then(() => res.json({ success: true }));
+                    Room.findByIdAndDelete(room.id)
+                        .then(room => {
+                            User.find({ rooms: room.id })
+                                .then(users => {
+                                    const updatedUsers = users.map(user => {
+                                        user.rooms.pull(room.id);
+                                        user.save();
+                                        return {
+                                            id: user.id,
+                                            username: user.username,
+                                            rooms: user.rooms
+                                        };
+                                    });
+                                    return res.json(updatedUsers);
+                                });
                         });
                 }
             })

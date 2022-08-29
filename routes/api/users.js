@@ -105,17 +105,4 @@ router.post('/login', (req, res) => {
       });
 });
 
-const roomsResponse = rooms => {
-    return rooms.map(({ id, name, solo, users, problems, roomPhotoUrl }) => { id, name, solo, users, problems, roomPhotoUrl })
-};
-
-router.get('/rooms',
-    passport.authenticate('jwt', { session: false }),
-    (req, res) => {
-        Room.find({ users: req.user.id })
-        .then(rooms => res.json(roomsResponse(rooms)))
-        .catch(err => console.log(err));
-    }
-);
-
 module.exports = router;

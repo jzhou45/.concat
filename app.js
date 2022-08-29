@@ -20,7 +20,8 @@ app.use(passport.initialize());
 require('./config/passport')(passport);
 
 app.use("/api/users", users);
-app.use("/api/rooms", rooms)
-app.use("/api/problems", problems)
+app.use("/api/rooms", rooms);
+app.use("/api/problems", problems);
+
 const port = process.env.PORT || 3001;
 app.listen(port, () => console.log(`Server is running on port ${port}`));
