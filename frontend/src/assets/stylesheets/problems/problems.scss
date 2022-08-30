@@ -14,8 +14,8 @@
     width: 100%;
     height: 10%;
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .problems-page h1{
@@ -23,6 +23,17 @@
     font-size: 40px;
     color: $default-white;
     font-weight: $bold;
+}
+
+.problems-page h1 + p{
+    margin-left: 130px;
+    color: $default-white;
+}
+
+.problems-page h1 + p:hover{
+    cursor: pointer;
+    color: $default-lightblue;
+    text-decoration: underline;
 }
 
 .problems-container{

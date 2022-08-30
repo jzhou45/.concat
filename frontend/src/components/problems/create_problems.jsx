@@ -18,9 +18,6 @@ const CreateProblems = props => {
     const handleSubmit = e => {
         e.preventDefault();
         const problem = Object.assign({}, state);
-        console.log(problem)
-        console.log(props.createProblem)
-        console.log(props.currentRoomId)
         props.createProblem(props.currentRoomId, problem).then(() => props.closeModal())
     };
 
