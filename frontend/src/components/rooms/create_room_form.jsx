@@ -4,8 +4,8 @@ import { createRoom } from "../../actions/room_actions";
 import { openModal, closeModal } from "../../actions/modal_actions";
 
 const CreateRoomForm = (props) => {
-    
-    const {createRoom} = props
+
+    const {createRoom, error} = props
 
     const [state, setState] = useState({
         name: ''
@@ -19,23 +19,11 @@ const CreateRoomForm = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        // createRoom(state).then(() => props.closeModal())
-        props.openModal("joinroom")
-        // have user join the room they just created
+        createRoom(state).then((resp) => props.openModal("joinroom", {roomId: resp.room.data.id}))
+        // if (!error) {
+        //     props.openModal("joinroom")
+        // }
     }
-
-
-    // const renderErrors = () => {
-    //     return(
-    //       <ul>
-    //         {errors.map((error, i) => (
-    //           <li key={`error-${i}`} className="board-errors auth-errors">
-    //             {error}
-    //           </li>
-    //         ))}
-    //       </ul>
-    //     );
-    // }
 
     const content = () => {
         return (
@@ -50,7 +38,9 @@ const CreateRoomForm = (props) => {
                         onChange={update("name")}
                         placeholder={"What would you like to name your room?"}
                         />
-                        {/* { renderErrors } */}
+                        <div className="room-errors">
+                            {/* {error} */}
+                        </div>
                         <button type="submit"  className={`${state.name === "" ? "unclickable" : ""} room-create-button`}>
                             <div>Create</div>
                         </button>
@@ -66,7 +56,7 @@ const CreateRoomForm = (props) => {
 
 const mSTP = ({errors}) => {
     return {
-        errors
+        error: errors.room.name
     }
 }
 
@@ -78,4 +68,4 @@ const mDTP = (dispatch) => {
     }
 }
 
-export default connect(null, mDTP)(CreateRoomForm)
+export default connect(mSTP, mDTP)(CreateRoomForm)

@@ -3,6 +3,7 @@ import Plus from '../../assets/images/plus.png'
 import closeDropdown from '../util/close_dropdown'
 import { openModal } from "../../actions/modal_actions";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 const RoomItemContainer = (props) => {
 
@@ -43,10 +44,12 @@ const RoomItemContainer = (props) => {
                         </div>
                     </div>
                 </div>
-                <div className={`room-photo-container ${!roomPhotoUrl ? "create-room" : ""}`}>
-                    <img className={roomPhotoUrl? "" : "plus"} src={roomPhotoUrl && !solo ? roomPhotoUrl : solo ? "" : Plus} alt="" />
-                    <div className={`default-room ${solo ? "" : "hide"}`}>{currentUser?.toUpperCase()}</div>
-                </div>
+                {/* <Link to={`${roomPhotoUrl ? `/rooms/${room.id}` : "/rooms" }`}> */}
+                    <div className={`room-photo-container ${!roomPhotoUrl ? "create-room" : ""}`}>
+                        <img className={roomPhotoUrl? "" : "plus"} src={roomPhotoUrl && !solo ? roomPhotoUrl : solo ? "" : Plus} alt="" />
+                        <div className={`default-room ${solo ? "" : "hide"}`}>{currentUser?.toUpperCase()}</div>
+                    </div>
+                {/* </Link> */}
                 <div className="room-title">
                     <div>{roomName}</div>
                 </div>

@@ -5,11 +5,12 @@ import { closeModal } from "../../actions/modal_actions";
 
 const DeleteRoomContainer = (props) => {
     
-    const {deleteRoom} = props
+    const {deleteRoom, roomId} = props
 
     const handleClick = (e) => {
         e.preventDefault()
-        // deleteRoom(state).then(() => closeModal())
+        deleteRoom(roomId)
+        props.closeModal()
     }
 
     const content = () => {
@@ -23,7 +24,7 @@ const DeleteRoomContainer = (props) => {
                         If you delete a room, there is no way to get it back. But go ahead click it.
                     </p>
                 </div>
-                <div className="delete button">
+                <div onClick={handleClick} className="delete button">
                     Delete
                 </div>
             </div>
@@ -36,15 +37,15 @@ const DeleteRoomContainer = (props) => {
 
 const mSTP = ({ui: {modal}}) => {
     return {
-        roomId:modal.props.roomId
+        roomId: modal.props.roomId
     }
 }
 
 const mDTP = (dispatch) => {
     return {
-        deleteRoom: () => dispatch(deleteRoom()),
+        deleteRoom: (roomId) => dispatch(deleteRoom(roomId)),
         closeModal: () => dispatch(closeModal())
     }
 }
 
-export default connect(null, mDTP)(DeleteRoomContainer)
+export default connect(mSTP, mDTP)(DeleteRoomContainer)

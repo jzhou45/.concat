@@ -1,8 +1,10 @@
 import { 
-    RECEIVE_USERS, 
+    // RECEIVE_USERS, 
     RECEIVE_ROOM, 
     RECEIVE_ROOMS,
-    RECEIVE_ROOM_ERRORS
+    RECEIVE_ROOM_ERRORS,
+    REMOVE_ROOM,
+    RECEIVE_RENAMED_ROOM
 } from '../actions/room_actions';
 import {RECEIVE_USER_LOGOUT} from '../actions/session_actions'
 
@@ -16,10 +18,18 @@ const roomsReducer = (state = {}, action) => {
                 nextState[room.id] = room
             }) 
             return nextState
-        case RECEIVE_USER_LOGOUT:
-            nextState = {}
+            case RECEIVE_USER_LOGOUT:
+                nextState = {}
             return nextState
         case RECEIVE_ROOM:
+            nextState[action.room.id] = action.room.data;
+            return nextState
+        case RECEIVE_RENAMED_ROOM: 
+            nextState[action.room.data.id] = action.room.data
+            return nextState
+        case REMOVE_ROOM: 
+            console.log("REMOVE_ROOM", action)
+            delete nextState[action.roomId];
             return nextState
         default:
             return state;
