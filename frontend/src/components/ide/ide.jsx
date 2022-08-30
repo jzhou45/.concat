@@ -77,8 +77,12 @@ export default () => {
             const funcReturn = func(...(testArray(problem.testCase).map(arg => arg[1])));
             const resultArray = [`Input: ${problem.testCase}`, `Output: ${JSON.stringify(funcReturn)}`, `Expected: ${JSON.stringify(parsedSolution)}`]
 
-            if (Array.isArray(funcReturn) && Array.isArray(parsedSolution) && funcReturn.sort().join(',') === parsedSolution.sort().join(',')) setResult(['Correct Answer'].concat(resultArray));
-            else if ((typeof funcReturn === 'string' || typeof funcReturn === 'number') && funcReturn === parsedSolution) setResult(['Correct Answer'].concat(resultArray));
+            if ((Array.isArray(funcReturn) && Array.isArray(parsedSolution) &&
+            funcReturn.sort().join(',') === parsedSolution.sort().join(',')) ||
+            ((typeof funcReturn === 'string' || typeof funcReturn === 'number') &&
+            funcReturn === parsedSolution)) {
+                setResult(['Correct Answer'].concat(resultArray));
+            }
             else setResult(['Wrong Answer'].concat(resultArray));
         } catch (error) {
             setResult(errorArray(error));
