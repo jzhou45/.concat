@@ -34,7 +34,7 @@ const RoomItemContainer = (props) => {
         return (
             <div className={`${show ? "" : "hide"} room-container`}>
                 <div onClick={handleClick} className={`room-options-trigger ${roomPhotoUrl? "" : "hide"}`}>
-                    <div>
+                    <div className={`${solo ? "hide" : ""}`}>
                         ...
                     </div>
                     <div ref={openRef} className={`room-options-menu ${open ? "open" : "hide"}`}>
