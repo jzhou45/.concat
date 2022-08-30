@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 const Room = require('../../models/Room');
 const User = require('../../models/User');
+const Problem = require('../../models/Problem');
 const validateRoomInput = require('../../validation/rooms');
 const roomPhotoUrls = require('../../util/room-photo-url');
 
@@ -39,18 +40,22 @@ router.post('/',
             return res.status(400).json(errors);
         }
 
-        const newRoom = new Room({
-            name: req.body.name,
-            users: [user.id],
-            roomPhotoUrl: roomPhotoUrls[Math.floor(Math.random() * 25)]
-        });
-
-        newRoom.save().then(room => {
-            user.rooms.push(newRoom.id);
-            user.save();
-
-            return res.json(roomResponse(room));
-        });
+        Problem.find({ seed: true })
+            .then(problems => {
+                const newRoom = new Room({
+                    name: req.body.name,
+                    users: [user.id],
+                    roomPhotoUrl: roomPhotoUrls[Math.floor(Math.random() * 25)],
+                    problems: problems.map(problem => problem.id)
+                });
+        
+                newRoom.save().then(room => {
+                    user.rooms.push(newRoom.id);
+                    user.save();
+        
+                    return res.json(roomResponse(room));
+                });
+            })
     }
 );
 
