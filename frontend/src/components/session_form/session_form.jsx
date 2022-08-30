@@ -1,3 +1,4 @@
+
 import React, {useEffect} from "react";
 import closeButton from "../../assets/images/close.png";
 import logo from "../../assets/images/concat_logo.png";
@@ -34,9 +35,8 @@ const SessionForm = props => {
         props.processForm(user).then(() => {
             if (Object.values(props.session).length > 0) {
                 history.push("/rooms");
-                closeModal();
             };
-        });
+        }).finally(() => closeModal());
     };
 
     let usernameError;

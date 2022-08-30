@@ -1,0 +1,82 @@
+@import '../variables.scss';
+
+.room-form {
+    background-color: white;
+    height: 200px;
+    width: 500px;
+    border-radius: $div-border-radius;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: $box-shadow;
+
+    .form-title {
+        font-weight: $logo-font-weight;
+        font-size: $logo-font-size;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center; 
+
+        input {
+            width: 400px;
+            height: 40px;
+            outline: 0;
+            border: 2px solid $default-lightblue;
+            border-radius: $button-border-radius;
+            text-indent: 8px;
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            cursor: pointer;
+            outline: 0;
+            border: 0;
+            background-color: $default-lightblue;
+            height: 40px;
+            width: 70px;
+            border-radius: $submit-button-border-radius;
+            color: $default-white;
+            font-weight: 400;
+
+            &:hover {
+                filter: brightness(.8);
+            }
+        }
+    }
+}
+
+.room-create-button.unclickable {
+    background-color: $default-gray-hover;
+    color: $default-lightestgray;
+}
+
+.form-button-div button.delete-room {
+    background-color: $default-black;
+}
+
+.form-button-div {
+    margin-left: 200px;
+    width: 260px;
+    display: flex; 
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.join.room-form {
+    background-color: $background-color;
+
+    .form-title {
+        color: $default-white;
+    }
+
+    input {
+        color: $default-white;
+    }
+}

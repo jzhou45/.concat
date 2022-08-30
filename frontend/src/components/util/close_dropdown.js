@@ -11,7 +11,6 @@ const CloseDropdown = (el, initialState) => {
         }
 
         if (open) {
-            console.log('click')
             window.addEventListener('click', pageClickEvent)
         }
 

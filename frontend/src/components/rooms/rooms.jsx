@@ -37,12 +37,10 @@ const RoomsPageContainer = (props) => {
                         {userRooms.map((room, i) => <RoomItemContainer 
                             key={i}
                             currentUser={currentUser}
-                            roomName={room.name} 
-                            roomPhotoUrl={room.roomPhotoUrl} 
-                            solo={room.solo}
+                            room={room}
                             /> )}
                         <div onClick={handleCreateClick}>
-                            {<RoomItemContainer roomName={"Create Room"}/>}
+                            {<RoomItemContainer room={"Create Room"}/>}
                         </div>
                     </div>
                 </div>
