@@ -31,6 +31,10 @@ const ProblemSchema = new Schema ({
         room: {
             type: Schema.Types.ObjectId,
             ref: 'Room'
+        },
+        difficulty: {
+            type: String,
+            required: true
         }
 });
 

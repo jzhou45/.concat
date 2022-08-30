@@ -23,8 +23,8 @@ router.post('/:roomId/',
             solution: req.body.solution,
             testCase2: req.body.testCase2,
             solution2: req.body.solution2,
-            seed: false,
-            room: req.params.roomId
+            room: req.params.roomId,
+            difficulty: req.body.difficulty
         })
 
         
@@ -76,7 +76,8 @@ router.post('/', (req, res) => {
             solution: req.body.solution,
             testCase2: req.body.testCase2,
             solution2: req.body.solution2,
-            seed: req.body.seed
+            seed: req.body.seed,
+            difficulty: req.body.difficulty
         })
 
         newProblem.save().then(problem => res.json(problem))
@@ -108,6 +109,7 @@ router.patch('/:roomId/:id',
                     problem.solution = req.body.solution,
                     problem.testCase2 = req.body.testCase2,
                     problem.solution2 = req.body.solution2,
+                    problem.difficulty = req.body.difficulty
 
                     problem.save()
                     .then(problem => res.json(problem))
