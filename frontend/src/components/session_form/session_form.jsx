@@ -33,7 +33,6 @@ const SessionForm = props => {
         e.preventDefault();
         const user = Object.assign({}, state);
         if (props.joinPath) {
-            console.log('appetizer')
             props.joinRoom(props.roomId).then(() => {
                 history.push(props.joinPath)
             })

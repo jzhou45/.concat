@@ -6,13 +6,13 @@
     padding-left: 300px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
 }
 
 .problems-page > :first-child{
     width: 100%;
-    height: 10%;
+    height: 15%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -31,7 +31,6 @@
 }
 
 .problems-page h1 + p:hover{
-    cursor: pointer;
     color: $default-lightblue;
     text-decoration: underline;
 }
@@ -60,10 +59,10 @@
     font-weight: $bold;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
+    cursor: pointer
 }
 
 .leetcode-75:hover, .your-problems:hover{
-    cursor: pointer;
     filter: brightness(1.1);
 }
 
@@ -92,25 +91,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 }
 
-.problems-list > div, .custom-problems-list > div{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 90%;
-    height: 100%;
-    background-color: $default-lightblue;
-    border-radius: 25px;
-    padding: 10px 20px;
-}
 
-.custom-problems-list > div{
-    background-color: $default-blue;
-}
-
-.problems-list > div:hover, .custom-problems-list >div:hover{
-    cursor: pointer;
+.individual-problem:hover {
     filter: brightness(0.8);
 }
 
@@ -124,12 +109,17 @@
     position: relative;
     width: 90%;
     margin-bottom: -10px;
+    color: $default-white;
 }
 
 .problems-checkbox{
     border: none;
-    height: 30px;
-    width: 30px;
+    height: 20px;
+    width: 20px;
+    margin-right: 15px;
+
+    cursor: pointer;
+
 }
 
 .problems-checkbox + p{
@@ -156,3 +146,51 @@
     background-color: $default-lightblue;
     filter: invert(0);
 }
+
+.problems-list a, .custom-problems-list a {
+    text-decoration: none;
+    width: 100%;
+}
+
+.problems-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+.back-to-rooms {
+    margin-left: 120px;
+    height: 50px;
+    filter: invert(100);
+    cursor: pointer;
+
+
+    &:hover {
+        filter: invert(72%) sepia(61%) saturate(11%) hue-rotate(32deg) brightness(104%) contrast(94%);
+    }
+}
+
+.individual-problem {
+    display: flex; 
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    a {
+        color: $default-white;
+    }
+
+    width: 90%;
+    height: 100%;
+    border-radius: 25px;
+    padding: 12px 18px;
+
+    &:hover {
+        background-color: $default-blue;
+    }
+}
+
+.problems.search-bar{
+    margin-left: 40px;
+}
+

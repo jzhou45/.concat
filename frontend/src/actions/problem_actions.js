@@ -30,3 +30,7 @@ export const createProblem = (roomId, problem) => dispatch => (
 export const fetchCreatedProblems = roomId => dispatch => (
     APIUtil.fetchCreatedProblems(roomId).then(problems => dispatch(receiveAllProblems(problems)))
 );
+
+export const fetchProblem = (roomId, problemId) => dispatch => (
+    APIUtil.fetchProblem(roomId, problemId).then(problem => dispatch(receiveProblem(problem)))
+);

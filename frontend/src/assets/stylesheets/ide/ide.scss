@@ -2,7 +2,8 @@
 
 
 .ide {
-    width: 80%;
+    margin-left: 50px;
+    width: 90%;
     height: 30%;
     
     display: flex;
@@ -11,7 +12,8 @@
     align-items: center;
 
     .ide-extras {
-        width: 300px;
+        margin-left: 50px;
+        width: 40%;
         height: 500px;
         display: flex;
         flex-direction: column;
@@ -21,7 +23,7 @@
     }
 
     .ide-result {
-        width: 300px;
+        width: 80%;
         height: 200px;
         background-color: $default-white;
         box-shadow: $box-shadow;
@@ -42,8 +44,8 @@
         background-color: $default-lightestgray;
         outline: 0;
         border: 0;
-        width: 200px;
-        height: 70px;
+        width: 80%;
+        height: 60px;
         color: $default-white;
         font-size: 20px;
         font-weight: $bold;
@@ -57,7 +59,7 @@
 }
 .ide-editor {
     height: 90%;
-    width: 90%;
+    width: 60%;
     
     section {
         border-radius: $div-border-radius;

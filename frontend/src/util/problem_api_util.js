@@ -11,3 +11,7 @@ export const createProblem = (roomId, problem) => (
 export const fetchCreatedProblems = (roomId) => (
     axios.get(`/api/problems/${roomId}/createdproblems`)
 );
+
+export const fetchProblem = (roomId, problemId) => {
+    return axios.get(`/api/problems/${roomId}/${problemId}`)
+}

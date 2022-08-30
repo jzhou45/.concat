@@ -3,19 +3,94 @@
 .create-problems-form{
     background-color: $default-lightgray;
     color: $default-white;
-    width: 500px;
-    height: 600px;
-}
+    width: 600px;
+    height: 800px;
+    border-radius: $div-border-radius;
+    box-shadow: $box-shadow;
 
-.create-problems-form > form{
-    display: flex;
+    display: flex; 
     flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 
+.create-problem-title {
+    display: flex; 
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    height: 100px;
+    font-weight: $logo-font-weight;
+    font-size: $logo-font-size;
+}
+
+.create-problems-form > form{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    input, textarea {
+        outline: 0;
+        border: 3px solid $default-lightblue;
+        border-radius: 8px;
+        resize: none;
+        font-family: $default-font;
+        margin-top: 10px;
+        padding-left: 10px;
+    }
+
+    input {
+        height: 30px;
+    }
+
+    textarea {
+        padding-top: 8px;
+        height: 50px;
+    }
+}
+
 .create-problems-form label{
-    margin-top: 10px;
     display: flex;
     flex-direction: column;
     width: 80%;
+    margin-bottom: 20px;
+    
+    font-size: 14px;
+    text-indent: 10px;
 }
+
+.problem.button {
+    height: 40px;
+    font-weight: $bold;
+    font-size: 15px;
+    width: 200px;
+    border: none;
+    margin-bottom: 10px;
+
+    &:hover {
+        filter: brightness(0.7);
+    }
+}
+
+
+.required-note {
+    position: absolute;
+    font-size: 12px;
+    left: 50px;
+    color: $default-lightblue;
+    width: 80px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .asterisk {
+        font-size: 16px;
+        color: $default-white;
+    }
+}
+

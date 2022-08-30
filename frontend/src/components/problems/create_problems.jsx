@@ -32,33 +32,59 @@ const CreateProblems = props => {
 
     return (
         <div className="create-problems-form">
+            <div className="create-problem-title">
+                <div>
+                    Create Problem
+                </div>
+                <div className="required-note">
+                    <div className="asterisk">
+                        *
+                    </div>
+                    <div>
+                        is required
+                    </div>
+                </div>
+            </div>
             <form onSubmit={handleSubmit}>
-                <label>Title
-                    <input type="text" value={state.title} onChange={handleUpdate("title")}/>
+                <label>Title * 
+                    <input 
+                    placeholder="ex: Two Sum"
+                    type="text" value={state.title} onChange={handleUpdate("title")}/>
                 </label>
 
-                <label>Description
-                    <textarea value={state.description} onChange={(handleUpdate("description"))}></textarea>
+                <label>Description *
+                    <textarea 
+                    placeholder="ex: Given an array of integer nums and a targer, return indices of the two numbers so they add up to the target."
+                    value={state.description} onChange={(handleUpdate("description"))}></textarea>
                 </label>
 
-                <label>Test Case 1
-                    <textarea value={state.testCase} onChange={handleUpdate("testCase")}></textarea>
+                <label>Test Case 1 *
+                    <textarea 
+                    placeholder="ex: nums = [2, 7, 11, 15], target = 9"
+                    value={state.testCase} onChange={handleUpdate("testCase")}></textarea>
                 </label>
 
-                <label>Solution 1
-                    <input type="text" value={state.solution} onChange={handleUpdate("solution")}/>
+                <label>Solution 1 *
+                    <input type="text" 
+                    placeholder="ex: [0, 1]"
+                    value={state.solution} onChange={handleUpdate("solution")}/>
                 </label>
 
                 <label> Test Case 2
-                    <textarea value={state.testCase2} onChange={handleUpdate("testCase2")}></textarea>
+                    <textarea 
+                    placeholder="ex: nums = [3,2,4], target = 6"
+                    value={state.testCase2} onChange={handleUpdate("testCase2")}></textarea>
                 </label>
 
                 <label>Solution 2
-                    <input type="text" value={state.solution2} onChange={handleUpdate("solution2")}/>
+                    <input 
+                    placeholder="[1,2]"
+                    type="text" value={state.solution2} onChange={handleUpdate("solution2")}/>
                 </label>
 
-                <button type="submit">Create Problem</button>
+                <button className="problem button" type="submit">Create Problem</button>
             </form>
+
         </div>
     );
 };

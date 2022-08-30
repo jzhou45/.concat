@@ -5,6 +5,8 @@ import { fetchRooms } from "../../actions/room_actions";
 import { openModal } from "../../actions/modal_actions";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Arrow from '../../assets/images/left-arrow-icon.png'
+import SearchIcon from '../../assets/images/search-icon.png'
 
 const Problems = props => {
     const [state, setState] = useState({
@@ -53,13 +55,23 @@ const Problems = props => {
 
     const history = useHistory();
 
+    const [query, setQuery] = useState('')
+    const updateQuery = (e) => {
+        setQuery(e.currentTarget.value)
+    }
+
+    const [customQuery, setCustomQuery] = useState('')
+    const updateCustomQuery = (e) => {
+        setCustomQuery(e.currentTarget.value)
+    }
+
+    const show = (problem, searchQuery) => {
+        return problem?.title.toLowerCase().includes(searchQuery.toLowerCase())
+    }
+
     const handleClick = () => {
         history.push("/rooms")
     };
-
-    const goToProblem = problemsId => {
-        history.push(`/rooms/${props.currentRoomId}/problems/${problemsId}`)
-    }
 
     const rerenderProblems = () => {
         props.fetchCreatedProblems(props.currentRoomId).then(problems => {
@@ -71,9 +83,10 @@ const Problems = props => {
 
     return(
         <div className="problems-page">
-            <div>
+            <div className="problems-header">
+                <img src={Arrow} className="back-to-rooms" onClick={handleClick}>
+                </img>
                 <h1>{props.currentRoom}</h1>
-                <p onClick={handleClick}>Return to your rooms</p>
             </div>
             
             <div className="problems-container">
@@ -95,35 +108,39 @@ const Problems = props => {
                 {(state.problems === "seed") ?
                     
                     (<div className="seeded-problems-index">
+                        <div className="problems search-bar">
+                            <input onChange={updateQuery} placeholder="Find problem" type="text" />
+                            <img className="magnifying-glass" src={SearchIcon} alt="" />
+                        </div>
                         {seededProblems.sort(compareFn).map((problem, i) => (
-                            <div className="problems-list" key={i}>
-                                <Link to={`/rooms/${props.currentRoomId}/problems/${problem._id}`}>
-                                    <div>
-                                        <div>
+                            <div className={`${show(problem, query) ? "" : "hide"} problems-list`} key={i}>
+                                        <div className={`individual-problem`}>
                                             <input type="checkbox" className="problems-checkbox"/>
-                                            <p>{problem.title}</p>
+                                            <Link to={`/rooms/${props.currentRoomId}/problems/${problem._id}`}>
+                                                <p>{problem.title}</p>
+                                             </Link>
                                         </div>
                                         <div></div>
-                                    </div>
                                     <hr />
-                                </Link>
                             </div>
                         ))}
                     </div>) :
 
                     (<div className="custom-problems-index">
+                        <div className="problems search-bar">
+                            <input onChange={updateCustomQuery} placeholder="Find problem" type="text" />
+                            <img className="magnifying-glass" src={SearchIcon} alt="" />
+                        </div>
                         {customProblems.map((problem, i) => (
-                            <div className="custom-problems-list" key={i}>
-                                <Link to={`/rooms/${props.currentRoomId}/problems/${problem._id}`}>
-                                <div>
-                                    <div>
-                                        <input type="checkbox" className="problems-checkbox"/>
+                            <div className={`${show(problem, customQuery) ? "" : "hide"} custom-problems-list`} key={i}>
+                                <div className={`individual-problem`}>
+                                    <input type="checkbox" className="problems-checkbox"/>
+                                    <Link to={`/rooms/${props.currentRoomId}/problems/${problem._id}`}>
                                         <p>{problem.title}</p>
-                                    </div>
-                                    <div></div>
+                                    </Link>
                                 </div>
+                                <div></div>
                                 <hr />
-                                </Link>
                             </div>
                         ))}
                     </div>)
