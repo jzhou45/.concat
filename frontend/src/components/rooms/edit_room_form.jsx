@@ -5,9 +5,8 @@ import { closeModal, openModal } from "../../actions/modal_actions";
 
 const EditRoomForm = (props) => {
     
-    const {renameRoom, room} = props
+    const {room} = props
 
-    console.log(room)
     const [state, setState] = useState({
         name: room.name,
         id: room.id
@@ -21,15 +20,13 @@ const EditRoomForm = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        // updateRoom(state).then(() => closeModal())
+        props.renameRoom(state).then(() => props.closeModal())
     }
 
     const handleDelete = (e) => {
         e.preventDefault()
-        // deleteRoom(state.id).then(() => closeModal())
-        props.openModal("deleteroom", {roomid: room.id})
+        props.openModal("deleteroom", {roomId: room.id})
     }
-
 
     // const renderErrors = () => {
     //     return(
@@ -75,8 +72,7 @@ const EditRoomForm = (props) => {
 
 }
 
-const mSTP = ({errors, ui: {modal}}, props) => {
-    console.log("PROPS",modal.props.room)
+const mSTP = ({errors, ui: {modal}}) => {
     return {
         errors,
         room: modal.props.room

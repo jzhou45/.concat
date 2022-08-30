@@ -8,6 +8,7 @@
 @import './rooms/rooms.scss';
 @import './rooms/room_options.scss';
 @import './rooms/room_form.scss';
+
 @import "./problems/problems.scss";
 @import './rooms/room_form.scss';
 @import './rooms/confirmation_modal.scss';
@@ -71,6 +72,9 @@
     width: 100%;
     overflow: scroll;
     scroll-snap-type: y mandatory;
+    a {
+        text-decoration: none;
+    }
 
     > div {
         height: 100%;
