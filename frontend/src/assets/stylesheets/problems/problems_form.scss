@@ -1,0 +1,21 @@
+@import "../variables.scss";
+
+.create-problems-form{
+    background-color: $default-lightgray;
+    color: $default-white;
+    width: 500px;
+    height: 600px;
+}
+
+.create-problems-form > form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.create-problems-form label{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}

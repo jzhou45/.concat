@@ -18,7 +18,10 @@ const CreateProblems = props => {
     const handleSubmit = e => {
         e.preventDefault();
         const problem = Object.assign({}, state);
-        props.createProblem(problem).then(() => props.closeModal())
+        console.log(problem)
+        console.log(props.createProblem)
+        console.log(props.currentRoomId)
+        props.createProblem(props.currentRoomId, problem).then(() => props.closeModal())
     };
 
     const handleUpdate = field => (
@@ -61,7 +64,7 @@ const CreateProblems = props => {
 };
 
 const mSTP = (state) => ({
-    currentRoomId: state.ui.modal.props.currentRoomId
+    currentRoomId: state.ui.modal.props.currentRoom
 });
 
 const mDTP = dispatch => ({
