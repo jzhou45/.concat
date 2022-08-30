@@ -53,6 +53,19 @@ const SessionForm = props => {
         props.clearSessionErrors();
     };
 
+    const demoUser = {
+        username: "test1",
+        password: "password"
+    };
+
+    const handleDemoSignin = () => {
+        props.processForm(demoUser).then(() => {
+            if (Object.values(props.session).length > 0) {
+                history.push("/rooms");
+            };
+        }).finally(() => closeModal());
+    };
+
     return(
         <div className="session-form-div">
             <form className="session-form" onSubmit={handleSubmit}>
@@ -83,7 +96,7 @@ const SessionForm = props => {
 
                 <button type="submit">{(props.formType === "Login") ? "Log in" : "Create an account"}</button>
 
-                <p>Log in as demo user</p>
+                <p onClick={handleDemoSignin}>Log in as demo user</p>
             </form>
         </div>
     )
