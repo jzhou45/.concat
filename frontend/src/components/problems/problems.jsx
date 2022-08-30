@@ -2,9 +2,13 @@ import { connect } from "react-redux";
 import { fetchProblems } from "../../actions/problem_actions";
 import { useEffect } from "react";
 import { fetchRooms } from "../../actions/room_actions";
-
+import { useState } from "react";
 
 const Problems = props => {
+    const [state, setState] = useState({
+        problems: "seed"
+    });
+
     useEffect(() => props.fetchProblems(), []);
     useEffect(() => props.fetchRooms(), []);
 
@@ -29,26 +33,64 @@ const Problems = props => {
         };
     };
 
+    const seededOrCustomQuestions = questionType => {
+        if (questionType === "custom"){
+            setState({
+                problems: "custom"
+            });
+        } else{
+            setState({
+                problems: "seed"
+            });
+        };
+    };
+
     return(
         <div className="problems-page">
             <div>
                 <h1>{props.currentRoom}</h1>
             </div>
+            
             <div className="problems-container">
-                <div className="leetcode-75">
-                    <span>Leetcode 75</span>
+                <div className="select-problems">
+                    <div className="leetcode-75" onClick={() => seededOrCustomQuestions("seed")}>
+                        <span>Leetcode 75</span>
+                    </div>
+
+                    <div className="your-problems" onClick={() => seededOrCustomQuestions("custom")}>
+                        <span>Your Problems</span>
+                    </div>
+
                 </div>
-                <div className="seeded-problems-index">
-                    {seededProblems.sort(compareFn).map((problem, i) => (
-                        <div className="problems-list" key={i}>
-                            <div>
-                                <input type="checkbox"/>
-                                <p>{problem.title}</p>
+
+                {(state.problems === "seed") ?
+                    
+                    (<div className="seeded-problems-index">
+                        {seededProblems.sort(compareFn).map((problem, i) => (
+                            <div className="problems-list" key={i}>
+                                <div>
+                                    <input type="checkbox"/>
+                                    <p>{problem.title}</p>
+                                    <div></div>
+                                </div>
+                                <hr />
                             </div>
-                            <hr />
-                        </div>
-                    ))}
-                </div>
+                        ))}
+                    </div>) :
+
+                    (<div className="custom-problems-index">
+                        {customProblems.sort(compareFn).map((problem, i) => (
+                            <div className="problems-list" key={i}>
+                                <div>
+                                    <input type="checkbox"/>
+                                    <p>{problem.title}</p>
+                                    <div></div>
+                                </div>
+                                <hr />
+                            </div>
+                        ))}
+                    </div>)
+                }       
             </div>
         </div>
     );
