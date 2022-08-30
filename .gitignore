@@ -1,3 +1,5 @@
 node_modules
 .DS_Store
 config/keys.js
+.gitignore
+config/keys_dev.js
