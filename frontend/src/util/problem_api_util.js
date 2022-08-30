@@ -7,3 +7,7 @@ export const fetchProblems = () => (
 export const createProblem = (roomId, problem) => (
     axios.post(`/api/problems/${roomId}`, problem)
 );
+
+export const fetchCreatedProblems = (roomId) => (
+    axios.get(`/api/problems/${roomId}/createdproblems`)
+);

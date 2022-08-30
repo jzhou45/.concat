@@ -83,9 +83,10 @@
 
 .custom-problems-index{
     background-color: $default-blue;
+
 }
 
-.problems-list{
+.problems-list, .custom-problems-list{
     margin-top: 20px;
     margin-left: 20px;
     display: flex;
@@ -93,22 +94,36 @@
     align-items: center;
 }
 
-.problems-list > div{
+.problems-list > div, .custom-problems-list > div{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: 90%;
+    height: 100%;
+    background-color: $default-lightblue;
+    border-radius: 25px;
+    padding: 10px 20px;
 }
 
-.problems-list > div > div{
+.custom-problems-list > div{
+    background-color: $default-blue;
+}
+
+.problems-list > div:hover, .custom-problems-list >div:hover{
+    cursor: pointer;
+    filter: brightness(0.8);
+}
+
+.problems-list > div > div, .custom-problems-list > div > div{
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.problems-list hr{
+.problems-list hr, .custom-problems-list hr{
     position: relative;
     width: 90%;
+    margin-bottom: -10px;
 }
 
 .problems-checkbox{

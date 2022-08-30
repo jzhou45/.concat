@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { fetchProblems } from "../../actions/problem_actions";
+import { fetchProblems, fetchCreatedProblems } from "../../actions/problem_actions";
 import { fetchRooms } from "../../actions/room_actions";
 import { openModal } from "../../actions/modal_actions";
 import { useHistory } from "react-router-dom";
 
 const Problems = props => {
     const [state, setState] = useState({
-        problems: "seed"
+        problems: "seed",
+        problems: props.problems
     });
 
     useEffect(() => {
-        props.fetchProblems()
-    }, []);
-    useEffect(() => {
-        props.fetchRooms()
+        props.fetchProblems();
+        props.fetchRooms();
+        props.fetchCreatedProblems(props.currentRoomId);
     }, []);
 
     const seededProblems = [];
@@ -54,7 +54,15 @@ const Problems = props => {
 
     const handleClick = () => {
         history.push("/rooms")
-    }
+    };
+
+    const rerenderProblems = () => {
+        props.fetchCreatedProblems(props.currentRoomId).then(problems => {
+            setState({
+                problems
+            });
+        });
+    };
 
     return(
         <div className="problems-page">
@@ -72,7 +80,7 @@ const Problems = props => {
                     <div className="your-problems" onClick={() => seededOrCustomQuestions("custom")}>
                         <div></div>
                         <span>Your Problems</span>
-                        <div onClick={() => props.openModal("createproblem", {currentRoom: props.currentRoomId})}>
+                        <div onClick={() => props.openModal("createproblem", {currentRoom: props.currentRoomId, rerenderProblems: rerenderProblems})}>
                             <img src="https://icons-for-free.com/iconfiles/png/512/pencil-131965017493514588.png" alt="Edit" className="edit-problems" />
                         </div>
                     </div>
@@ -97,11 +105,11 @@ const Problems = props => {
                     </div>) :
 
                     (<div className="custom-problems-index">
-                        {customProblems.sort(compareFn).map((problem, i) => (
-                            <div className="problems-list" key={i}>
+                        {customProblems.map((problem, i) => (
+                            <div className="custom-problems-list" key={i}>
                                 <div>
                                     <div>
-                                        <input type="checkbox"/>
+                                        <input type="checkbox" className="problems-checkbox"/>
                                         <p>{problem.title}</p>
                                     </div>
                                     <div></div>
@@ -130,7 +138,8 @@ const mSTP = (state, ownProps) => {
 const mDTP = dispatch => ({
     fetchProblems: () => dispatch(fetchProblems()),
     fetchRooms: () => dispatch(fetchRooms()),
-    openModal: (modal, props=null) => dispatch(openModal(modal, props))
+    openModal: (modal, props=null) => dispatch(openModal(modal, props)),
+    fetchCreatedProblems: (roomId) => dispatch(fetchCreatedProblems(roomId))
 });
 
 export default connect(mSTP, mDTP)(Problems);
