@@ -1,15 +1,23 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { connect } from "react-redux";
 import { renameRoom } from "../../actions/room_actions";
 import { closeModal, openModal } from "../../actions/modal_actions";
+import { clearRoomErrors } from "../../actions/room_actions";
+import { useDispatch } from "react-redux";
 
 const EditRoomForm = (props) => {
+    
+    const dispatch = useDispatch() 
     
     const {room, error} = props
     const [state, setState] = useState({
         name: room.name,
         id: room.id
       })
+
+    useEffect(() => {
+        dispatch(clearRoomErrors())
+    }, [dispatch])
 
     const update = (field) => {
         return e => setState({
@@ -19,7 +27,11 @@ const EditRoomForm = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        props.renameRoom(state).then(() => props.closeModal())
+        props.renameRoom(state).then((resp) => {
+            if (resp !== undefined) {
+                props.closeModal()
+            }
+        })
     }
 
     const handleDelete = (e) => {
