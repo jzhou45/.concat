@@ -32,7 +32,11 @@ const doubler = num => {
     const runCode = () => {
         try {
             const func = Function(`${code}\nreturn doubler;`)(); // replace 'doubler' with the name of the preloaded function
-            setResult(func(3)); // pass in test arguments to func
+            const funcReturn = func(3); // pass in test arguments to func
+            const resultString = ` answer Input: 3 Output: ${funcReturn} Expected: 6`; // replace input and expected output
+            
+            if (funcReturn === 6) setResult('Correct' + resultString);
+            else setResult('Wrong' + resultString);
         } catch (error) {
             setResult(errorString(error));
         }
