@@ -3,10 +3,7 @@ import Editor from "@monaco-editor/react";
 
 export default () => {
     const preloadedCode = (
-`// Write a function that takes in a number as an argument and returns that number multiplied by two
-// example: doubler(3) => 6
-
-const doubler = num => {
+`const doubler = num => {
     
 };`
     );

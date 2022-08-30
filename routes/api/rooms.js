@@ -8,7 +8,9 @@ const validateRoomInput = require('../../validation/rooms');
 const roomPhotoUrls = require('../../util/room-photo-url');
 
 const roomResponse = ({ id, name, solo, users, problems, roomPhotoUrl }) => {
-    return { id, name, solo, users, problems, roomPhotoUrl };
+    return User.find({ _id: { $in: users } }).then(users => {
+        return { id, name, solo, users, problems, roomPhotoUrl };
+    });
 };
 
 const userResponse = ({ id, username, rooms }) => {
@@ -53,7 +55,7 @@ router.post('/',
                     user.rooms.push(newRoom.id);
                     user.save();
         
-                    return res.json(roomResponse(room));
+                    roomResponse(room).then(room => res.json(room));
                 });
             })
     }
