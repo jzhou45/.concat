@@ -58,7 +58,7 @@
 .rooms {
     width: 90%;
     height: 90%;
-
+    overflow: scroll;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
