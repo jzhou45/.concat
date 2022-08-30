@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOMClient from "react-dom/client";
+import * as ReactDOM from "react-dom"
 import Root from './components/root';
 import configureStore from './store/store';
 import jwt_decode from 'jwt-decode';
@@ -28,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
     store = configureStore({});
   }
   const rootContainer = document.getElementById('root');
-  const root = ReactDOMClient.createRoot(rootContainer)
-
-  root.render(<Root store={store} />, root);
+  
+  ReactDOM.render(<Root store={store} />, rootContainer);
 });
