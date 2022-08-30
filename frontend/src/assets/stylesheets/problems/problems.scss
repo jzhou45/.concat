@@ -1,0 +1,73 @@
+@import "../variables.scss";
+
+.problems-page{
+    height: 100%;
+    width: calc(100% - 300px);
+    padding-left: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.problems-page > :first-child{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.problems-page h1{
+    margin-left: 130px;
+    font-size: 40px;
+    color: $default-white;
+    font-weight: $bold;
+}
+
+.problems-container{
+    height: 75%;
+    width: 80%;
+    border-radius: 28px;
+    display: flex;
+    flex-direction: column;
+}
+
+.leetcode-75{
+    width: 50%;
+    background-color: $default-lightblue;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: $bold;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.seeded-problems-index{
+    background-color: $default-lightblue;
+    height: 100%;
+    width: 100%;
+    border-bottom-left-radius: 28px;
+    border-bottom-right-radius: 28px;
+    border-top-right-radius: 28px;
+}
+
+.problems-list{
+    margin-top: 20px;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.problems-list > div{
+    display: flex;
+    flex-direction: row;
+}
+
+.problems-list hr{
+    position: relative;
+    width: 90%;
+}
