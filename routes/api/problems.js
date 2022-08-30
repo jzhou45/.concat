@@ -139,5 +139,10 @@ router.get('/:roomId/:id',
     }
 )
 
+router.delete('/:id', (req,res) => {
+    Problem.deleteOne({_id: req.params.id})
+    .then(result => res.json(null))
+    .catch(err => console.log(err))
+})
 
 module.exports = router;
