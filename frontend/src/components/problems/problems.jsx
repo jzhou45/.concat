@@ -4,6 +4,7 @@ import { fetchProblems, fetchCreatedProblems } from "../../actions/problem_actio
 import { fetchRooms } from "../../actions/room_actions";
 import { openModal } from "../../actions/modal_actions";
 import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Problems = props => {
     const [state, setState] = useState({
@@ -56,6 +57,10 @@ const Problems = props => {
         history.push("/rooms")
     };
 
+    const goToProblem = problemsId => {
+        history.push(`/rooms/${props.currentRoomId}/problems/${problemsId}`)
+    }
+
     const rerenderProblems = () => {
         props.fetchCreatedProblems(props.currentRoomId).then(problems => {
             setState({
@@ -92,14 +97,16 @@ const Problems = props => {
                     (<div className="seeded-problems-index">
                         {seededProblems.sort(compareFn).map((problem, i) => (
                             <div className="problems-list" key={i}>
-                                <div>
+                                <Link to={`/rooms/${props.currentRoomId}/problems/${problem._id}`}>
                                     <div>
-                                        <input type="checkbox" className="problems-checkbox"/>
-                                        <p>{problem.title}</p>
+                                        <div>
+                                            <input type="checkbox" className="problems-checkbox"/>
+                                            <p>{problem.title}</p>
+                                        </div>
+                                        <div></div>
                                     </div>
-                                    <div></div>
-                                </div>
-                                <hr />
+                                    <hr />
+                                </Link>
                             </div>
                         ))}
                     </div>) :
@@ -107,6 +114,7 @@ const Problems = props => {
                     (<div className="custom-problems-index">
                         {customProblems.map((problem, i) => (
                             <div className="custom-problems-list" key={i}>
+                                <Link to={`/rooms/${props.currentRoomId}/problems/${problem._id}`}>
                                 <div>
                                     <div>
                                         <input type="checkbox" className="problems-checkbox"/>
@@ -115,6 +123,7 @@ const Problems = props => {
                                     <div></div>
                                 </div>
                                 <hr />
+                                </Link>
                             </div>
                         ))}
                     </div>)
