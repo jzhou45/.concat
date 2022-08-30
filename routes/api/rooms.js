@@ -51,7 +51,10 @@ router.post('/',
                     name: req.body.name,
                     users: [user.id],
                     roomPhotoUrl: roomPhotoUrls[Math.floor(Math.random() * 25)],
-                    problems: problems.map(problem => problem.id)
+                    problems: {
+                        incomplete: problems.map(problem => problem.id),
+                        complete: []
+                    }
                 });
         
                 newRoom.save().then(room => {
@@ -63,6 +66,27 @@ router.post('/',
             })
     }
 );
+
+router.patch('/:roomId/:id/complete', (req, res) => {
+    Room.findById(req.params.roomId)
+        .then(room => {
+            const index = room.problems.incomplete.indexOf(req.params.id)
+            if (index > -1) {
+                room.problems.incomplete.pull(req.params.id)
+                room.problems.complete.push(req.params.id)
+                room.save().then(room => res.json(room))
+            }
+        })
+})
+router.patch('/:roomId/:id/incomplete', (req, res) => {
+    Room.findById(req.params.roomId)
+        .then(room => {
+                room.problems.complete.pull(req.params.id)
+                room.problems.incomplete.push(req.params.id)
+                room.save().then(room => res.json(room))
+            
+        })
+})
 
 router.patch('/:id/rename',
     passport.authenticate('jwt', { session: false }),

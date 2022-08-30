@@ -14,10 +14,10 @@ const RoomSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     }],
-    problems: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Problem'
-    }],
+    problems: {
+        complete: [{type: Schema.Types.ObjectId, ref: 'Problem'}],
+        incomplete: [{type: Schema.Types.ObjectId, ref: 'Problem'}]
+    },
     roomPhotoUrl: {
         type: String,
         required: true
