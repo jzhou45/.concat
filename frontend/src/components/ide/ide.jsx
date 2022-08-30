@@ -79,7 +79,7 @@ export default () => {
 
             if ((Array.isArray(funcReturn) && Array.isArray(parsedSolution) &&
             funcReturn.sort().join(',') === parsedSolution.sort().join(',')) ||
-            ((typeof funcReturn === 'string' || typeof funcReturn === 'number') &&
+            ((typeof funcReturn === 'string' || typeof funcReturn === 'number' || typeof funcReturn === 'boolean') &&
             funcReturn === parsedSolution)) {
                 setResult(['Correct Answer'].concat(resultArray));
             }
