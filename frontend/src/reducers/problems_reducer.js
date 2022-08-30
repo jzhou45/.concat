@@ -11,6 +11,7 @@ const problemsReducer = (state={}, action) => {
             });
             return nextState;
         case RECEIVE_PROBLEM:
+            nextState[action.problem.data._id] = action.problem.data
             return nextState;
         default:
             return state;

@@ -13,14 +13,16 @@
     display: flex; 
     flex-direction: column;
 
-    .problem-item-info {
-        text-indent: 130px;
+    .problem-item-text {
+        margin: 20px 130px;
+
     }
 
     .problem-item-title {
         font-size: $logo-font-size;
         font-weight: $logo-font-weight;
         font-family: $logo-font;
+        margin-bottom: 20px;
     }
 }
 
