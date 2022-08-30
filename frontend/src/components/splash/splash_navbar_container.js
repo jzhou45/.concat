@@ -7,7 +7,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    openModal: modal => dispatch(openModal(modal))
+    openModal: (modal, props) => dispatch(openModal(modal, props))
 });
 
 export default connect(null, mapDispatchToProps)(SplashNavBar);

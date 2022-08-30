@@ -68,6 +68,7 @@ export const deleteRoom = (roomId) => dispatch => {
 export const renameRoom = (roomData) => dispatch => {
     return RoomAPIUtil.renameRoom(roomData)
         .then( room => dispatch(receiveRenamedRoom(room)))
+        .catch(err => {dispatch(receiveRoomErrors(err?.response?.data))})
 }
 
 export const joinRoom = (roomId) => dispatch => {

@@ -3,7 +3,7 @@
 .logged-in-nav-container {
     position: fixed;
     height: 100%;
-    width: 300px;
+    width: 20vw;
     background-color: $default-blue;
 
     display: flex; 
@@ -36,7 +36,7 @@
 
 .logout-button {
     background: $background-color;
-    width: 250px;
+    width: 15vw;
     height: 50px;
     text-align: center;
     border-radius: $button-border-radius;

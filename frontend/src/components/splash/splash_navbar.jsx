@@ -2,10 +2,11 @@ import React from "react";
 import logo from "../../assets/images/concat_logo.png"
 
 const SplashNavBar = (props) => {
+    
     const handleClick = (formType) => {
         return e => {
             e.preventDefault();
-            props.openModal(formType);
+            props.openModal(formType, {path: props.joinPath, roomId: props.roomId});
         };
     };
 
