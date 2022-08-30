@@ -23,7 +23,8 @@ router.post('/:roomId/',
             solution: req.body.solution,
             testCase2: req.body.testCase2,
             solution2: req.body.solution2,
-            seed: false
+            seed: false,
+            room: req.params.roomId
         })
 
         
@@ -51,6 +52,13 @@ router.get('/set', (req, res) => {
     Problem.find({seed: true})
     .then(seedProblems => {
         res.json(seedProblems)
+    })
+})
+
+router.get('/:roomId/createdproblems', (req, res) => {
+    Problem.find({room: req.params.roomId})
+    .then(createProblems => {
+        res.json(createProblems)
     })
 })
 

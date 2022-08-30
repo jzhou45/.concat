@@ -27,6 +27,10 @@ const ProblemSchema = new Schema ({
         seed: {
             type: Boolean,
             default: false
+        },
+        room: {
+            type: Schema.Types.ObjectId,
+            ref: 'Room'
         }
 });
 
