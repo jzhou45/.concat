@@ -26,3 +26,7 @@ export const fetchProblems = () => dispatch => (
 export const createProblem = (roomId, problem) => dispatch => (
     APIUtil.createProblem(roomId, problem).then(problem => dispatch(receiveProblem(problem))).catch(errors => dispatch(recieveProblemErrors(errors.response.data)))
 );
+
+export const fetchCreatedProblems = roomId => dispatch => (
+    APIUtil.fetchCreatedProblems(roomId).then(problems => dispatch(receiveAllProblems(problems)))
+);
