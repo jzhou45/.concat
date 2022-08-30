@@ -40,9 +40,12 @@ const SessionForm = props => {
         }
         props.processForm(user).then(() => {
             if (Object.values(props.session).length > 0) {
-                    history.push("/rooms");
+                    props.closeModal().then(() => {   
+                        history.push("/rooms");
+                    }
+                )
             };
-        }).finally(() => closeModal());
+        })
     };
 
     let usernameError;
