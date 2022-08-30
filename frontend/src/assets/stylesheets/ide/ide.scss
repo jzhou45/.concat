@@ -1,0 +1,64 @@
+@import '../variables.scss';
+
+
+.ide {
+    width: 80%;
+    height: 30%;
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .ide-extras {
+        width: 300px;
+        height: 500px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    
+    }
+
+    .ide-result {
+        width: 300px;
+        height: 200px;
+        background-color: $default-white;
+        box-shadow: $box-shadow;
+        color: $default-lightgray;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        > div {
+            width: 80%;
+            text-align: center;
+        }
+    }
+
+    .run.button{
+        background-color: $default-lightestgray;
+        outline: 0;
+        border: 0;
+        width: 200px;
+        height: 70px;
+        color: $default-white;
+        font-size: 20px;
+        font-weight: $bold;
+        box-shadow: $box-shadow;
+    }
+
+}
+.ide-editor {
+    height: 90%;
+    width: 90%;
+    
+    section {
+        border-radius: $div-border-radius;
+        height: 100%;
+        width: 100%;
+    }
+}
+
