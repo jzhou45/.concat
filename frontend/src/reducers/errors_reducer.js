@@ -5,6 +5,6 @@ import RoomErrorsReducer from './room_errors_reducer';
 
 export default combineReducers({
   session: SessionErrorsReducer,
-  problems: ProblemErrorsReducer 
+  problems: ProblemErrorsReducer,
   room: RoomErrorsReducer
 });
