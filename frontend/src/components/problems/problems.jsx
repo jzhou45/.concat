@@ -3,6 +3,7 @@ import { fetchProblems } from "../../actions/problem_actions";
 import { useEffect } from "react";
 import { fetchRooms } from "../../actions/room_actions";
 import { useState } from "react";
+import { openModal } from "../../actions/modal_actions";
 
 const Problems = props => {
     const [state, setState] = useState({
@@ -58,7 +59,11 @@ const Problems = props => {
                     </div>
 
                     <div className="your-problems" onClick={() => seededOrCustomQuestions("custom")}>
+                        <div></div>
                         <span>Your Problems</span>
+                        <div onClick={() => props.openModal("createproblem", {currentRoom: props.currentRoomId})}>
+                            <img src="https://icons-for-free.com/iconfiles/png/512/pencil-131965017493514588.png" alt="Edit" className="edit-problems" />
+                        </div>
                     </div>
 
                 </div>
@@ -69,8 +74,10 @@ const Problems = props => {
                         {seededProblems.sort(compareFn).map((problem, i) => (
                             <div className="problems-list" key={i}>
                                 <div>
-                                    <input type="checkbox"/>
-                                    <p>{problem.title}</p>
+                                    <div>
+                                        <input type="checkbox" className="problems-checkbox"/>
+                                        <p>{problem.title}</p>
+                                    </div>
                                     <div></div>
                                 </div>
                                 <hr />
@@ -82,8 +89,10 @@ const Problems = props => {
                         {customProblems.sort(compareFn).map((problem, i) => (
                             <div className="problems-list" key={i}>
                                 <div>
-                                    <input type="checkbox"/>
-                                    <p>{problem.title}</p>
+                                    <div>
+                                        <input type="checkbox"/>
+                                        <p>{problem.title}</p>
+                                    </div>
                                     <div></div>
                                 </div>
                                 <hr />
@@ -102,13 +111,15 @@ const mSTP = (state, ownProps) => {
         problems: state.problems,
         rooms: state.rooms,
         currentUser: state.session.user.username,
-        currentRoom: state.rooms[currentRoomId]?.name
-    }
+        currentRoom: state.rooms[currentRoomId]?.name,
+        currentRoomId: currentRoomId
+    };
 };
 
 const mDTP = dispatch => ({
     fetchProblems: () => dispatch(fetchProblems()),
-    fetchRooms: () => dispatch(fetchRooms())
+    fetchRooms: () => dispatch(fetchRooms()),
+    openModal: (modal, props=null) => dispatch(openModal(modal, props))
 });
 
 export default connect(mSTP, mDTP)(Problems);
