@@ -58,7 +58,7 @@
 
 .your-problems{
     background-color: $default-blue;
-    color: $default-white;
+    justify-content: space-between;
 }
 
 .seeded-problems-index, .custom-problems-index{
@@ -89,7 +89,44 @@
     width: 90%;
 }
 
+.problems-list > div > div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 .problems-list hr{
     position: relative;
     width: 90%;
+}
+
+.problems-checkbox{
+    border: none;
+    height: 30px;
+    width: 30px;
+}
+
+.problems-checkbox + p{
+    text-indent: 10px;
+    font-size: 20px;
+}
+
+.edit-problems{
+    height: 50px;
+    width: 50px;
+}
+
+.your-problems > :first-child{
+    margin-left: 20px;
+}
+
+.your-problems > :last-child{
+    margin-right: 20px;
+    border-radius: 50%;
+    filter: invert(100);
+}
+
+.your-problems > :last-child:hover{
+    background-color: $default-lightblue;
+    filter: invert(0);
 }
