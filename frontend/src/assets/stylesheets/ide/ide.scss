@@ -38,7 +38,7 @@
         }
     }
 
-    .run.button{
+    .run.button, .save.button{
         background-color: $default-lightestgray;
         outline: 0;
         border: 0;
@@ -48,6 +48,10 @@
         font-size: 20px;
         font-weight: $bold;
         box-shadow: $box-shadow;
+
+        &:hover {
+            filter: brightness(0.7)
+        }
     }
 
 }
