@@ -1,9 +1,9 @@
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { fetchProblems } from "../../actions/problem_actions";
-import { useEffect } from "react";
 import { fetchRooms } from "../../actions/room_actions";
-import { useState } from "react";
 import { openModal } from "../../actions/modal_actions";
+import { useHistory } from "react-router-dom";
 
 const Problems = props => {
     const [state, setState] = useState({
@@ -50,10 +50,17 @@ const Problems = props => {
         };
     };
 
+    const history = useHistory();
+
+    const handleClick = () => {
+        history.push("/rooms")
+    }
+
     return(
         <div className="problems-page">
             <div>
                 <h1>{props.currentRoom}</h1>
+                <p onClick={handleClick}>Return to your rooms</p>
             </div>
             
             <div className="problems-container">
