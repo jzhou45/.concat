@@ -90,16 +90,23 @@ export default () => {
     };
 
     return (
-        <div>
-            <Editor
-                height="90vh"
-                theme="vs-dark"
-                defaultLanguage="javascript"
-                defaultValue={preloadedCode}
-                onChange={handleEditorChange}
-            />
-            <button onClick={runCode}>Run Code</button>
-            {result ? result.map((el, i) => <p key={i}>{el}</p>) : null}
+        <div className="ide">
+                <Editor
+                    border-radius="24px"
+                    height="55vh"
+                    width="100vh"
+                    theme="vs-dark"
+                    defaultLanguage="javascript"
+                    defaultValue={preloadedCode}
+                    onChange={handleEditorChange}
+                    position="relative"
+                />
+            <div className="ide-extras">
+                <button className="run button" onClick={runCode}>RUN</button>
+                <div className="ide-result">
+                  {result ? result.map((el, i) => <p key={i}>{el}</p>) : null}
+                </div>
+            </div>
         </div>
     );
 };

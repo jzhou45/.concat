@@ -1,15 +1,16 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import SplashNavbarContainer from './splash_navbar_container'
 import SplashFirstPageContainer from './splash-first-page'
 import SplashInstructionPageContainer from './splash-instruction-page'
 
-const SplashContainer = () => {
+const SplashContainer = (props) => {
+
+    const {joinPath, roomId} = props
 
     const content = () => {
         return (
           <div className='splash-container'>
-              <SplashNavbarContainer />
+              <SplashNavbarContainer  roomId={roomId} joinPath={joinPath}/>
               <section className='splash-first-page-container'>
                   <SplashFirstPageContainer/>
               </section>

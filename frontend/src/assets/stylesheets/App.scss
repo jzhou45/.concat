@@ -8,10 +8,13 @@
 @import './rooms/rooms.scss';
 @import './rooms/room_options.scss';
 @import './rooms/room_form.scss';
-
+@import './search_bar/search_bar.scss';
 @import "./problems/problems.scss";
 @import './rooms/room_form.scss';
 @import './rooms/confirmation_modal.scss';
+@import "./problems//problems_form.scss";
+@import "./ide/ide.scss";
+@import "./problems//problem_item.scss";
 
 @font-face {
     font-family: "Manrope";

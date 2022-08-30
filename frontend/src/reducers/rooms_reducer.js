@@ -28,7 +28,6 @@ const roomsReducer = (state = {}, action) => {
             nextState[action.room.data.id] = action.room.data
             return nextState
         case REMOVE_ROOM: 
-            console.log("REMOVE_ROOM", action)
             delete nextState[action.roomId];
             return nextState
         default:

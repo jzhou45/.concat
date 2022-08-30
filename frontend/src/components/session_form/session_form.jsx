@@ -32,9 +32,15 @@ const SessionForm = props => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const user = Object.assign({}, state);
+        if (props.joinPath) {
+            console.log('appetizer')
+            props.joinRoom(props.roomId).then(() => {
+                history.push(props.joinPath)
+            })
+        }
         props.processForm(user).then(() => {
             if (Object.values(props.session).length > 0) {
-                history.push("/rooms");
+                    history.push("/rooms");
             };
         }).finally(() => closeModal());
     };

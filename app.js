@@ -7,6 +7,12 @@ const bodyParser = require('body-parser');
 const app = express();
 const db = require('./config/keys').mongoURI;
 const passport = require('passport');
+const server = require('http').createServer(app)
+const io = require('socket.io')(server, {
+  cors: {
+    origin:'*'
+  }
+})
 
 mongoose
   .connect(db, { useNewUrlParser: true })
@@ -22,6 +28,15 @@ require('./config/passport')(passport);
 app.use("/api/users", users);
 app.use("/api/rooms", rooms);
 app.use("/api/problems", problems);
+
+io.on('connection', socket => {
+  console.log('connection made successfully')
+  socket.on('message', payload => {
+    io.emit('message', payload)
+  })
+})
+
+server.listen(8000, () => console.log('Websocket listening at port: 8000'))
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => console.log(`Server is running on port ${port}`));

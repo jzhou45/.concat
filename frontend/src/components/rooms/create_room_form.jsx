@@ -1,11 +1,18 @@
-import React, {useState} from "react";
-import { connect } from "react-redux";
+import React, {useState, useEffect} from "react";
+import { connect, useDispatch } from "react-redux";
 import { createRoom } from "../../actions/room_actions";
 import { openModal, closeModal } from "../../actions/modal_actions";
+import { clearRoomErrors } from "../../actions/room_actions";
 
 const CreateRoomForm = (props) => {
 
+    const dispatch = useDispatch()
+
     const {createRoom, error} = props
+
+    useEffect(() => {
+        dispatch(clearRoomErrors())
+    }, [dispatch])
 
     const [state, setState] = useState({
         name: ''
@@ -19,7 +26,13 @@ const CreateRoomForm = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        createRoom(state).then((resp) => props.openModal("joinroom", {roomId: resp.room.data.id}))
+        createRoom(state).then((resp) => {
+            if (resp !== undefined) {
+                props.openModal("joinroom", {roomId: resp.room.data.id})
+            }
+        })
+        
+        // createRoom(state).then((resp) => props.openModal("joinroom", {roomId: resp.room.data.id}))
         // if (!error) {
         //     props.openModal("joinroom")
         // }
@@ -39,7 +52,7 @@ const CreateRoomForm = (props) => {
                         placeholder={"What would you like to name your room?"}
                         />
                         <div className="room-errors">
-                            {/* {error} */}
+                            {error}
                         </div>
                         <button type="submit"  className={`${state.name === "" ? "unclickable" : ""} room-create-button`}>
                             <div>Create</div>

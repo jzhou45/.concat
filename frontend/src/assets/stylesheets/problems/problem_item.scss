@@ -1,0 +1,36 @@
+@import '../variables.scss';
+
+.problem-item-container {
+    height: 100%;
+    width: calc(100% - 300px);
+    margin-left: 300px;
+}
+
+.problem-item-header {
+    height: 30%;
+    width: 100%;
+    color: $default-white;
+    display: flex; 
+    flex-direction: column;
+
+    .problem-item-info {
+        text-indent: 130px;
+    }
+
+    .problem-item-title {
+        font-size: $logo-font-size;
+        font-weight: $logo-font-weight;
+        font-family: $logo-font;
+    }
+}
+
+.ide-container {
+    height: 70%;
+    width: 100%;
+    background-color: $default-lightblue;
+
+    display: flex; 
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}

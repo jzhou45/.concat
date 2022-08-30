@@ -1,4 +1,4 @@
-import { RECEIVE_ALL_PROBLEMS, RECEIVE_PROBLEM } from "../actions/problem_actions";
+import { RECEIVE_ALL_PROBLEMS, RECEIVE_PROBLEM, RECEIVE_ALL_CUSTOM_PROBLEMS } from "../actions/problem_actions";
 
 const problemsReducer = (state={}, action) => {
     Object.freeze(state);
