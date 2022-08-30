@@ -1,11 +1,18 @@
-import React, {useState} from "react";
-import { connect } from "react-redux";
+import React, {useState, useEffect} from "react";
+import { connect, useDispatch } from "react-redux";
 import { createRoom } from "../../actions/room_actions";
 import { openModal, closeModal } from "../../actions/modal_actions";
+import { clearRoomErrors } from "../../actions/room_actions";
 
 const CreateRoomForm = (props) => {
 
+    const dispatch = useDispatch()
+
     const {createRoom, error} = props
+
+    useEffect(() => {
+        dispatch(clearRoomErrors())
+    }, [dispatch])
 
     const [state, setState] = useState({
         name: ''

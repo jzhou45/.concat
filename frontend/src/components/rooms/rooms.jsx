@@ -4,6 +4,7 @@ import LoadingContainer from '../util/loading_container'
 import RoomItemContainer from './room_item'
 import { fetchRooms } from '../../actions/room_actions'
 import { openModal } from '../../actions/modal_actions'
+import SearchIcon from '../../assets/images/search-icon.png'
 
 const RoomsPageContainer = (props) => {
 
@@ -11,10 +12,15 @@ const RoomsPageContainer = (props) => {
 
     const { fetchRooms, rooms, openModal} = props
 
+    const [query, setQuery] = useState('')
+    const updateQuery = (e) => {
+        setQuery(e.currentTarget.value)
+    }
+
     useEffect( () => {
         fetchRooms().finally(() => setLoading(false))
-    }, [])
-    
+    }, [query])
+        
     const [loading, setLoading] = useState(true)
 
     const userRooms = Object.keys(rooms).map((roomId) => rooms[roomId])
@@ -33,14 +39,20 @@ const RoomsPageContainer = (props) => {
                     </div>
                 </div>
                 <div className='rooms-container'>
+                    <div className='search-bar'>
+                        <input type="text" onChange={updateQuery} placeholder="Find room"/>
+                        <img className="magnifying-glass" src={SearchIcon} alt="" />
+                    </div>
                     <div className='rooms'>
                         {userRooms.map((room, i) => <RoomItemContainer 
                             key={i}
                             currentUser={currentUser}
                             room={room}
+                            query={query
+                            }
                             /> )}
                         <div onClick={handleCreateClick}>
-                            {<RoomItemContainer room={"Create Room"}/>}
+                            {<RoomItemContainer query={query} room={"Create Room"}/>}
                         </div>
                     </div>
                 </div>

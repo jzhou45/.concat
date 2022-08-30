@@ -8,11 +8,13 @@ import { Link } from "react-router-dom";
 const RoomItemContainer = (props) => {
 
 
-    const {openModal, room, currentUser} = props
+    const {openModal, room, query, currentUser} = props
 
     const roomName = room?.name ?? room;
     const roomPhotoUrl = room?.roomPhotoUrl;
     const solo = room?.solo;
+    
+    const show = room === "Create Room" || room?.name.toLowerCase().includes(query?.toLowerCase()) 
 
     const openRef = useRef(null)
     const [open, setOpen] = closeDropdown(openRef, false)
@@ -30,7 +32,7 @@ const RoomItemContainer = (props) => {
 
     const content = () => {
         return (
-            <div className="room-container">
+            <div className={`${show ? "" : "hide"} room-container`}>
                 <div onClick={handleClick} className={`room-options-trigger ${roomPhotoUrl? "" : "hide"}`}>
                     <div>
                         ...
