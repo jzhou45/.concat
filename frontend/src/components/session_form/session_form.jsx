@@ -33,20 +33,20 @@ const SessionForm = props => {
         e.preventDefault();
         const user = Object.assign({}, state);
         if (props.joinPath) {
-            console.log('appetizer')
             props.joinRoom(props.roomId).then(() => {
-                history.push(props.joinPath)
-            })
-        }
+                history.push(props.joinPath);
+            });
+        };
         props.processForm(user).then(() => {
-            if (Object.values(props.session).length > 0) {
-                    props.closeModal().then(() => {   
-                        history.push("/rooms");
-                    }
-                )
+            if (props.formType === "Signup" && props.errors.username){
+                props.closeModal();
+                props.login(user);
+            } else if (props.formType === "Login" && Object.values(props.errors).length === 0){
+                props.closeModal();
             };
-        })
+        });
     };
+
 
     let usernameError;
     if (props.errors.username) usernameError = "input-error";
@@ -59,7 +59,6 @@ const SessionForm = props => {
 
     const closeModal = () => {
         props.closeModal();
-        props.clearSessionErrors();
     };
 
     const demoUser = {
@@ -75,6 +74,10 @@ const SessionForm = props => {
         }).finally(() => closeModal());
     };
 
+    const clearErrorsOnFocus = () => {
+        // setTimeout(() => props.clearSessionErrors(), 1000);
+    };
+
     return(
         <div className="session-form-div">
             <form className="session-form" onSubmit={handleSubmit}>
@@ -88,18 +91,18 @@ const SessionForm = props => {
                 <span>.concat</span>
 
                 <label htmlFor="username"></label>
-                <input type="text" name="username" placeholder="Username" value={state.username} onChange={update("username")} className={usernameError} />
+                <input type="text" name="username" placeholder="Username" value={state.username} onChange={update("username")} className={usernameError} onFocus={clearErrorsOnFocus} />
                 {(props.errors.username) ? <p className="error">{props.errors.username}</p> :null }
 
 
                 <label htmlFor="password"></label>
-                <input type="password" name="password" placeholder="Password" value={state.password} onChange={update("password")} className={passwordError} />
+                <input type="password" name="password" placeholder="Password" value={state.password} onChange={update("password")} className={passwordError} onFocus={clearErrorsOnFocus} />
                 {(props.errors.password) ? <p className="error">{props.errors.password}</p> :null }
 
                 {(props.formType === "Signup") ? 
                 <div>
                     <label htmlFor="confirm-password"></label>
-                    <input type="password" name="confirm-password" placeholder="Retype password" value={state.password2} onChange={update("password2")} className={password2Error} />
+                    <input type="password" name="confirm-password" placeholder="Retype password" value={state.password2} onChange={update("password2")} className={password2Error} onFocus={clearErrorsOnFocus} />
                     {(props.errors.password2) ? <p className="error">{props.errors.password2}</p> :null }
                 </div> : null}
 

@@ -9,7 +9,8 @@ const mapStateToProps = (state) => {
         formType: "Signup",
         session: state.session.user,
         errors: state.errors.session,
-        joinPath: state.ui.modal.props.path
+        joinPath: state.ui.modal.props.path,
+        isSignedIn: state.session.isSignedIn
     }
 };
 
