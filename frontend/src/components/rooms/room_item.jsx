@@ -15,7 +15,7 @@ const RoomItemContainer = (props) => {
 
     const openRef = useRef(null)
     const [open, setOpen] = closeDropdown(openRef, false)
-    const handleClick = () => setOpen(!open)
+    const handleClick = () => {setOpen(!open)}
 
     const handleRename = (e) => {
         e.preventDefault() 
