@@ -7,7 +7,6 @@ import {
 import {RECEIVE_USER_LOGOUT} from '../actions/session_actions'
 
 const roomsReducer = (state = {}, action) => {
-    console.log(action)
     Object.freeze(state);
     let nextState = Object.assign( {}, state);
     switch(action.type) {

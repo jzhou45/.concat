@@ -1,0 +1,46 @@
+@import '../variables.scss';
+
+.confirmation-modal {
+    width: 400px;
+    height: 250px;
+    background-color: $default-white;
+    border-radius: $div-border-radius;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: $box-shadow;
+
+    .confirmation-title {
+        font-weight: $logo-font-weight;
+        font-size: $logo-font-size;
+    }
+
+    .confirmation-text {
+        font-size: 16px;
+        width: 370px;
+        text-align: center;
+        line-height: 30px;
+    }
+}
+
+.button {
+    cursor: pointer;
+    background-color: $default-lightblue;
+    height: 40px;
+    width: 70px;
+    border-radius: $submit-button-border-radius;
+    color: $default-white;
+    font-weight: 400;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.leave.button {
+    background-color: $background-color;
+    width: 120px;
+}

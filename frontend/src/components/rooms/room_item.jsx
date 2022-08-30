@@ -1,14 +1,31 @@
 import React, {useRef} from "react";
 import Plus from '../../assets/images/plus.png'
 import closeDropdown from '../util/close_dropdown'
+import { openModal } from "../../actions/modal_actions";
+import { connect } from "react-redux";
 
 const RoomItemContainer = (props) => {
 
-    const {roomName, roomPhotoUrl, currentUser, solo} = props
+
+    const {openModal, room, currentUser} = props
+
+    const roomName = room?.name ?? room;
+    const roomPhotoUrl = room?.roomPhotoUrl;
+    const solo = room?.solo;
 
     const openRef = useRef(null)
     const [open, setOpen] = closeDropdown(openRef, false)
     const handleClick = () => setOpen(!open)
+
+    const handleRename = (e) => {
+        e.preventDefault() 
+        openModal("editroom", {room: room})
+    }
+
+    const handleLeave = (e) => {
+        e.preventDefault()
+        openModal("leaveroom", {roomId: room.id})
+    }
 
     const content = () => {
         return (
@@ -18,10 +35,10 @@ const RoomItemContainer = (props) => {
                         ...
                     </div>
                     <div ref={openRef} className={`room-options-menu ${open ? "open" : "hide"}`}>
-                        <div>
-                            <p>Rename room</p>
+                        <div onClick={handleRename}>
+                            <p>Edit room</p>
                         </div>
-                        <div>
+                        <div onClick={handleLeave}>
                             <p>Leave room</p>
                         </div>
                     </div>
@@ -40,4 +57,10 @@ const RoomItemContainer = (props) => {
     return content()
 }
 
-export default RoomItemContainer
+const mDTP = (dispatch) => {
+    return {
+        openModal: (formType, props) => dispatch(openModal(formType, props))
+    }
+}
+
+export default connect(null, mDTP)(RoomItemContainer)

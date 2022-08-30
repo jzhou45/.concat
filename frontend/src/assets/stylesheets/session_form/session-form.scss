@@ -6,10 +6,14 @@
     background-color: $modal-background-color;
 }
 
+.modal-child {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
 .session-form-div{
-    position: fixed;
-    margin-top: calc(50vh - 240px);
-    margin-left: calc(50vw - 242px);
     z-index: 5;
     display: flex;
     align-items: center;
