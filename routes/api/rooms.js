@@ -8,7 +8,9 @@ const validateRoomInput = require('../../validation/rooms');
 const roomPhotoUrls = require('../../util/room-photo-url');
 
 const roomResponse = ({ id, name, solo, users, problems, roomPhotoUrl }) => {
-    return { id, name, solo, users, problems, roomPhotoUrl };
+    return User.find({ _id: { $in: users } }).then(users => {
+        return { id, name, solo, users, problems, roomPhotoUrl };
+    });
 };
 
 const userResponse = ({ id, username, rooms }) => {
@@ -19,14 +21,17 @@ router.get('/',
     passport.authenticate('jwt', { session: false }),
     (req, res) => {
         Room.find({ users: req.user.id })
-        .then(rooms => res.json(rooms.map(room => roomResponse(room))))
+        .then(rooms => {
+            Promise.all(rooms.map(room => roomResponse(room).then(room => room)))
+                .then(rooms => res.json(rooms));
+        })
         .catch(err => console.log(err));
     }
 );
 
 router.get('/:id', (req, res) => {
     Room.findById(req.params.id)
-        .then(room => res.json(roomResponse(room)))
+        .then(room => roomResponse(room).then(room => res.json(room)))
         .catch(err => res.status(404).json({ noroomfound: 'No room found with that ID' }));
 });
 
@@ -53,7 +58,7 @@ router.post('/',
                     user.rooms.push(newRoom.id);
                     user.save();
         
-                    return res.json(roomResponse(room));
+                    roomResponse(room).then(room => res.json(room));
                 });
             })
     }
@@ -78,7 +83,7 @@ router.patch('/:id/rename',
                 } else {
                     room.name = req.body.name;
                     room.save()
-                        .then(room => res.json(roomResponse(room)))
+                        .then(room => roomResponse(room).then(room => res.json(room)))
                         .catch(err => console.log(err));
                 }
             })
@@ -103,7 +108,7 @@ router.patch('/:id/join',
 
                     room.users.push(user.id);
                     room.save()
-                        .then(room => res.json(roomResponse(room)))
+                        .then(room => roomResponse(room).then(room => res.json(room)))
                         .catch(err => console.log(err));
                 }
             })

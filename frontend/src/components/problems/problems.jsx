@@ -9,8 +9,12 @@ const Problems = props => {
         problems: "seed"
     });
 
-    useEffect(() => props.fetchProblems(), []);
-    useEffect(() => props.fetchRooms(), []);
+    useEffect(() => {
+        props.fetchProblems()
+    }, []);
+    useEffect(() => {
+        props.fetchRooms()
+    }, []);
 
     const seededProblems = [];
     const customProblems = [];
