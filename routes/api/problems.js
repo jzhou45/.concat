@@ -112,4 +112,24 @@ router.patch('/:roomId/:id',
     }
 )
 
+router.get('/:roomId/:id',
+    passport.authenticate('jwt', { session: false }),
+    (req, res) => {
+        const user = req.user;
+
+        Problem.findById(req.params.id)
+        .then(problem => 
+            Room.findById(req.params.roomId)
+            .then(room => {
+                if (!room.users.includes(user.id)) {
+                    return res.status(400).json({ usernotinroom: 'User is not in this room' });
+                } else {
+                    res.json(problem)
+                }
+            })
+        )
+    }
+)
+
+
 module.exports = router;
