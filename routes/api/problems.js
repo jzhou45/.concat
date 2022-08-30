@@ -35,12 +35,12 @@ router.post('/:roomId/',
             } else {
                 newProblem.save()
                 .then(problem => { 
-                    room.problems.push(problem.id);
+                    room.problems.incomplete.push(problem.id);
                     room.save()
                     .then(room => res.json(problem));
                     
                 })
-                .catch(err => console.log(err))
+                .catch(err => res.json(err))
             }
         })
         .catch(err => res.status(404).json({ noroomfound: 'No room found with that ID'}))
@@ -139,9 +139,20 @@ router.get('/:roomId/:id',
     }
 )
 
-router.delete('/:id', (req,res) => {
+router.delete('/:roomId/:id', (req,res) => {
     Problem.deleteOne({_id: req.params.id})
-    .then(result => res.json(null))
+    .then(result => 
+        Room.findById(req.params.id)
+        .then(room => {
+            if (room.problems.incomplete.includes(req.params.id)){
+                room.problems.incomplete.pull(req.params.id)
+                room.save().then(result => res.json(result))
+            } else if (room.problems.complete.includes(req.params.id)){
+                room.problems.complete.pull(req.params.id)
+                room.save().then(result => res.json(result))
+            }
+        })
+    )
     .catch(err => console.log(err))
 })
 
