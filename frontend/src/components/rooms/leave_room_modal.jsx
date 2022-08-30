@@ -4,12 +4,13 @@ import { closeModal } from "../../actions/modal_actions";
 import { leaveRoom } from "../../actions/room_actions";
 
 const LeaveRoomContainer = (props) => {
-    
-    const {deleteRoom, roomId} = props
+
+    const { leaveRoom, roomId } = props
 
     const handleClick = (e) => {
         e.preventDefault()
-        // leaveRoom(roomId).then(() => closeModal())
+        leaveRoom(roomId)
+        props.closeModal()
     }
 
     const content = () => {
@@ -23,7 +24,7 @@ const LeaveRoomContainer = (props) => {
                         If you leave this room, you probably can rejoin again. So go ahead click it.
                     </p>
                 </div>
-                <div className="leave button">
+                <div onClick={handleClick} className="leave button">
                     Leave room
                 </div>
             </div>
@@ -34,9 +35,9 @@ const LeaveRoomContainer = (props) => {
 
 }
 
-const mSTP = ({ui: {modal}}) => {
+const mSTP = ({ ui: { modal } }) => {
     return {
-        roomId:modal.props.roomId
+        roomId: modal.props.roomId
     }
 }
 
@@ -47,4 +48,4 @@ const mDTP = (dispatch) => {
     }
 }
 
-export default connect(null, mDTP)(LeaveRoomContainer)
+export default connect(mSTP, mDTP)(LeaveRoomContainer)

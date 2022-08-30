@@ -55,6 +55,7 @@
 .room-create-button.unclickable {
     background-color: $default-gray-hover;
     color: $default-lightestgray;
+    cursor: auto;
 }
 
 .form-button-div button.delete-room {
@@ -79,4 +80,11 @@
     input {
         color: $default-white;
     }
+}
+
+.room-errors {
+    font-size: 12px;
+    color: $red;
+    margin-right: 250px;
+    margin-top: -10px;
 }

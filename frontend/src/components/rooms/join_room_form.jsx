@@ -27,7 +27,6 @@ const JoinRoomForm = (props) => {
                         type="text" 
                         value={joinRoomLink}
                         disabled="disabled"
-                        // needs heroku whatever in the front 
                         />
                         {/* { renderErrors } */}
                         <button onClick={handleClick}>
@@ -43,11 +42,12 @@ const JoinRoomForm = (props) => {
 
 }
 
-const mSTP = ({errors}) => {
+const mSTP = ({errors, ui: {modal}}) => {
+    console.log(modal)
     // needs roomId passed in through modal props
     return {
         errors,
-        roomId: 'temp'
+        roomId: modal.props.roomId
     }
 }
 
@@ -58,4 +58,4 @@ const mDTP = (dispatch) => {
     }
 }
 
-export default connect(null, null)(JoinRoomForm)
+export default connect(mSTP, null)(JoinRoomForm)
