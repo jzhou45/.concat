@@ -19,7 +19,13 @@ const CreateRoomForm = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        createRoom(state).then((resp) => props.openModal("joinroom", {roomId: resp.room.data.id}))
+        createRoom(state).then((resp) => {
+            if (resp !== undefined) {
+                props.openModal("joinroom", {roomId: resp.room.data.id})
+            }
+        })
+        
+        // createRoom(state).then((resp) => props.openModal("joinroom", {roomId: resp.room.data.id}))
         // if (!error) {
         //     props.openModal("joinroom")
         // }
@@ -39,7 +45,7 @@ const CreateRoomForm = (props) => {
                         placeholder={"What would you like to name your room?"}
                         />
                         <div className="room-errors">
-                            {/* {error} */}
+                            {error}
                         </div>
                         <button type="submit"  className={`${state.name === "" ? "unclickable" : ""} room-create-button`}>
                             <div>Create</div>

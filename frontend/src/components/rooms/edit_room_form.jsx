@@ -5,8 +5,7 @@ import { closeModal, openModal } from "../../actions/modal_actions";
 
 const EditRoomForm = (props) => {
     
-    const {room} = props
-
+    const {room, error} = props
     const [state, setState] = useState({
         name: room.name,
         id: room.id
@@ -28,18 +27,6 @@ const EditRoomForm = (props) => {
         props.openModal("deleteroom", {roomId: room.id})
     }
 
-    // const renderErrors = () => {
-    //     return(
-    //       <ul>
-    //         {errors.map((error, i) => (
-    //           <li key={`error-${i}`} className="board-errors auth-errors">
-    //             {error}
-    //           </li>
-    //         ))}
-    //       </ul>
-    //     );
-    // }
-
     const content = () => {
         return (
             <div className="room-form">
@@ -53,7 +40,9 @@ const EditRoomForm = (props) => {
                         onChange={update("name")}
                         value={state.name}
                         />
-                        {/* { renderErrors } */}
+                    <div className="room-errors">
+                            {error}
+                        </div>
                         <div className="form-button-div">
                             <button type="submit"  className={`${state.name != "" ? "clickable" : ""} room-create-button`}>
                                 <div>Submit</div>
@@ -74,7 +63,7 @@ const EditRoomForm = (props) => {
 
 const mSTP = ({errors, ui: {modal}}) => {
     return {
-        errors,
+        error: errors.room.name,
         room: modal.props.room
     }
 }
