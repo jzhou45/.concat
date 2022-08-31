@@ -25,7 +25,8 @@
 }
 
 .messages {
-    height: 80%;
+    overflow: scroll;
+    height: 500px;
     width: 90%;
     border-radius: $button-border-radius;
     border: 2px solid $default-lightblue;
@@ -80,6 +81,10 @@
         color: $default-lightblue;
         font-weight: $medium;
         width: 60px;
+        margin-right: 5px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
     }
 
     .chat-message {

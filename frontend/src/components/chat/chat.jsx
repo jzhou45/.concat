@@ -56,8 +56,8 @@ const Chat = (props) => {
                                 </div>
                             )
                         })}
+                        <div ref={bottomRef} className="bottom-of-div"></div>
                     </div>
-                    <div ref={bottomRef} className="bottom-of-div"></div>
                 </div>
                 <form className="message-form" onSubmit={sendMessage}>
                     <input type="text" 

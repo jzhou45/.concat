@@ -4,7 +4,7 @@ import closeDropdown from "../util/close_dropdown";
 
 
 const ProblemListItem = props => {
-    const { problem, currentRoomId, query, openModal, problemsListClassName } = props;
+    const { problem, seed=false, query, openModal, currentRoom, problemsListClassName } = props;
 
     
     const openRef = useRef(null);
@@ -24,11 +24,11 @@ const ProblemListItem = props => {
         <div className={`${show(problem, query) ? "" : "hide"} ${problemsListClassName}`}>
             <div className={`individual-problem`}>
                 <input type="checkbox" className="problems-checkbox"/>
-                <Link to={`/rooms/${currentRoomId}/problems/${problem._id}`}>
+                <Link to={`/rooms/${currentRoom.id}/problems/${problem._id}`}>
                     <p>{problem.title}</p>
                 </Link>
             </div>
-            <div onClick={handleDropdown} className={`problem options-trigger`}>
+            <div onClick={handleDropdown} className={`${seed ? "hide" : "" } problem options-trigger`}>
                 <div>
                     ...
                 </div>
