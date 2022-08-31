@@ -13,7 +13,7 @@ import closeDropdown from "../util/close_dropdown";
 const Problems = props => {
 
     const [state, setState] = useState({
-        problems: "seed",
+        problemType: "seed",
         problems: props.problems
     });
 
@@ -51,11 +51,11 @@ const Problems = props => {
     const seededOrCustomQuestions = questionType => {
         if (questionType === "custom"){
             setState({
-                problems: "custom"
+                problemType: "custom"
             });
         } else{
             setState({
-                problems: "seed"
+                problemType: "seed"
             });
         };
     };
@@ -116,7 +116,7 @@ const Problems = props => {
 
                 </div>
 
-                {(state.problems === "seed") ?
+                {(state.problemType === "seed") ?
                     
                     (<div className="seeded-problems-index">
                         <div className="problems search-bar">
