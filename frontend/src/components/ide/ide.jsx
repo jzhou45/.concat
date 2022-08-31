@@ -1,9 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Editor from "@monaco-editor/react";
 import { connect } from "react-redux";
 import { fetchDocument, createDocument, updateDocument } from "../../actions/document_actions";
 
-export default () => {
+export const IDE = props => {
+    const {roomId, problemId, fetchDocument, createDocument, updateDocument} = props;
+
+    const [state, setState] = useState({
+        newDocument: true
+    })
+
+    useEffect(() => {
+        fetchDocument(roomId, problemId).then(documet => {
+            if (!document){
+                setState({
+                    newDocument: false
+                });
+            };
+        });
+    }, []);
+
     const problem = {
         title: 'Two Sum',
         description: `Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
@@ -95,6 +111,14 @@ export default () => {
         setCode(value);
     };
 
+    const handleSave = () => {
+        if (state.newDocument){
+            createDocument(roomId, problemId, code);
+        } else{
+            updateDocument(roomId, problemId, code);
+        };
+    };
+
     return (
         <div className="ide">
                 <Editor
@@ -109,7 +133,7 @@ export default () => {
                 />
             <div className="ide-extras">
                 <button className="run button" onClick={runCode}>RUN</button>
-                <button className="save button" onClick={runCode}>SAVE</button>
+                <button className="save button" onClick={handleSave}>SAVE</button>
                 <div className="ide-result">
                     <div>
                         {result ? result.map((el, i) => <div key={i}>{el}</div>) : null}
@@ -119,3 +143,15 @@ export default () => {
         </div>
     );
 };
+
+const mSTP = state => ({
+
+});
+
+const mDTP = dispatch => ({
+    fetchDocument: (roomId, problemId) => dispatch(fetchDocument(roomId, problemId)),
+    createDocument: (roomId, problemId, documentData) => dispatch(createDocument(roomId, problemId, documentData)),
+    updateDocument: (roomId, problemId, documentData) => dispatch(updateDocument(roomId, problemId, documentData))
+});
+
+export default connect(mSTP, mDTP)(IDE);
