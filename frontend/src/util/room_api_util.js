@@ -4,8 +4,8 @@ export const fetchRooms = () => {
   return axios.get('/api/rooms');
 };
 
-export const fetchRoom = (userId) => {
-  return axios.get(`/api/users/${userId}`)
+export const fetchRoom = (roomId) => {
+  return axios.get(`/api/rooms/${roomId}`)
 }
 
 export const createRoom = (roomData) => {
