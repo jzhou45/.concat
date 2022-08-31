@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const Room = require('../../models/Room');
-const Docuemnt = require('../../models/Document');
+const Document = require('../../models/Document');
 const Problem = require('../../models/Problem')
 const validateProblemInput = require('../../validation/problem')
 

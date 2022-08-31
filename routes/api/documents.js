@@ -1,9 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
-const Room = require('../../models/Room');
-const User = require('../../models/User');
-const Problem = require('../../models/Problem');
 const Document = require('../../models/Document');
 
 router.post('/:roomId/:id',
