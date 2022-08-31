@@ -8,7 +8,7 @@ const CreateRoomForm = (props) => {
 
     const dispatch = useDispatch()
 
-    const {createRoom, error} = props
+    const {createRoom, errors} = props
 
     useEffect(() => {
         dispatch(clearRoomErrors())
@@ -22,6 +22,18 @@ const CreateRoomForm = (props) => {
         return e => setState({
             ...state, [field]: e.currentTarget.value
         })
+    }
+
+    const renderErrors = () => {
+        return(
+          <ul>
+            {Object.values(errors).map((error, i) => (
+              <li key={`error-${i}`} className="room-errors">
+                {error}
+              </li>
+            ))}
+          </ul>
+        );
     }
 
     const handleSubmit = (e) => {
@@ -52,7 +64,7 @@ const CreateRoomForm = (props) => {
                         placeholder={"What would you like to name your room?"}
                         />
                         <div className="room-errors">
-                            {error}
+                            {renderErrors()}
                         </div>
                         <button type="submit"  className={`${state.name === "" ? "unclickable" : ""} room-create-button`}>
                             <div>Create</div>
@@ -69,7 +81,7 @@ const CreateRoomForm = (props) => {
 
 const mSTP = ({errors}) => {
     return {
-        error: errors.room.name
+        errors: errors.room
     }
 }
 

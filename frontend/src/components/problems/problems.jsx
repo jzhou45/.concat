@@ -66,7 +66,7 @@ const Problems = props => {
     }
 
     const show = (problem, searchQuery) => {
-        return problem?.title.toLowerCase().includes(searchQuery.toLowerCase())
+        return problem?.title?.toLowerCase().includes(searchQuery?.toLowerCase())
     }
 
     const handleClick = () => {

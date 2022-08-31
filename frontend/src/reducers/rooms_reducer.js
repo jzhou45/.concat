@@ -2,7 +2,6 @@ import {
     // RECEIVE_USERS, 
     RECEIVE_ROOM, 
     RECEIVE_ROOMS,
-    RECEIVE_ROOM_ERRORS,
     REMOVE_ROOM,
     RECEIVE_RENAMED_ROOM
 } from '../actions/room_actions';
