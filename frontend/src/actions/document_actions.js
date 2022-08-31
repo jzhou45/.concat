@@ -12,6 +12,11 @@ const clearErrors = () => ({
     type: CLEAR_DOCUMENT_ERRORS
 });
 
+export const fetchDocument = (roomId, problemId) => dispatch => (
+    APIUtil.fetchDocument(roomId, problemId)
+    .then(document => dispatch(receiveDocument(document)))
+);
+
 export const createDocument = (roomId, problemId, documentData) => dispatch => (
     APIUtil.createDocument(roomId, problemId, documentData)
     .then(document => dispatch(receiveDocument(document)))

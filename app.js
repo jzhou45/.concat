@@ -47,8 +47,12 @@ io.on('connection', socket => {
     io.emit('message', payload);
   });
 
-  socket.on('codeChange', newCode => {
-    io.emit('codeChange', newCode);
+  socket.on('codeChange', payload => {
+    io.emit('codeChange', payload);
+  });
+
+  socket.on('documentSaved', userId => {
+    io.emit('documentSaved', userId);
   });
 })
 
