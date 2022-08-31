@@ -129,7 +129,7 @@ export const IDE = props => {
         <div className="ide">
             <div className="ide-content">
                 <div className={`save-status ${document ? "" : "hide"}`}>
-                    {saved ? `Last edit was ${timeSince(document?.updatedAt)} ago by ${document?.lastEditor}` : 'Saving...'}
+                    {saved ? `Last edit was ${timeSince(document?.updatedAt)} by ${document?.lastEditor}` : 'Saving...'}
                 </div>
                 <Editor
                     border-radius="24px"
