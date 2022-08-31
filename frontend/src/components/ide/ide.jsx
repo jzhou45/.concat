@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Editor from "@monaco-editor/react";
+import { connect } from "react-redux";
+import { fetchDocument, createDocument, updateDocument } from "../../actions/document_actions";
 
 export default () => {
     const problem = {
