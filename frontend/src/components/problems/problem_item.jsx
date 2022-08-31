@@ -27,11 +27,33 @@ const ProblemItemContainer = (props) => {
                             {problemItem.description}
                         </div>
                     </div>
-                    <div className="problem-test-cases">
-
-                        {
-                            problemItem.testCase
-                        }
+                    <div className="problem-testcases">
+                        <div className="testcase">
+                            <h1>Example 1:</h1>
+                            <div className="testcase-content">
+                                <div className="testcase-line">
+                                    <h2>Input:</h2>
+                                    {problemItem.testCase}
+                                </div>
+                                <div className="testcase-line">
+                                    <h2>Output:</h2>
+                                    {problemItem.solution}
+                                </div>
+                            </div>
+                        </div>
+                        <div className={`testcase ${problemItem.testCase2 ? "" : "hide"}`}>
+                            <h1>Example 2:</h1>
+                            <div className="testcase-content">
+                                <div className="testcase-line">
+                                    <h2>Input:</h2>
+                                    {problemItem.testCase2}
+                                </div>
+                                <div className="testcase-line">
+                                    <h2>Output:</h2>
+                                    {problemItem.solution2}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className="ide-container">

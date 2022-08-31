@@ -4,18 +4,27 @@
     height: 100%;
     width: calc(100% - 300px);
     margin-left: 300px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .problem-item-header {
-    height: 30%;
-    width: 100%;
+    margin-top: 20px;
+    height: 35%;
+    width: 85%;
     color: $default-white;
     display: flex; 
-    flex-direction: column;
-
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+ 
     .problem-item-text {
-        margin: 20px 130px;
-
+        width: 40%;
+        display: flex; 
+        flex-direction: column;
     }
 
     .problem-item-title {
@@ -27,7 +36,7 @@
 }
 
 .ide-container {
-    height: 70%;
+    height: 65%;
     width: 100%;
     background-color: $default-lightblue;
 
@@ -35,4 +44,46 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+}
+
+.problem-testcases {
+    height: 100%;
+    width: 40%;
+    margin-left: 50px;
+    display: flex; 
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.testcase-content {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: $button-border-radius;
+    background-color: $default-lightestgray;
+}
+
+.testcase {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    letter-spacing: 1px;
+
+    h1 {
+        font-weight: $bold;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+}
+
+.testcase-line {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-top: 5px;
+    margin-left: 15px;
+
+    h2 {
+        margin-right: 10px;
+        font-weight: $medium;
+    }
 }

@@ -2,7 +2,7 @@
 
 
 .ide {
-    margin-left: 50px;
+    margin-left: 80px;
     width: 90%;
     height: 30%;
     
@@ -17,7 +17,7 @@
         height: 500px;
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        justify-content: space-evenly;
         align-items: center;
     
     }
@@ -44,7 +44,7 @@
         background-color: $default-lightestgray;
         outline: 0;
         border: 0;
-        width: 80%;
+        width: 60%;
         height: 60px;
         color: $default-white;
         font-size: 20px;
