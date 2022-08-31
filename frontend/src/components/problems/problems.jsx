@@ -11,6 +11,7 @@ import CopyIcon from '../../assets/images/copy-icon.png'
 import LoadingContainer from '../util/loading_container';
 
 const Problems = props => {
+    const {currentRoomId} = props
 
     const [loading, setLoading] = useState(true);
 
@@ -143,7 +144,7 @@ const Problems = props => {
                                 <img className="magnifying-glass" src={SearchIcon} alt="" />
                             </div>
                             {seededProblems.sort(compareFn).map((problem, i) => (
-                                <ProblemListItem key={i} problem={problem} currentRoomId={props.currentRoomId} query={query} problemsListClassName={"problems-list"} openModal={props.openModal} />
+                                <ProblemListItem key={i} problem={problem} currentRoomId={currentRoomId} query={query} problemsListClassName={"problems-list"} openModal={props.openModal} />
                             ))}
                         </div>) :
 
@@ -153,7 +154,7 @@ const Problems = props => {
                                 <img className="magnifying-glass" src={SearchIcon} alt="" />
                             </div>
                             {filteredCustomProblems.map((problem, i) => (
-                                <ProblemListItem key={i} problem={problem} currentRoom={props.currentRoomId} query={customQuery} problemsListClassName={"custom-problems-list"} openModal={props.openModal} /> 
+                                <ProblemListItem key={i} problem={problem} currentRoomId={currentRoomId} query={customQuery} problemsListClassName={"custom-problems-list"} openModal={props.openModal} /> 
                             ))}
                         </div>)
                     }       

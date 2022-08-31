@@ -37,7 +37,7 @@ router.post('/:roomId/',
                 .then(problem => { 
                     room.problems.incomplete.push(problem.id);
                     room.save()
-                    .then(room => res.json(problem));
+                    .then(room => res.json(Object.assign({}, problem._doc, {document: null})));
                     
                 })
                 .catch(err => res.json(err))
