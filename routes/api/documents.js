@@ -19,7 +19,7 @@ router.patch('/:roomId/:id',
         (req,res) => {
         Document.findOne({problem: req.params.id, room: req.params.roomId})
         .then(document => {
-            document.body = req.body.body
+            document.body = req.body.body;
             document.save()
             .then(doc => res.json(doc))
             .catch(err => console.log(err))

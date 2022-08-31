@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import Editor from "@monaco-editor/react";
 import { connect } from "react-redux";
 import { createDocument, updateDocument } from "../../actions/document_actions";
+import io from 'socket.io-client';
+
+const socket = io('http://localhost:8000');
 
 export const IDE = props => {
     const {roomId, problemId, problem, createDocument, updateDocument} = props;
@@ -54,8 +57,10 @@ export const IDE = props => {
 
     const preloadedCode = `const ${camelize(problem.title)} = (${testArray(problem.testCase).map(arg => arg[0]).join(', ')}) => {\n\t\n};`;
 
-    const [code, setCode] = useState(preloadedCode);
+    const [code, setCode] = useState(problem.document ? problem.document.body : preloadedCode);
     const [result, setResult] = useState(null);
+    const [timeoutId, setTimeoutId] = useState(null);
+    const [saved, setSaved] = useState(true);
 
     const runCode = () => {
         let parsedSolution;
@@ -83,16 +88,29 @@ export const IDE = props => {
     };
 
     const handleEditorChange = value => {
-        setCode(value);
+        socket.emit('codeChange', value);
     };
 
-    const handleSave = () => {
-        if (problem.document){
-            updateDocument(roomId, problemId, { body: code });
-        } else{
-            createDocument(roomId, problemId, { body: code });
+    useEffect(() => {
+        socket.on('codeChange', newCode => {
+            setCode(newCode);
+            if (timeoutId) clearTimeout(timeoutId);
+            setTimeoutId(autosave(newCode));
+            setSaved(false);
+        });
+
+        return () => socket.off('codeChange');
+    });
+
+    const autosave = newCode => setTimeout(() => {
+        if (problem.document) {
+            updateDocument(roomId, problemId, { body: newCode });
+        } else {
+            createDocument(roomId, problemId, { body: newCode });
         };
-    };
+        setTimeoutId(null);
+        setSaved(true);
+    }, 2000);
 
     return (
         <div className="ide">
@@ -102,13 +120,13 @@ export const IDE = props => {
                     width="100vh"
                     theme="vs-dark"
                     defaultLanguage="javascript"
-                    defaultValue={problem.document ? problem.document.body : preloadedCode}
+                    value={code}
                     onChange={handleEditorChange}
                     position="relative"
                 />
             <div className="ide-extras">
                 <button className="run button" onClick={runCode}>RUN</button>
-                <button className="save button" onClick={handleSave}>SAVE</button>
+                <p>{saved ? 'saved' : 'saving...'}</p>
                 <div className="ide-result">
                     <div>
                         {result ? result.map((el, i) => <div key={i}>{el}</div>) : null}
