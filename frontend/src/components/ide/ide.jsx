@@ -7,7 +7,7 @@ import io from 'socket.io-client';
 const socket = io(process.env.PORT || 'http://localhost:3000');
 
 export const IDE = props => {
-    const {roomId, problemId, problem, fetchDocument, createDocument, updateDocument, user} = props;
+    const {roomId, problemId, problem, fetchDocument, createDocument, updateDocument, user, document} = props;
 
     const testArray = testCase => {
         let left = 0, right = 0, arr = [], 
@@ -127,8 +127,8 @@ export const IDE = props => {
     return (
         <div className="ide">
             <div className="ide-content">
-                <div className="save-status">
-                    {saved ? `Last edit was ${"seconds"}` : 'Saving...'}
+                <div className={`save-status ${document ? "" : "hide"}`}>
+                    {saved ? `Last edit was ${document?.updatedAt} by ${document?.lastEditor}` : 'Saving...'}
                 </div>
                 <Editor
                     border-radius="24px"
@@ -154,7 +154,8 @@ export const IDE = props => {
 };
 
 const mSTP = state => ({
-    user: state.session.user
+    user: state.session.user,
+    document: state.document.data
 });
 
 const mDTP = dispatch => ({

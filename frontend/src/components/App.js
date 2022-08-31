@@ -16,8 +16,8 @@ import ProgressTracker from './progress_tracker/progress_tracker'
 const App = () => (
     <div>
         <header>
-            {/* <Nav/> */}
-            <Chat />
+            <Nav/>
+            {/* <Chat /> */}
         </header>
         <Modal />
         <ProgressTracker/>
