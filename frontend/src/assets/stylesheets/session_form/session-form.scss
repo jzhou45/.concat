@@ -108,11 +108,12 @@
 }
 
 p.error{
-    color: $default-white;
+    color: $default-lightblue;
     align-self: flex-start;
-    margin-top: 5px;
+    margin-top: -5px;
     margin-bottom: -5px;
     text-indent: 10px;
+    font-size: $error-font-size;
 }
 
 .session-form > .error{
@@ -125,5 +126,5 @@ p.error{
 }
 
 input.input-error, .session-form > div > input.input-error{
-    border: 1px solid $default-white;
+    border: 2px solid $default-lightblue;
 }

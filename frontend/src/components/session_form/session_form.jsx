@@ -41,7 +41,7 @@ const SessionForm = props => {
             if (props.formType === "Signup" && props.errors.username){
                 props.closeModal();
                 props.login(user);
-            } else if (props.formType === "Login" && Object.values(props.errors).length === 0){
+            } else if (props.formType === "Login" && Object.values(props.errors.session).length === 0){
                 props.closeModal();
             };
         });
@@ -74,10 +74,6 @@ const SessionForm = props => {
         }).finally(() => closeModal());
     };
 
-    const clearErrorsOnFocus = () => {
-        // setTimeout(() => props.clearSessionErrors(), 1000);
-    };
-
     return(
         <div className="session-form-div">
             <form className="session-form" onSubmit={handleSubmit}>
@@ -91,18 +87,18 @@ const SessionForm = props => {
                 <span>.concat</span>
 
                 <label htmlFor="username"></label>
-                <input type="text" name="username" placeholder="Username" value={state.username} onChange={update("username")} className={usernameError} onFocus={clearErrorsOnFocus} />
+                <input type="text" name="username" placeholder="Username" value={state.username} onChange={update("username")} className={usernameError} />
                 {(props.errors.username) ? <p className="error">{props.errors.username}</p> :null }
 
 
                 <label htmlFor="password"></label>
-                <input type="password" name="password" placeholder="Password" value={state.password} onChange={update("password")} className={passwordError} onFocus={clearErrorsOnFocus} />
+                <input type="password" name="password" placeholder="Password" value={state.password} onChange={update("password")} className={passwordError} />
                 {(props.errors.password) ? <p className="error">{props.errors.password}</p> :null }
 
                 {(props.formType === "Signup") ? 
                 <div>
                     <label htmlFor="confirm-password"></label>
-                    <input type="password" name="confirm-password" placeholder="Retype password" value={state.password2} onChange={update("password2")} className={password2Error} onFocus={clearErrorsOnFocus} />
+                    <input type="password" name="confirm-password" placeholder="Retype password" value={state.password2} onChange={update("password2")} className={password2Error} />
                     {(props.errors.password2) ? <p className="error">{props.errors.password2}</p> :null }
                 </div> : null}
 

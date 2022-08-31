@@ -7,9 +7,9 @@ import { clearProblemErrors } from "../../actions/problem_actions";
 
 const EditProblemForm = (props) => {
     
-    const dispatch = useDispatch() 
+    const dispatch = useDispatch();
 
-    const {room, problem, errors} = props
+    const {room, problem, errors} = props;
 
     const [state, setState] = useState({
         title: problem.title,
@@ -24,40 +24,27 @@ const EditProblemForm = (props) => {
 
     useEffect(() => {
         dispatch(clearProblemErrors())
-    }, [dispatch])
+    }, [dispatch]);
 
     const handleUpdate = (field) => {
         return e => setState({
             ...state, [field]: e.currentTarget.value
-        })
-    }
+        });
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault()
         props.editProblem(room.id, problem._id, state).then((resp) => {
             if (resp.type !== "RECEIVE_PROBLEM_ERRORS") {
                 props.closeModal();
-            }
+            };
         });
-    }
+    };
 
     const handleDelete = (e) => {
         e.preventDefault()
         props.openModal("deleteproblem", {roomId: room.id, problemId: problem._id})
-    }
-
-    const renderErrors = () => {
-        return(
-          <ul>
-            {Object.values(errors).map((error, i) => (
-              <li key={`error-${i}`} className="problem-errors">
-                {error}
-              </li>
-            ))}
-          </ul>
-        );
-    }
-    
+    };
 
     const content = () => {
         return (
@@ -80,24 +67,28 @@ const EditProblemForm = (props) => {
                         <input 
                         placeholder={state.title}
                         type="text" value={state.title} onChange={handleUpdate("title")}/>
+                        {(props.errors.title) ? <p className="problems-errors">{props.errors.title}</p> :null }
                     </label>
     
                     <label>Description *
                         <textarea 
                         placeholder={state.description}
                         value={state.description} onChange={(handleUpdate("description"))}></textarea>
+                        {(props.errors.description) ? <p className="problems-errors">{props.errors.description}</p> :null }
                     </label>
     
                     <label>Test Case 1 *
                         <textarea 
                         placeholder={state.testCase}
                         value={state.testCase} onChange={handleUpdate("testCase")}></textarea>
+                        {(props.errors.testCase) ? <p className="problems-errors">{props.errors.testCase}</p> :null }
                     </label>
     
                     <label>Solution 1 *
                         <input type="text" 
                         placeholder={state.solution}
                         value={state.solution} onChange={handleUpdate("solution")}/>
+                        {(props.errors.solution) ? <p className="problems-errors">{props.errors.solution}</p> :null }
                     </label>
     
                     <label>Difficulty
@@ -111,18 +102,18 @@ const EditProblemForm = (props) => {
                                         id="easy" 
                                         type="radio" 
                                         value="easy"
-                                        // {...state.difficulty === value ? "selected" : ""}
+                                        checked={state.difficulty === "easy"}
                                         />
                                 </div>
                                 <div>
                                     <label htmlFor="medium">Medium
                                     </label>
-                                    <input  onClick={handleUpdate("difficulty")} name="difficulty" id="medium" type="radio" value="medium"/>
+                                    <input  onClick={handleUpdate("difficulty")} name="difficulty" id="medium" type="radio" value="medium" checked={state.difficulty === "medium"}/>
                                 </div>
                                 <div>
                                     <label htmlFor="hard">Hard
                                     </label>
-                                    <input  onClick={handleUpdate("difficulty")} name="difficulty" id="hard" type="radio" value="hard"/>
+                                    <input  onClick={handleUpdate("difficulty")} name="difficulty" id="hard" type="radio" value="hard" checked={state.difficulty === "hard"}/>
                                 </div>
                         </div>
                     </label>
@@ -138,34 +129,31 @@ const EditProblemForm = (props) => {
                         placeholder="ex: [1,2]"
                         type="text" value={state.solution2} onChange={handleUpdate("solution2")}/>
                     </label>
-                    <div className="room-errors">
-                        {renderErrors()}
-                    </div>
                     <button type="button" onClick={handleDelete} className="delete-problem button">Delete Problem </button>
                     <button className="problem button" type="submit">Edit Problem</button>
                 </form>
             </div>
         );
-    }
+    };
 
-    return content()
+    return content();
 
-}
+};
 
 const mSTP = ({errors, ui: {modal}}) => {
     return {
         errors: errors.problems,
         room: modal.props.room, 
         problem: modal.props.problem
-    }
-}
+    };
+};
 
 const mDTP = (dispatch) => {
     return {
         editProblem: (roomId, problemId, problemData) => dispatch(editProblem(roomId, problemId, problemData)),
         closeModal: () => dispatch(closeModal()), 
         openModal: (formType, props) => dispatch(openModal(formType, props))
-    }
-}
+    };
+};
 
-export default connect(mSTP, mDTP)(EditProblemForm)
+export default connect(mSTP, mDTP)(EditProblemForm);
