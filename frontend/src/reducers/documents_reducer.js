@@ -7,8 +7,6 @@ const documentReducer = (state=null, action) => {
     switch (action.type) {
         case RECEIVE_DOCUMENT:
             return action.document.data;
-        // case RECEIVE_PROBLEM:
-        //     return action.problem.data.document;
         default:
             return nextState;
     };

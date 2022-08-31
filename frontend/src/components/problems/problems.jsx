@@ -11,6 +11,7 @@ import CopyIcon from '../../assets/images/copy-icon.png'
 import LoadingContainer from '../util/loading_container';
 
 const Problems = props => {
+    const {currentRoomId} = props
 
     const [loading, setLoading] = useState(true);
 
@@ -143,7 +144,8 @@ const Problems = props => {
                                 <img className="magnifying-glass" src={SearchIcon} alt="" />
                             </div>
                             {seededProblems.sort(compareFn).map((problem, i) => (
-                                <ProblemListItem seed={true }key={i} problem={problem} currentRoom={props.currentRoom} query={query} problemsListClassName={"problems-list"} openModal={props.openModal} />
+
+                                <ProblemListItem seed={true}key={i} problem={problem} currentRoom={props.currentRoom} query={query} problemsListClassName={"problems-list"} openModal={props.openModal} />
                             ))}
                         </div>) :
 
