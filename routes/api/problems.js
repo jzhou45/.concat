@@ -145,7 +145,7 @@ router.get('/:roomId/:id',
 router.delete('/:roomId/:id', (req,res) => {
     Problem.findByIdAndDelete(req.params.id)
     .then(result => 
-        Room.findById(req.params.id)
+        Room.findById(req.params.roomId)
         .then(room => {
             if (room.problems.incomplete.includes(req.params.id)){
                 room.problems.incomplete.pull(req.params.id)
