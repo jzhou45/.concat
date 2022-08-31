@@ -1,0 +1,98 @@
+@import '../variables.scss';
+
+.progress-tracker-container {
+    position: fixed;
+    right: 40px;
+    top: 40px;
+    height: 100px;
+    width: 160px;
+    
+    display: flex; 
+    flex-direction: row;
+    justify-content: space-between;
+
+    animation: bouncing;
+    animation-duration: 2s;
+    animation-iteration-count: 3;
+}
+
+.progress-tracker-icon {
+    cursor: pointer;
+    z-index: 300;
+    height: 50px;
+    width: 50px;
+    background-color: $default-white;
+    border-radius: 50%;
+    box-shadow: $box-shadow;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+
+    img {
+        height: 100px;
+    }
+}
+
+@keyframes bouncing {
+    0% {transform: translateY(0)}
+    20% {transform: translateY(0);}
+    50% {transform: translateY(0);}
+    40% {transform: translateY(-10px);} 
+    60% {transform: translateY(-20px);} 
+    80% {transform: translateY(0px);} 
+    100% {transform: translateY(0);} 
+}
+
+.progress-tracker-modal {
+    height: 400px;
+    width: 600px;
+    background-color: $default-white;
+    border-radius: $div-border-radius;
+}
+
+.progress-tracker-label {
+    font-size: 12px;
+    color: $default-white;
+    background-color: $default-blue;
+    text-align: center;
+    height: 50px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: $button-border-radius;
+
+    div {
+        width: 80%;
+    }
+}
+
+.progress-tracker-label:after {
+    content:'';
+    position: absolute;
+    rotate: (270deg);
+    margin-left: 100px;
+    width: 0;
+    height: 0;
+    border-top: solid 10px $default-blue;
+    border-left: solid 10px transparent;
+    border-right: solid 10px transparent;
+}
+
+.progress-tracker-modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: $box-shadow
+}
+
+.progress-label {
+    font-family: $logo-font; 
+    color: $default-lightblue;
+    font-weight: $logo-font-weight;
+    font-size: $logo-font-size;
+}

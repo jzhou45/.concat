@@ -9,6 +9,7 @@ import LeaveRoom from '../rooms/leave_room_modal'
 import CreateProblems from "../problems/create_problems";
 import EditProblem from '../problems/edit_problem'
 import DeleteProblem from '../problems/delete_problem'
+import ProgressTracker from '../progress_tracker/progress_tracker_modal'
 
 const Modal = (props) => {
     if (!props.modal) return null;
@@ -45,6 +46,9 @@ const Modal = (props) => {
         break;
     case 'deleteproblem':
         component = <DeleteProblem/>;
+        break;
+    case 'progresstracker':
+        component = <ProgressTracker/>;
         break;
     default:
         return null;
