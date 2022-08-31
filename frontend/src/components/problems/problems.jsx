@@ -34,6 +34,7 @@ const Problems = props => {
     const seededProblems = [];
     const customProblems = [];
 
+    
     for (let problem of Object.values(props.problems)){
         if (problem.seed){
             seededProblems.push(problem);
@@ -42,6 +43,13 @@ const Problems = props => {
         };
     };
 
+    const filteredCustomProblems = [];
+    for (let problem of customProblems){
+        if (problem.room === props.currentRoomId){
+            filteredCustomProblems.push(problem);
+        };
+    };
+    
     const compareFn = (a, b) => {
         if (a < b){
             return -1;
@@ -144,7 +152,7 @@ const Problems = props => {
                                 <input onChange={updateCustomQuery} placeholder="Find problem" type="text" />
                                 <img className="magnifying-glass" src={SearchIcon} alt="" />
                             </div>
-                            {customProblems.map((problem, i) => (
+                            {filteredCustomProblems.map((problem, i) => (
                                 <ProblemListItem key={i} problem={problem} currentRoom={props.currentRoomId} query={customQuery} problemsListClassName={"custom-problems-list"} openModal={props.openModal} /> 
                             ))}
                         </div>)

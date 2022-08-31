@@ -21,7 +21,7 @@ const roomsReducer = (state = {}, action) => {
                 nextState = {}
             return nextState
         case RECEIVE_ROOM:
-            nextState[action.room.id] = action.room.data;
+            nextState[action.room.data.id] = action.room.data;
             return nextState
         case RECEIVE_RENAMED_ROOM: 
             nextState[action.room.data.id] = action.room.data
