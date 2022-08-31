@@ -4,23 +4,29 @@ export const RECEIVE_ALL_PROBLEMS = "RECEIVE_ALL_PROBLEMS";
 export const RECEIVE_PROBLEM = "RECEIVE_PROBLEM";
 export const RECEIVE_PROBLEM_ERRORS = "RECEIVE_PROBLEM_ERRORS";
 export const REMOVE_PROBLEM = "REMOVE_PROBLEM"
+export const CLEAR_PROBLEM_ERRORS = "CLEAR_PROBLEM_ERRORS"
 
-const receiveAllProblems = problems => ({
+export const clearProblemErrors = () => ({
+    type: CLEAR_PROBLEM_ERRORS
+})
+
+export const receiveAllProblems = problems => ({
     type: RECEIVE_ALL_PROBLEMS,
     problems
 });
 
-const receiveProblem = problem => ({
+export const receiveProblem = problem => ({
     type: RECEIVE_PROBLEM,
     problem
 });
 
-export const removeProblem = problemId=> ({
+export const removeProblem = problemId => {
+    return {
     type: REMOVE_PROBLEM,
     problemId
-});
+}};
 
-const recieveProblemErrors = errors => ({
+export const recieveProblemErrors = errors => ({
     type: RECEIVE_PROBLEM_ERRORS,
     errors
 });
@@ -35,16 +41,17 @@ export const createProblem = (roomId, problem) => dispatch => (
         .catch(errors => dispatch(recieveProblemErrors(errors.response.data)))
 );
 
-export const editProblem = (roomId, problemId, problem) => dispatch => (
-    APIUtil.editProblem(roomId, problemId, problem)
+export const editProblem = (roomId, problemId, problemData) => dispatch => {
+    return APIUtil.editProblem(roomId, problemId, problemData)
         .then(problem => dispatch(receiveProblem(problem)))
         .catch(errors => dispatch(recieveProblemErrors(errors.response.data)))
-);
+};
 
-export const deleteProblem = (roomId, problemId) => dispatch => (
-    APIUtil.deleteProblem(roomId, problemId)
+export const deleteProblem = (roomId, problemId) => dispatch => {
+    return APIUtil.deleteProblem(roomId, problemId)
         .then(() => dispatch(removeProblem(problemId)))
-);
+        // this is not hitting the .then
+};
 
 export const fetchCreatedProblems = roomId => dispatch => (
     APIUtil.fetchCreatedProblems(roomId)

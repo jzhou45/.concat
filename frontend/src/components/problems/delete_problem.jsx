@@ -9,7 +9,6 @@ const DeleteProblemContainer = (props) => {
 
     const handleClick = (e) => {
         e.preventDefault()
-        console.log(roomId, problemId)
         deleteProblem(roomId, problemId)
         props.closeModal()
     }
@@ -46,7 +45,7 @@ const mSTP = ({ui: {modal}}) => {
 const mDTP = (dispatch) => {
     return {
         closeModal: () => dispatch(closeModal()),
-        deleteProblem: (roomId, problemId) => dispatch(deleteProblem((roomId, problemId))),
+        deleteProblem: (roomId, problemId) => dispatch(deleteProblem(roomId, problemId)),
         openModal: (formType, props) => dispatch(openModal(formType, props))
     }
 }

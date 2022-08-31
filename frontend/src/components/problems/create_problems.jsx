@@ -1,10 +1,19 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, {useEffect} from "react";
+import { connect, useDispatch } from "react-redux";
 import { createProblem } from "../../actions/problem_actions";
 import { useState } from "react";
 import { closeModal } from "../../actions/modal_actions";
+import { clearProblemErrors } from "../../actions/problem_actions";
 
 const CreateProblems = props => {
+
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(clearProblemErrors())
+    }, [dispatch])
+
     const [state, setState] = useState({
         title: "",
         description: "",
@@ -19,9 +28,11 @@ const CreateProblems = props => {
     const handleSubmit = e => {
         e.preventDefault();
         const problem = Object.assign({}, state);
-        props.createProblem(props.currentRoomId, problem).then(() => {
-            props.closeModal();
-            props.rerenderProblems();
+        props.createProblem(props.currentRoomId, problem).then((resp) => {
+            if (resp.type !== "RECEIVE_PROBLEM_ERRORS") {
+                props.closeModal();
+                props.rerenderProblems();
+            }
         });
     };
 
@@ -30,6 +41,20 @@ const CreateProblems = props => {
             ...state, [field]: e.currentTarget.value
         })
     );
+
+
+    const renderErrors = () => {
+        return(
+          <ul>
+            {Object.values(props.errors).map((error, i) => (
+              <li key={`error-${i}`} className="problem-errors">
+                {error}
+              </li>
+            ))}
+          </ul>
+        );
+    }
+
 
     return (
         <div className="create-problems-form">
@@ -102,6 +127,9 @@ const CreateProblems = props => {
                     placeholder="ex: [1,2]"
                     type="text" value={state.solution2} onChange={handleUpdate("solution2")}/>
                 </label>
+                <div className="room-errors">
+                        {renderErrors()}
+                </div>
 
                 <button className="problem button" type="submit">Create Problem</button>
             </form>
@@ -112,7 +140,8 @@ const CreateProblems = props => {
 
 const mSTP = (state) => ({
     currentRoomId: state.ui.modal.props.currentRoom,
-    rerenderProblems: state.ui.modal.props.rerenderProblems
+    rerenderProblems: state.ui.modal.props.rerenderProblems,
+    errors: state.errors.problems
 });
 
 const mDTP = dispatch => ({

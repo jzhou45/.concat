@@ -223,7 +223,7 @@
     flex-direction: row;
     
     input {
-        background-color: $default-white;
+        background-color: $default-lightgray;
         color: $default-lightestgray;
         margin-left: 30px;
         margin-right: 10px;
@@ -260,4 +260,8 @@
 .room-members-container h1 {
     font-size: 14px;
     font-weight: $medium;
+}
+
+.room-info input{
+    background-color: $default-white;
 }

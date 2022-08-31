@@ -1,4 +1,4 @@
-import { RECEIVE_ALL_PROBLEMS, RECEIVE_PROBLEM, RECEIVE_ALL_CUSTOM_PROBLEMS } from "../actions/problem_actions";
+import { RECEIVE_ALL_PROBLEMS, RECEIVE_PROBLEM, REMOVE_PROBLEM, RECEIVE_ALL_CUSTOM_PROBLEMS } from "../actions/problem_actions";
 
 const problemsReducer = (state={}, action) => {
     Object.freeze(state);
@@ -12,6 +12,9 @@ const problemsReducer = (state={}, action) => {
             return nextState;
         case RECEIVE_PROBLEM:
             nextState[action.problem.data._id] = action.problem.data
+            return nextState;
+        case REMOVE_PROBLEM:
+            delete nextState[action.problemId]
             return nextState;
         default:
             return state;

@@ -45,11 +45,13 @@
 
     input {
         height: 30px;
+        width: 95%;
     }
 
     textarea {
         padding-top: 8px;
         height: 35px;
+        width: 95%;
     }
 }
 
@@ -99,6 +101,11 @@
     flex-direction: row;
     justify-content: space-evenly;
     align-items: flex-start;
+    height: 30px;
+
+    input {
+        border: 0px;
+    }
 
     div {
         display: flex; 
@@ -107,8 +114,8 @@
         align-items: center;
 
         label {
-            margin-bottom: -10px;
             margin-right: 5px;
+            margin-bottom: 5px;
         }
     }
 }
@@ -125,5 +132,9 @@
     &:hover {
         filter: brightness(0.7);
     }
+}
+
+.problem-errors {
+    
 }
 
