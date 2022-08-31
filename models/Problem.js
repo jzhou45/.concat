@@ -33,8 +33,7 @@ const ProblemSchema = new Schema ({
             ref: 'Room'
         },
         difficulty: {
-            type: String,
-            required: true
+            type: String
         }
 });
 
