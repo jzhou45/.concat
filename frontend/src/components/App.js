@@ -15,8 +15,8 @@ import Chat from './chat/chat'
 const App = () => (
     <div>
         <header>
-            <Nav/>
-            {/* <Chat /> */}
+            {/* <Nav/> */}
+            <Chat />
         </header>
         <Modal />
 
