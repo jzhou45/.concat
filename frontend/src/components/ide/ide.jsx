@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Editor from "@monaco-editor/react";
 import { connect } from "react-redux";
-import { createDocument, updateDocument } from "../../actions/document_actions";
+import { fetchDocument, createDocument, updateDocument } from "../../actions/document_actions";
 import io from 'socket.io-client';
 
 const socket = io('http://localhost:3000');
 
 export const IDE = props => {
-    const {roomId, problemId, problem, createDocument, updateDocument} = props;
+    const {roomId, problemId, problem, fetchDocument, createDocument, updateDocument, user} = props;
 
     const testArray = testCase => {
         let left = 0, right = 0, arr = [], 
@@ -59,7 +59,6 @@ export const IDE = props => {
 
     const [code, setCode] = useState(problem.document ? problem.document.body : preloadedCode);
     const [result, setResult] = useState(null);
-    const [timeoutId, setTimeoutId] = useState(null);
     const [saved, setSaved] = useState(true);
 
     const runCode = () => {
@@ -88,28 +87,41 @@ export const IDE = props => {
     };
 
     const handleEditorChange = value => {
-        socket.emit('codeChange', value);
+        socket.emit('codeChange', {value, userId: user.id});
     };
 
     useEffect(() => {
-        socket.on('codeChange', newCode => {
-            setCode(newCode);
-            if (timeoutId) clearTimeout(timeoutId);
-            setTimeoutId(autosave(newCode));
+        let timeoutId = null;
+
+        socket.on('codeChange', payload => {
+            if (user.id === payload.userId) {
+                if (timeoutId) clearTimeout(timeoutId);
+                timeoutId = autosave(payload.value, user.username);
+            } else {
+                setCode(payload.value);
+            }
             setSaved(false);
         });
 
-        return () => socket.off('codeChange');
-    });
+        socket.on('documentSaved', userId => {
+            if (user.id !== userId) fetchDocument(roomId, problemId);
+            setSaved(true);
+        });
 
-    const autosave = newCode => setTimeout(() => {
-        if (problem.document) {
-            updateDocument(roomId, problemId, { body: newCode });
-        } else {
-            createDocument(roomId, problemId, { body: newCode });
+        return () => {
+            socket.off('codeChange');
+            socket.off('documentSaved');
         };
-        setTimeoutId(null);
-        setSaved(true);
+    }, []);
+
+    const autosave = (body, lastEditor) => setTimeout(() => {
+        if (problem.document) {
+            updateDocument(roomId, problemId, { body, lastEditor });
+        } else {
+            createDocument(roomId, problemId, { body, lastEditor });
+        }
+
+        socket.emit('documentSaved', user.id);
     }, 2000);
 
     return (
@@ -137,9 +149,14 @@ export const IDE = props => {
     );
 };
 
+const mSTP = state => ({
+    user: state.session.user
+});
+
 const mDTP = dispatch => ({
+    fetchDocument: (roomId, problemId) => dispatch(fetchDocument(roomId, problemId)),
     createDocument: (roomId, problemId, documentData) => dispatch(createDocument(roomId, problemId, documentData)),
     updateDocument: (roomId, problemId, documentData) => dispatch(updateDocument(roomId, problemId, documentData))
 });
 
-export default connect(null, mDTP)(IDE);
+export default connect(mSTP, mDTP)(IDE);

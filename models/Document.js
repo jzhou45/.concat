@@ -16,6 +16,12 @@ const DocumentSchema = new Schema ({
             ref: 'Room',
             required: true
         },
+        lastEditor: {
+            type: String,
+            required: true
+        }
+    }, {
+        timestamps: true
 });
 
 module.exports = Document = mongoose.model('Document', DocumentSchema)
