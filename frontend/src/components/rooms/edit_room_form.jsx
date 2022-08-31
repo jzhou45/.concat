@@ -9,7 +9,7 @@ const EditRoomForm = (props) => {
     
     const dispatch = useDispatch() 
     
-    const {room, error} = props
+    const {room, errors} = props
     const [state, setState] = useState({
         name: room.name,
         id: room.id
@@ -39,6 +39,19 @@ const EditRoomForm = (props) => {
         props.openModal("deleteroom", {roomId: room.id})
     }
 
+    const renderErrors = () => {
+        return(
+          <ul>
+            {Object.values(errors).map((error, i) => (
+              <li key={`error-${i}`} className="room-errors">
+                {error}
+              </li>
+            ))}
+          </ul>
+        );
+    }
+    
+
     const content = () => {
         return (
             <div className="room-form">
@@ -53,7 +66,7 @@ const EditRoomForm = (props) => {
                         value={state.name}
                         />
                     <div className="room-errors">
-                            {error}
+                            {renderErrors()}
                         </div>
                         <div className="form-button-div">
                             <button type="submit"  className={`${state.name != "" ? "clickable" : ""} room-create-button`}>
@@ -75,7 +88,7 @@ const EditRoomForm = (props) => {
 
 const mSTP = ({errors, ui: {modal}}) => {
     return {
-        error: errors.room.name,
+        errors: errors.room,
         room: modal.props.room
     }
 }

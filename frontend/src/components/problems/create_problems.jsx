@@ -70,6 +70,26 @@ const CreateProblems = props => {
                     value={state.solution} onChange={handleUpdate("solution")}/>
                 </label>
 
+                <label>Difficulty
+                    <div className="difficulty-radio" >
+                            <div>
+                                <label htmlFor="easy">Easy
+                                </label>
+                                <input name="difficulty" id="easy" type="radio" value="easy"/>
+                            </div>
+                            <div>
+                                <label htmlFor="medium">Medium
+                                </label>
+                                <input name="difficulty" id="medium" type="radio" value="medium"/>
+                            </div>
+                            <div>
+                                <label htmlFor="hard">Hard
+                                </label>
+                                <input name="difficulty" id="hard" type="radio" value="hard"/>
+                            </div>
+                    </div>
+                </label>
+
                 <label> Test Case 2
                     <textarea 
                     placeholder="ex: nums = [3,2,4], target = 6"

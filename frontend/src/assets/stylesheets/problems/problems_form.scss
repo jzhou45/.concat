@@ -1,10 +1,10 @@
 @import "../variables.scss";
 
-.create-problems-form{
+.create-problems-form {
     background-color: $default-lightgray;
     color: $default-white;
     width: 600px;
-    height: 800px;
+    height: 70%;
     border-radius: $div-border-radius;
     box-shadow: $box-shadow;
 
@@ -49,7 +49,7 @@
 
     textarea {
         padding-top: 8px;
-        height: 50px;
+        height: 35px;
     }
 }
 
@@ -91,6 +91,25 @@
     .asterisk {
         font-size: 16px;
         color: $default-white;
+    }
+}
+
+.difficulty-radio {
+    display: flex; 
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-start;
+
+    div {
+        display: flex; 
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        label {
+            margin-bottom: -10px;
+            margin-right: 5px;
+        }
     }
 }
 

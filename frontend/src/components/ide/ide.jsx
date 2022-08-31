@@ -109,7 +109,9 @@ export default () => {
                 <button className="run button" onClick={runCode}>RUN</button>
                 <button className="save button" onClick={runCode}>SAVE</button>
                 <div className="ide-result">
-                  {result ? result.map((el, i) => <p key={i}>{el}</p>) : null}
+                    <div>
+                        {result ? result.map((el, i) => <div key={i}>{el}</div>) : null}
+                    </div>
                 </div>
             </div>
         </div>
