@@ -7,7 +7,7 @@ import io from 'socket.io-client';
 const socket = io(process.env.PORT || 'http://localhost:3000');
 
 export const IDE = props => {
-    const {roomId, problemId, problem, fetchDocument, createDocument, updateDocument, user} = props;
+    const {roomId, problemId, problem, fetchDocument, createDocument, updateDocument, user, document} = props;
 
     const testArray = testCase => {
         let left = 0, right = 0, arr = [], 
@@ -57,7 +57,7 @@ export const IDE = props => {
 
     const preloadedCode = `const ${camelize(problem.title)} = (${testArray(problem.testCase).map(arg => arg[0]).join(', ')}) => {\n\t\n};`;
 
-    const [code, setCode] = useState(problem.document ? problem.document.body : preloadedCode);
+    const [code, setCode] = useState(document ? document.body : preloadedCode);
     const [result, setResult] = useState(null);
     const [saved, setSaved] = useState(true);
 
@@ -115,7 +115,7 @@ export const IDE = props => {
     }, []);
 
     const autosave = (body, lastEditor) => setTimeout(() => {
-        if (problem.document) {
+        if (document) {
             updateDocument(roomId, problemId, { body, lastEditor });
         } else {
             createDocument(roomId, problemId, { body, lastEditor });
@@ -154,7 +154,8 @@ export const IDE = props => {
 };
 
 const mSTP = state => ({
-    user: state.session.user
+    user: state.session.user,
+    doucment: state.document
 });
 
 const mDTP = dispatch => ({

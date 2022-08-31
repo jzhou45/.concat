@@ -1,11 +1,14 @@
 import { RECEIVE_DOCUMENT } from "../actions/document_actions";
+import { RECEIVE_PROBLEM } from "../actions/problem_actions";
 
-const documentReducer = (state={}, action) => {
+const documentReducer = (state=null, action) => {
     Object.freeze(state);
     let nextState = Object.assign({}, state);
     switch (action.type) {
         case RECEIVE_DOCUMENT:
-            return nextState.document = action.document
+            return action.document.data;
+        case RECEIVE_PROBLEM:
+            return action.problem.data.document;
         default:
             return nextState;
     };
