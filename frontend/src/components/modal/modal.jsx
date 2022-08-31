@@ -7,6 +7,8 @@ import DeleteRoom from '../rooms/delete_room_modal'
 import JoinRoom from '../rooms/join_room_form'
 import LeaveRoom from '../rooms/leave_room_modal'
 import CreateProblems from "../problems/create_problems";
+import EditProblem from '../problems/edit_problem'
+import DeleteProblem from '../problems/delete_problem'
 
 const Modal = (props) => {
     if (!props.modal) return null;
@@ -37,6 +39,12 @@ const Modal = (props) => {
         break;
     case 'createproblem':
         component = <CreateProblems/>;
+        break;
+    case 'editproblem':
+        component = <EditProblem/>;
+        break;
+    case 'deleteproblem':
+        component = <DeleteProblem/>;
         break;
     default:
         return null;

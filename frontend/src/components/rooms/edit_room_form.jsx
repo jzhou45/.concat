@@ -43,7 +43,7 @@ const EditRoomForm = (props) => {
         return(
           <ul>
             {Object.values(errors).map((error, i) => (
-              <li key={`error-${i}`} className="room-errors">
+              <li key={`error-${i}`} className="board-errors auth-errors">
                 {error}
               </li>
             ))}

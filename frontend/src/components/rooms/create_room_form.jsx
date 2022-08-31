@@ -43,11 +43,6 @@ const CreateRoomForm = (props) => {
                 props.openModal("joinroom", {roomId: resp.room.data.id})
             }
         })
-        
-        // createRoom(state).then((resp) => props.openModal("joinroom", {roomId: resp.room.data.id}))
-        // if (!error) {
-        //     props.openModal("joinroom")
-        // }
     }
 
     const content = () => {

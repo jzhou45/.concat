@@ -113,3 +113,17 @@
     }
 }
 
+.delete-problem.button {
+    position: absolute;
+    background-color: $default-black;
+    width: 100px;
+    left: 30px;
+    bottom: 10px;
+    outline: 0;
+    border: 0;
+
+    &:hover {
+        filter: brightness(0.7);
+    }
+}
+

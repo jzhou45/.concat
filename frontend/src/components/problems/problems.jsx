@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 import { fetchProblems, fetchCreatedProblems } from "../../actions/problem_actions";
 import { fetchRooms } from "../../actions/room_actions";
@@ -7,8 +7,11 @@ import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Arrow from '../../assets/images/left-arrow-icon.png'
 import SearchIcon from '../../assets/images/search-icon.png'
+import closeDropdown from "../util/close_dropdown";
+
 
 const Problems = props => {
+
     const [state, setState] = useState({
         problems: "seed",
         problems: props.problems
@@ -30,6 +33,10 @@ const Problems = props => {
             customProblems.push(problem);
         };
     };
+
+    const openRef = useRef(null)
+    const [open, setOpen] = closeDropdown(openRef, false)
+    const handleDropdown = () => {setOpen(!open)}
 
     const compareFn = (a, b) => {
         if (a < b){
@@ -72,6 +79,10 @@ const Problems = props => {
     const handleClick = () => {
         history.push("/rooms")
     };
+
+    const handleEdit = (problem) => {
+        props.openModal("editproblem", {room: props.currentRoom, problem: problem})
+    }
 
     const rerenderProblems = () => {
         props.fetchCreatedProblems(props.currentRoomId).then(problems => {
@@ -120,6 +131,16 @@ const Problems = props => {
                                                 <p>{problem.title}</p>
                                              </Link>
                                         </div>
+                                        <div onClick={handleDropdown} className={`problem options-trigger`}>
+                                            <div>
+                                                ...
+                                            </div>
+                                            <div ref={openRef} className={`problem options-menu ${open ? "open" : "hide"}`}>
+                                                <div >
+                                                    <p onClick={handleEdit(problem)}>Edit problem</p>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div></div>
                                     <hr />
                             </div>
@@ -164,8 +185,8 @@ const mSTP = (state, ownProps) => {
 const mDTP = dispatch => ({
     fetchProblems: () => dispatch(fetchProblems()),
     fetchRooms: () => dispatch(fetchRooms()),
-    openModal: (modal, props=null) => dispatch(openModal(modal, props)),
-    fetchCreatedProblems: (roomId) => dispatch(fetchCreatedProblems(roomId))
+    openModal: (modal, props) => dispatch(openModal(modal, props)),
+    fetchCreatedProblems: (roomId) => dispatch(fetchCreatedProblems(roomId)),
 });
 
 export default connect(mSTP, mDTP)(Problems);

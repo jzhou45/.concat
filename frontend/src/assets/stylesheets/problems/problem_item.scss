@@ -32,7 +32,26 @@
         font-weight: $logo-font-weight;
         font-family: $logo-font;
         margin-bottom: 20px;
+
+        display: flex;
+        flex-direction: row;
+
+        > div {
+            margin-right: 20px;
+        }
     }
+}
+
+.problem-difficulty {
+    font-size: 12px;
+    background-color: $default-lightblue;
+    display: flex; 
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 24px;
 }
 
 .ide-container {
