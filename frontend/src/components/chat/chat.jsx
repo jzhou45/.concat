@@ -15,6 +15,8 @@ const Chat = () => {
         socket.on('message', payload => {
             setChat([...chat, payload])
         })
+
+        return () => socket.off('message')
     })
 
     const sendMessage = (e) => {
