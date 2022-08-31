@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import Arrow from '../../assets/images/left-arrow-icon.png'
 import SearchIcon from '../../assets/images/search-icon.png'
 import closeDropdown from "../util/close_dropdown";
+import ProblemListItem from "./problem_list_item";
 
 
 const Problems = props => {
@@ -72,9 +73,9 @@ const Problems = props => {
         setCustomQuery(e.currentTarget.value)
     }
 
-    const show = (problem, searchQuery) => {
-        return problem?.title?.toLowerCase().includes(searchQuery?.toLowerCase())
-    }
+    // const show = (problem, searchQuery) => {
+    //     return problem?.title?.toLowerCase().includes(searchQuery?.toLowerCase())
+    // }
 
     const handleClick = () => {
         history.push("/rooms")
@@ -124,26 +125,7 @@ const Problems = props => {
                             <img className="magnifying-glass" src={SearchIcon} alt="" />
                         </div>
                         {seededProblems.sort(compareFn).map((problem, i) => (
-                            <div className={`${show(problem, query) ? "" : "hide"} problems-list`} key={i}>
-                                        <div className={`individual-problem`}>
-                                            <input type="checkbox" className="problems-checkbox"/>
-                                            <Link to={`/rooms/${props.currentRoomId}/problems/${problem._id}`}>
-                                                <p>{problem.title}</p>
-                                             </Link>
-                                        </div>
-                                        <div onClick={handleDropdown} className={`problem options-trigger`}>
-                                            <div>
-                                                ...
-                                            </div>
-                                            <div ref={openRef} className={`problem options-menu ${open ? "open" : "hide"}`}>
-                                                <div >
-                                                    <p onClick={handleEdit(problem)}>Edit problem</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div></div>
-                                    <hr />
-                            </div>
+                            <ProblemListItem key={i} problem={problem} currentRoomId={props.currentRoomId}/>
                         ))}
                     </div>) :
 
