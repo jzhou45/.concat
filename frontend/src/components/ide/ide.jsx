@@ -3,6 +3,7 @@ import Editor from "@monaco-editor/react";
 import { connect } from "react-redux";
 import { fetchDocument, createDocument, updateDocument } from "../../actions/document_actions";
 import io from 'socket.io-client';
+import { timeSince } from "../util/function_util";
 
 const socket = io(process.env.PORT || 'http://localhost:3000');
 
@@ -128,7 +129,7 @@ export const IDE = props => {
         <div className="ide">
             <div className="ide-content">
                 <div className={`save-status ${document ? "" : "hide"}`}>
-                    {saved ? `Last edit was ${document?.updatedAt} by ${document?.lastEditor}` : 'Saving...'}
+                    {saved ? `Last edit was ${timeSince(document?.updatedAt)} ago by ${document?.lastEditor}` : 'Saving...'}
                 </div>
                 <Editor
                     border-radius="24px"
