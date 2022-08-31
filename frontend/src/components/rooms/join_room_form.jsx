@@ -1,5 +1,6 @@
 import React, {} from "react";
 import { connect } from "react-redux";
+import CopyIcon from '../../assets/images/copy-icon.png'
 
 const JoinRoomForm = (props) => {
     
@@ -26,7 +27,7 @@ const JoinRoomForm = (props) => {
                         disabled="disabled"
                         />
                         <button onClick={handleClick}>
-                            <div>Copy link</div>
+                            <img src={CopyIcon} alt="" />
                         </button>
                     </form>
                 </div>

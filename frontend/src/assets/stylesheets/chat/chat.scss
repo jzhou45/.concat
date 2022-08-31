@@ -27,7 +27,6 @@
 .messages {
     height: 80%;
     width: 90%;
-    overflow: scroll;
     border-radius: $button-border-radius;
     border: 2px solid $default-lightblue;
     background: $default-lightestgray;
@@ -41,8 +40,10 @@
 }
 
 .messages-text {
+    overflow: scroll;
     width: 90%;
     height: 90%;
+    word-wrap: break-word;
 }
 
 .message-form {
@@ -78,13 +79,17 @@
     .chat-user {
         color: $default-lightblue;
         font-weight: $medium;
-        margin-right: 10px;
-        width: 20%;
+        width: 60px;
     }
 
-    .chat-messsage {
-        width: 80%;
+    .chat-message {
+        width: 200px;
         word-wrap: break-word;
     }
 
+}
+
+.bottom-of-div {
+    height: 1px;
+    width: 100%;
 }
