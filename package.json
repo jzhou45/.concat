@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "<p align=\"center\">   <img width=\"300\" height=\"300\" src=\"> </p>",
   "main": "index.js",
+  "engines": {
+    "node": "16.16.0",
+    "npm": "8.17.0"
+  },
   "scripts": {
     "server": "nodemon app.js",
     "start": "node app.js",
