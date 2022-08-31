@@ -232,10 +232,13 @@
     button {
         width: 40px;
         border-radius: 8px;
+        margin-top: 5px;
+        margin-right: 20px;
     }
 
     img {
         height: 20px;
+        filter: invert(100);
     }
 }
 

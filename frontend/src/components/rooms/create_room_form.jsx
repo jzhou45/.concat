@@ -49,7 +49,7 @@ const CreateRoomForm = (props) => {
         return (
             <div className="room-form">
                 <div className="form-title">
-                    Create board
+                    Create room
                 </div>
                 <div>
                     <form onSubmit={handleSubmit}>
