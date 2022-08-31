@@ -5,11 +5,12 @@ import { openModal, closeModal } from "../../actions/modal_actions";
 
 const DeleteProblemContainer = (props) => {
     
-    const {deleteRoom, roomId, problemId} = props
+    const {deleteProblem, roomId, problemId} = props
 
     const handleClick = (e) => {
         e.preventDefault()
-        // deleteRoom(roomId, problemId)
+        console.log(roomId, problemId)
+        deleteProblem(roomId, problemId)
         props.closeModal()
     }
 

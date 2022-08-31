@@ -19,7 +19,7 @@ const JoinRoomForm = (props) => {
                     Join room link
                 </div>
                 <div>
-                    <form>
+                    <form className="link-form">
                         <input 
                         type="text" 
                         value={joinRoomLink}
