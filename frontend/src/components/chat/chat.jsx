@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from "react"
 import io from 'socket.io-client'
 
-const socket = io('http://localhost:8000')
+const socket = io('http://localhost:3000')
+// const socket = io('https://concat-mern.herokuapp.com')
+
 const userName = 'User ' + parseInt(Math.random()*10)
 
 const Chat = () => {
@@ -13,6 +15,8 @@ const Chat = () => {
         socket.on('message', payload => {
             setChat([...chat, payload])
         })
+
+        return () => socket.off('message')
     })
 
     const sendMessage = (e) => {
