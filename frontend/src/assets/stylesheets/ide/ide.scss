@@ -4,7 +4,7 @@
 .ide {
     margin-left: 80px;
     width: 90%;
-    height: 30%;
+    height: 100%;
     
     display: flex;
     flex-direction: row;
@@ -46,6 +46,12 @@
             display: flex;
             flex-direction: column;
             justify-content: space-evenly;
+            align-items: center;
+            word-wrap: break-word;
+            
+            div {
+                width: 100%;
+            }
         }
     }
 
@@ -76,4 +82,15 @@
         width: 100%;
     }
 }
+
+.save-status {
+    color: $default-lightgray;
+    font-size: 14px;
+    position:relative;
+    text-decoration: underline;
+    letter-spacing: 0.7px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+}
+
 

@@ -126,19 +126,23 @@ export const IDE = props => {
 
     return (
         <div className="ide">
+            <div className="ide-content">
+                <div className="save-status">
+                    {saved ? `Last edit was ${"seconds"}` : 'Saving...'}
+                </div>
                 <Editor
                     border-radius="24px"
                     height="55vh"
-                    width="100vh"
+                    width="45vw"
                     theme="vs-dark"
                     defaultLanguage="javascript"
                     value={code}
                     onChange={handleEditorChange}
                     position="relative"
                 />
+            </div>
             <div className="ide-extras">
                 <button className="run button" onClick={runCode}>RUN</button>
-                <p>{saved ? 'saved' : 'saving...'}</p>
                 <div className="ide-result">
                     <div>
                         {result ? result.map((el, i) => <div key={i}>{el}</div>) : null}

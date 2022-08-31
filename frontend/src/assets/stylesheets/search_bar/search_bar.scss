@@ -9,14 +9,14 @@
         width: 40px;
         height: 40px;
         position: absolute;
-        margin-left: -210px;
+        margin-left: -310px;
         margin-top: -2px;
         filter: invert(40%) sepia(61%) saturate(11%) hue-rotate(32deg) brightness(104%) contrast(94%);
     }
 
     input {
         height: 30px;
-        width: 200px;
+        width: 300px;
         border-radius: $div-border-radius;
         border: 2px solid $default-blue;
         text-indent: 25px;

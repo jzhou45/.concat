@@ -11,6 +11,7 @@ import NewJoinContainer from './rooms/new_join'
 import ProblemItemContainer from './problems/problem_item';
 import IDE from './ide/ide';
 import Chat from './chat/chat'
+import ProgressTracker from './progress_tracker/progress_tracker'
 
 const App = () => (
     <div>
@@ -19,7 +20,7 @@ const App = () => (
             <Chat />
         </header>
         <Modal />
-
+        <ProgressTracker/>
         <Switch>
             <ProtectedRoute path={"/rooms/:roomId/problems/:problemId"} component={ProblemItemContainer}/>
             <Route path={"/rooms/:roomId/join"} component={NewJoinContainer}/>
