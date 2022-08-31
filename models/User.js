@@ -13,7 +13,11 @@ const UserSchema = new Schema({
     rooms: [{
         type: Schema.Types.ObjectId,
         ref: 'Room'
-    }]
+    }],
+    soloRoomId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Room'
+    }
   }, {
     timestamps: true
 });

@@ -13,8 +13,8 @@ const roomResponse = ({ id, name, solo, users, problems, roomPhotoUrl }) => {
     });
 };
 
-const userResponse = ({ id, username, rooms }) => {
-    return { id, username, rooms };
+const userResponse = ({ id, username, rooms, soloRoomId }) => {
+    return { id, username, rooms, soloRoomId };
 };
 
 router.get('/',
