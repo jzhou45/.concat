@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { createDocument, updateDocument } from "../../actions/document_actions";
 import io from 'socket.io-client';
 
-const socket = io(process.env.PORT);
+const socket = io(process.env.PORT || 'http://localhost:3000');
 
 export const IDE = props => {
     const {roomId, problemId, problem, createDocument, updateDocument} = props;
