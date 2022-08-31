@@ -17,7 +17,7 @@ router.post('/:roomId/:id',
 router.patch('/:roomId/:id',
         passport.authenticate('jwt', { session: false }),
         (req,res) => {
-        Document.find({problem: req.params.id, room: req.params.roomId})
+        Document.findOne({problem: req.params.id, room: req.params.roomId})
         .then(document => {
             document.body = req.body.body
             document.save()
