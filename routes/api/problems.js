@@ -143,7 +143,7 @@ router.get('/:roomId/:id',
 )
 
 router.delete('/:roomId/:id', (req,res) => {
-    Problem.deleteOne({_id: req.params.id})
+    Problem.findByIdAndDelete(req.params.id)
     .then(result => 
         Room.findById(req.params.id)
         .then(room => {

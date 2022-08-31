@@ -41,10 +41,15 @@ app.use("/api/problems", problems);
 app.use("/api/documents", documents);
 
 io.on('connection', socket => {
-  console.log('connection made successfully')
+  console.log('connection made successfully');
+
   socket.on('message', payload => {
-    io.emit('message', payload)
-  })
+    io.emit('message', payload);
+  });
+
+  socket.on('codeChange', newCode => {
+    io.emit('codeChange', newCode);
+  });
 })
 
 server.listen(8000, () => console.log('Websocket listening at port: 8000'))
