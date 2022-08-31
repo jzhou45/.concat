@@ -127,8 +127,8 @@ export const IDE = props => {
     return (
         <div className="ide">
             <div className="ide-content">
-                <div className="save-status">
-                    {saved ? `Last edit was ${"seconds"}` : 'Saving...'}
+                <div className={`save-status ${document ? "" : "hide"}`}>
+                    {saved ? `Last edit was ${document?.updatedAt} by ${document?.lastEditor}` : 'Saving...'}
                 </div>
                 <Editor
                     border-radius="24px"
@@ -155,7 +155,7 @@ export const IDE = props => {
 
 const mSTP = state => ({
     user: state.session.user,
-    doucment: state.document
+    document: state.document
 });
 
 const mDTP = dispatch => ({

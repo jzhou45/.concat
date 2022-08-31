@@ -1,0 +1,90 @@
+@import '../variables.scss';
+
+.websocket-container {
+    height: 100%;
+
+    display: flex; 
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.websocket.logged-in-nav-container {
+    display: flex; 
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.websocket.logged-in-nav-header {
+    height: 15%;
+    margin-bottom: 100px;
+}
+
+.chat-container {
+    height: 90%;
+}
+
+.messages {
+    height: 80%;
+    width: 90%;
+    overflow: scroll;
+    border-radius: $button-border-radius;
+    border: 2px solid $default-lightblue;
+    background: $default-lightestgray;
+    color: $default-white;
+    font-size: 14px;
+
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.messages-text {
+    width: 90%;
+    height: 90%;
+}
+
+.message-form {
+    height: 20%;
+    width: 100%;
+
+    .message-input {
+        width: 90%;
+        color: $default-lightgray;
+    }
+
+    button {
+        background-color: $default-white;
+        position: absolute;
+        margin-top: 5px;
+        margin-left: 290px;
+        width: 30px;
+        
+        img {
+            height: 20px;
+            filter: invert(85%) sepia(34%) saturate(6164%) hue-rotate(189deg) brightness(106%) contrast(94%);
+        }
+
+    }
+}
+
+.chat-line {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+
+    .chat-user {
+        color: $default-lightblue;
+        font-weight: $medium;
+        margin-right: 10px;
+        width: 20%;
+    }
+
+    .chat-messsage {
+        width: 80%;
+        word-wrap: break-word;
+    }
+
+}

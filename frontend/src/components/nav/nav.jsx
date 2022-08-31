@@ -3,9 +3,12 @@ import logo from '../../assets/images/concat_logo.png'
 import { logout } from '../../actions/session_actions'
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import Chat from '../chat/chat'
+import { useLocation } from 'react-router-dom'
 
 const LoggedInNav = (props) => {
 
+    const location = useLocation()
     const currentUser = props.currentUser?.username
     const history = useHistory()
 
@@ -34,7 +37,21 @@ const LoggedInNav = (props) => {
         )
     }
 
-    return currentUser ? content() : ""
+    const chat = () => {
+        return (
+            <div className='websocket logged-in-nav-container'>
+                <div className='websocket logged-in-nav-header'>
+                    <img src={logo} alt="" />
+                    <h1>.concat</h1>
+                </div>
+                <div className='chat-container'>
+                    <Chat/>
+                </div>
+            </div>
+        )
+    }
+
+    return currentUser ? location.pathname !== "/rooms" ? chat() : content() : ""
 }
 
 const mSTP = ({session: {user}}) => {

@@ -1,15 +1,18 @@
 import React, {useState, useEffect} from "react"
 import io from 'socket.io-client'
+import SendIcon from '../../assets/images/send-icon.png'
+import { connect } from "react-redux"
 
-const socket = io(process.env.PORT || 'http://localhost:3000')
-// const socket = io('https://concat-mern.herokuapp.com')
 
-const userName = 'User ' + parseInt(Math.random()*10)
-
-const Chat = () => {
+const Chat = (props) => {
+    const socket = io(process.env.PORT || 'http://localhost:3000')
+    // const socket = io('https://concat-mern.herokuapp.com')
+    
+    const userName = props.currentUser.username
 
     const [message, setMessage] = useState('')
     const [chat, setChat] = useState([])
+    const [typing, setTyping] = useState(false)
 
     useEffect(() => {
         socket.on('message', payload => {
@@ -19,30 +22,62 @@ const Chat = () => {
         return () => socket.off('message')
     })
 
+    const updateMessage = (e) => {
+        setMessage(e.currentTarget.value)
+        setTyping(e.currentTarget.value !=="")
+    }
+
     const sendMessage = (e) => {
         e.preventDefault()
-        console.log(message)
-        socket.emit('message',{userName, message})
+        if (message.trim().length > 0) {
+            socket.emit('message',{userName, message})
+        }
         setMessage('')
     }
 
-    return (
-        <div>
-            {chat.map((payload, index) => {
-                return (
-                    <div key={index}>{payload.userName}<span>{payload.message}</span></div>
-                )
-            })}
-            <form onSubmit={sendMessage}>
-                <input type="text" 
-                name="message" 
-                placeholder="Type Message" 
-                value={message}
-                onChange={(e) => {setMessage(e.target.value)}}/>
-                <button type="">Send</button>
-            </form>
-        </div>
-    )
+    const content = () => {
+        return (
+            <div className="websocket-container">
+                <div className="messages">
+                    <div className="messages-text">
+                        {chat.map((payload, index) => {
+                            return (
+                                <div className="chat-line" key={index}>
+                                    <div className="chat-user">
+                                        {payload.userName}
+                                    </div>
+                                    <div className="chat-message">
+                                        {payload.message}
+                                    </div>
+                                </div>
+                            )
+                        })}
+                    </div>
+                </div>
+                <form className="message-form" onSubmit={sendMessage}>
+                    <input type="text" 
+                    name="message" 
+                    placeholder="Type Message" 
+                    value={message}
+                    className="message-input"
+                    autoComplete="off"
+                    onChange={updateMessage}
+                    />
+                    <button className={`${typing ? "" : "hide"}`}type="">
+                        <img src={SendIcon} alt="" />
+                    </button>
+                </form>
+            </div>
+        )
+    }
+    
+    return content()
 }
 
-export default Chat 
+const mSTP = ({session: {user}}) => {
+    return {
+        currentUser: user
+    }
+}
+
+export default connect(mSTP, null)(Chat)
