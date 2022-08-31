@@ -47,7 +47,6 @@ const EditProblemForm = (props) => {
     }
 
     const renderErrors = () => {
-        console.log(errors)
         return(
           <ul>
             {Object.values(errors).map((error, i) => (

@@ -144,7 +144,8 @@ const Problems = props => {
                                 <img className="magnifying-glass" src={SearchIcon} alt="" />
                             </div>
                             {seededProblems.sort(compareFn).map((problem, i) => (
-                                <ProblemListItem key={i} problem={problem} currentRoomId={currentRoomId} query={query} problemsListClassName={"problems-list"} openModal={props.openModal} />
+
+                                <ProblemListItem seed={true}key={i} problem={problem} currentRoom={props.currentRoom} query={query} problemsListClassName={"problems-list"} openModal={props.openModal} />
                             ))}
                         </div>) :
 
@@ -154,7 +155,7 @@ const Problems = props => {
                                 <img className="magnifying-glass" src={SearchIcon} alt="" />
                             </div>
                             {filteredCustomProblems.map((problem, i) => (
-                                <ProblemListItem key={i} problem={problem} currentRoomId={currentRoomId} query={customQuery} problemsListClassName={"custom-problems-list"} openModal={props.openModal} /> 
+                                <ProblemListItem key={i} problem={problem} currentRoom={props.currentRoom} query={customQuery} problemsListClassName={"custom-problems-list"} openModal={props.openModal} /> 
                             ))}
                         </div>)
                     }       

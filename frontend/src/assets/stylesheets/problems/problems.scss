@@ -180,6 +180,14 @@
         color: $default-white;
     }
 
+    p {
+        width: 80%;
+
+        white-space: no-wrap; 
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
     width: 90%;
     height: 100%;
     border-radius: 25px;

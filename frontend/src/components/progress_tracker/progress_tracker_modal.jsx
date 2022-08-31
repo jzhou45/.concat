@@ -7,7 +7,6 @@ const ProgressTrackerModal = (props) => {
 
     const {currentUser, rooms, closeModal} = props
 
-    console.log(rooms)
 
     const fetchUserCompletedProblems = () => {
         const userRooms = (Object.keys(rooms)).map((roomId) => rooms[roomId])
@@ -19,7 +18,6 @@ const ProgressTrackerModal = (props) => {
             } 
         })
 
-        console.log(completedCounter)
 
         return completedCounter
     }

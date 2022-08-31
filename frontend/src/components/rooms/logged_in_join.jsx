@@ -9,7 +9,7 @@ const LoggedInJoinContainer = (props) => {
     const history = useHistory()
 
     useEffect(() => {
-        joinRoom(roomId).then(() => history.push(`rooms/${roomId}`))
+        joinRoom(roomId).finally(() => history.push(`rooms/${roomId}`))
     },[])
 
 }
