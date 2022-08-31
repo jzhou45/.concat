@@ -16,6 +16,7 @@
         font-weight: $logo-font-weight;
         font-size: $logo-font-size;
     }
+}
 
     form {
         display: flex;
@@ -50,7 +51,6 @@
             }
         }
     }
-}
 
 .room-create-button.unclickable {
     background-color: $default-gray-hover;

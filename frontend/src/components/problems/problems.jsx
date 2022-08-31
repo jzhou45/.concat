@@ -8,9 +8,12 @@ import { Link } from "react-router-dom";
 import Arrow from '../../assets/images/left-arrow-icon.png'
 import SearchIcon from '../../assets/images/search-icon.png'
 import closeDropdown from "../util/close_dropdown";
-
+import CopyIcon from '../../assets/images/copy-icon.png'
+import LoadingContainer from '../util/loading_container';
 
 const Problems = props => {
+
+    const [loading, setLoading] = useState(true);
 
     const [state, setState] = useState({
         problems: "seed",
@@ -18,10 +21,16 @@ const Problems = props => {
     });
 
     useEffect(() => {
-        props.fetchProblems();
-        props.fetchRooms();
-        props.fetchCreatedProblems(props.currentRoomId);
+        props.fetchProblems()
+            .then( () => props.fetchRooms())
+            .then( () => props.fetchCreatedProblems(props.currentRoomId))
+            .finally( () => setLoading(false))
     }, []);
+
+    const handleCopy = (e) => {
+        e.preventDefault()
+        navigator.clipboard.writeText(joinRoomLink)
+    }
 
     const seededProblems = [];
     const customProblems = [];
@@ -61,6 +70,7 @@ const Problems = props => {
     };
 
     const history = useHistory();
+    const joinRoomLink = `localhost:3000/#/rooms/${props.currentRoomId}/join`
 
     const [query, setQuery] = useState('')
     const updateQuery = (e) => {
@@ -92,12 +102,35 @@ const Problems = props => {
         });
     };
 
-    return(
+    const groupMembers = () => {
+        if (props.currentRoom) {
+            const userIds = Object.keys(props.currentRoom?.users)
+            return userIds
+        }
+        return null
+    }
+
+    const content = () => {
+        return(
         <div className="problems-page">
             <div className="problems-header">
                 <img src={Arrow} className="back-to-rooms" onClick={handleClick}>
                 </img>
-                <h1>{props.currentRoom}</h1>
+                <div className="room-info">
+                    <h1>{props.currentRoom?.name}</h1>
+                    <div className={`link ${props.currentRoom?.solo ? "hide" : ""}`}>
+                        <form className="link-form">
+                            <input 
+                            type="text" 
+                            value={joinRoomLink}
+                            disabled="disabled"
+                            />
+                            <button onClick={handleCopy}>
+                                <img src={CopyIcon} alt="" />
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
             
             <div className="problems-container">
@@ -131,16 +164,6 @@ const Problems = props => {
                                                 <p>{problem.title}</p>
                                              </Link>
                                         </div>
-                                        <div onClick={handleDropdown} className={`problem options-trigger`}>
-                                            <div>
-                                                ...
-                                            </div>
-                                            <div ref={openRef} className={`problem options-menu ${open ? "open" : "hide"}`}>
-                                                <div >
-                                                    <p onClick={handleEdit(problem)}>Edit problem</p>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <div></div>
                                     <hr />
                             </div>
@@ -160,6 +183,16 @@ const Problems = props => {
                                         <p>{problem.title}</p>
                                     </Link>
                                 </div>
+                                <div onClick={handleDropdown} className={`problem options-trigger`}>
+                                            <div>
+                                                ...
+                                            </div>
+                                            <div ref={openRef} className={`problem options-menu ${open ? "open" : "hide"}`}>
+                                                <div >
+                                                    <p onClick={() => handleEdit(problem)}>Edit problem</p>
+                                                </div>
+                                            </div>
+                                        </div>
                                 <div></div>
                                 <hr />
                             </div>
@@ -169,6 +202,9 @@ const Problems = props => {
             </div>
         </div>
     );
+    }
+
+    return loading? <LoadingContainer/> : content()
 };
 
 const mSTP = (state, ownProps) => {
@@ -177,7 +213,7 @@ const mSTP = (state, ownProps) => {
         problems: state.problems,
         rooms: state.rooms,
         currentUser: state.session.user.username,
-        currentRoom: state.rooms[currentRoomId]?.name,
+        currentRoom: state.rooms[currentRoomId],
         currentRoomId: currentRoomId
     };
 };

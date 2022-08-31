@@ -5,7 +5,6 @@ export const fetchProblems = () => (
 );
 
 export const createProblem = (roomId, problem) => {
-    console.log(roomId, problem)
     return axios.post(`/api/problems/${roomId}`, problem)
 };
 
@@ -18,6 +17,7 @@ export const fetchProblem = (roomId, problemId) => {
 }
 
 export const deleteProblem = (roomId, problemId) => {
+    console.log("API UTIL", roomId, problemId)
     return axios.delete(`/api/problems/${roomId}/${problemId}`)
 }
 
