@@ -1,39 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Editor from "@monaco-editor/react";
 import { connect } from "react-redux";
-import { fetchDocument, createDocument, updateDocument } from "../../actions/document_actions";
+import { createDocument, updateDocument } from "../../actions/document_actions";
 
 export const IDE = props => {
-    const {roomId, problemId, fetchDocument, createDocument, updateDocument} = props;
-
-    const [state, setState] = useState({
-        newDocument: true
-    })
-
-    useEffect(() => {
-        fetchDocument(roomId, problemId).then(documet => {
-            if (!document){
-                setState({
-                    newDocument: false
-                });
-            };
-        });
-    }, []);
-
-    const problem = {
-        title: 'Two Sum',
-        description: `Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
-
-        You may assume that each input would have exactly one solution, and you may not use the same element twice.
-        
-        You can return the answer in any order.`,
-        testCase: 'nums = [2,7,11,15], target = 9',
-        solution: '[0,1]'
-    };
+    const {roomId, problemId, problem, createDocument, updateDocument} = props;
 
     const testArray = testCase => {
         let left = 0, right = 0, arr = [], 
-        match = testCase.match(/([^\[\]]+)|([\[\]])/g), L = match.length, next, str= '';
+        match = testCase.match(/([^[\]]+)|([[\]])/g), L = match.length, next, str= '';
 
         for (let i = 0; i < L; i++) {
             next = match[i];
@@ -112,10 +87,10 @@ export const IDE = props => {
     };
 
     const handleSave = () => {
-        if (state.newDocument){
-            createDocument(roomId, problemId, code);
+        if (problem.document){
+            updateDocument(roomId, problemId, { body: code });
         } else{
-            updateDocument(roomId, problemId, code);
+            createDocument(roomId, problemId, { body: code });
         };
     };
 
@@ -127,7 +102,7 @@ export const IDE = props => {
                     width="100vh"
                     theme="vs-dark"
                     defaultLanguage="javascript"
-                    defaultValue={preloadedCode}
+                    defaultValue={problem.document ? problem.document.body : preloadedCode}
                     onChange={handleEditorChange}
                     position="relative"
                 />
@@ -144,14 +119,9 @@ export const IDE = props => {
     );
 };
 
-const mSTP = state => ({
-
-});
-
 const mDTP = dispatch => ({
-    fetchDocument: (roomId, problemId) => dispatch(fetchDocument(roomId, problemId)),
     createDocument: (roomId, problemId, documentData) => dispatch(createDocument(roomId, problemId, documentData)),
     updateDocument: (roomId, problemId, documentData) => dispatch(updateDocument(roomId, problemId, documentData))
 });
 
-export default connect(mSTP, mDTP)(IDE);
+export default connect(null, mDTP)(IDE);

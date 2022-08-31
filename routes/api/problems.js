@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const Room = require('../../models/Room');
-const User = require('../../models/User');
+const Docuemnt = require('../../models/Document');
 const Problem = require('../../models/Problem')
 const validateProblemInput = require('../../validation/problem')
 
@@ -134,7 +134,8 @@ router.get('/:roomId/:id',
                 if (!room.users.includes(user.id)) {
                     return res.status(400).json({ usernotinroom: 'User is not in this room' });
                 } else {
-                    res.json(problem)
+                    Document.findOne({problem: req.params.id, room: req.params.roomId})
+                    .then(document => res.json(Object.assign({}, problem._doc, {document})));
                 }
             })
         )

@@ -3,13 +3,8 @@ const router = express.Router();
 const passport = require('passport');
 const Room = require('../../models/Room');
 const User = require('../../models/User');
-const Problem = require('../../models/Problem')
-const Document = require('../../models/Document')
-
-router.get('/:roomId/:id', (req, res) => {
-    Document.find({problem: req.params.id, room: req.params.roomId})
-    .then(document => res.json(document))
-})
+const Problem = require('../../models/Problem');
+const Document = require('../../models/Document');
 
 router.post('/:roomId/:id',
         passport.authenticate('jwt', { session: false }),
@@ -25,7 +20,7 @@ router.post('/:roomId/:id',
 router.patch('/:roomId/:id',
         passport.authenticate('jwt', { session: false }),
         (req,res) => {
-        Document.find({problem: req.params.id, room: req.params.roomid})
+        Document.find({problem: req.params.id, room: req.params.roomId})
         .then(document => {
             document.body = req.body.body
             document.save()
@@ -34,3 +29,5 @@ router.patch('/:roomId/:id',
         })
         .catch(err => console.log(err))
 })
+
+module.exports = router;

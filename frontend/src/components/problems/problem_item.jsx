@@ -64,7 +64,7 @@ const ProblemItemContainer = (props) => {
                     </div>
                 </div>
                 <div className="ide-container">
-                    <IDEContainer problemId={problemId} roomId={roomId} />
+                    <IDEContainer problemId={problemId} roomId={roomId} problem={problemItem} />
                 </div>
             </div>
         );
