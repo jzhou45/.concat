@@ -27,6 +27,10 @@
         flex-direction: column;
     }
 
+    .problem-item-info {
+        margin-left: 3px;
+    }
+
     .problem-item-title {
         font-size: $logo-font-size;
         font-weight: $logo-font-weight;

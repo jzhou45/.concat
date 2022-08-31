@@ -10,8 +10,6 @@ const EditRoomForm = (props) => {
 
     const {room, problem, editProblem, closeModal, openModal} = props
 
-    console.log(room, problem)
-    
     const [state, setState] = useState({
         title: problem.title,
         description: problem.description,
@@ -35,7 +33,7 @@ const EditRoomForm = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        editProblem(state).then(() => closeModal())
+        editProblem(room.id, problem.id, state).then(() => closeModal())
     }
 
     const handleDelete = (e) => {
@@ -135,7 +133,7 @@ const EditRoomForm = (props) => {
                         placeholder="ex: [1,2]"
                         type="text" value={state.solution2} onChange={handleUpdate("solution2")}/>
                     </label>
-                    <button onClick={handleDelete} className="delete-problem button">Delete Problem </button>
+                    <button type="button" onClick={handleDelete} className="delete-problem button">Delete Problem </button>
                     <button className="problem button" type="submit">Edit Problem</button>
                 </form>
     
@@ -148,7 +146,6 @@ const EditRoomForm = (props) => {
 }
 
 const mSTP = ({errors, ui: {modal}}) => {
-    console.log(modal)
     return {
         errors: errors.room,
         room: modal.props.room, 
