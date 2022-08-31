@@ -6,7 +6,7 @@ import { closeModal } from "../../actions/modal_actions";
 import { clearProblemErrors } from "../../actions/problem_actions";
 
 const CreateProblems = props => {
-
+    const {errors} = props;
 
     const dispatch = useDispatch()
 
@@ -43,19 +43,6 @@ const CreateProblems = props => {
     );
 
 
-    const renderErrors = () => {
-        return(
-          <ul>
-            {Object.values(props.errors).map((error, i) => (
-              <li key={`error-${i}`} className="problem-errors">
-                {error}
-              </li>
-            ))}
-          </ul>
-        );
-    }
-
-
     return (
         <div className="create-problems-form">
             <div className="create-problem-title">
@@ -76,24 +63,28 @@ const CreateProblems = props => {
                     <input 
                     placeholder="ex: Two Sum"
                     type="text" value={state.title} onChange={handleUpdate("title")}/>
+                    {(errors.title) ? <p className="problems-errors">{errors.title}</p> : null}
                 </label>
 
                 <label>Description *
                     <textarea 
                     placeholder="ex: Given an array of integer nums and a targer, return indices of the two numbers so they add up to the target."
                     value={state.description} onChange={(handleUpdate("description"))}></textarea>
+                    {(errors.description) ? <p className="problems-errors">{errors.description}</p> : null}
                 </label>
 
                 <label>Test Case 1 *
                     <textarea 
                     placeholder="ex: nums = [2, 7, 11, 15], target = 9"
                     value={state.testCase} onChange={handleUpdate("testCase")}></textarea>
+                    {(errors.testCase) ? <p className="problems-errors">{errors.testCase}</p> : null}
                 </label>
 
                 <label>Solution 1 *
                     <input type="text" 
                     placeholder="ex: [0, 1]"
                     value={state.solution} onChange={handleUpdate("solution")}/>
+                    {(errors.solution) ? <p className="problems-errors">{errors.solution}</p> : null}
                 </label>
 
                 <label>Difficulty
@@ -127,9 +118,6 @@ const CreateProblems = props => {
                     placeholder="ex: [1,2]"
                     type="text" value={state.solution2} onChange={handleUpdate("solution2")}/>
                 </label>
-                <div className="room-errors">
-                        {renderErrors()}
-                </div>
 
                 <button className="problem button" type="submit">Create Problem</button>
             </form>
