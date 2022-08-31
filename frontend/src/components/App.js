@@ -9,8 +9,6 @@ import css from "../assets/stylesheets/App.scss"
 import Problems from './problems/problems';
 import NewJoinContainer from './rooms/new_join'
 import ProblemItemContainer from './problems/problem_item';
-import IDE from './ide/ide';
-import Chat from './chat/chat'
 import ProgressTracker from './progress_tracker/progress_tracker'
 
 const App = () => (
@@ -20,7 +18,7 @@ const App = () => (
             {/* <Chat /> */}
         </header>
         <Modal />
-        <ProgressTracker/>
+        {/* <ProgressTracker/> */}
         <Switch>
             <ProtectedRoute path={"/rooms/:roomId/problems/:problemId"} component={ProblemItemContainer}/>
             <Route path={"/rooms/:roomId/join"} component={NewJoinContainer}/>

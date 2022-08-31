@@ -112,7 +112,10 @@ router.patch('/:roomId/:id',
                     problem.difficulty = req.body.difficulty
 
                     problem.save()
-                    .then(problem => res.json(problem))
+                    .then(problem => {
+                        Document.findOne({problem: req.params.id, room: req.params.roomId})
+                        .then(document => res.json(Object.assign({}, problem._doc, {document})));
+                    })
                     .catch(err => console.log(err))
                 }
             })

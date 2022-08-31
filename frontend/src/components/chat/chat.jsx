@@ -68,7 +68,7 @@ const Chat = (props) => {
                     autoComplete="off"
                     onChange={updateMessage}
                     />
-                    <button className={`${typing ? "" : "hide"}`}type="">
+                    <button className={`send-message-button ${typing ? "" : "hide"}`} type="">
                         <img src={SendIcon} alt="" />
                     </button>
                 </form>
