@@ -17,7 +17,6 @@ export const fetchProblem = (roomId, problemId) => {
 }
 
 export const deleteProblem = (roomId, problemId) => {
-    console.log("API UTIL", roomId, problemId)
     return axios.delete(`/api/problems/${roomId}/${problemId}`)
 }
 

@@ -3,12 +3,13 @@ import { connect } from "react-redux";
 import {editProblem } from "../../actions/problem_actions";
 import { closeModal, openModal } from "../../actions/modal_actions";
 import { useDispatch } from "react-redux";
+import { clearProblemErrors } from "../../actions/problem_actions";
 
-const EditRoomForm = (props) => {
+const EditProblemForm = (props) => {
     
-    // const dispatch = useDispatch() 
+    const dispatch = useDispatch() 
 
-    const {room, problem, editProblem, closeModal, openModal} = props
+    const {room, problem, errors} = props
 
     const [state, setState] = useState({
         title: problem.title,
@@ -21,9 +22,9 @@ const EditRoomForm = (props) => {
         seed: false
     });
 
-    // useEffect(() => {
-    //     dispatch(clearRoomErrors())
-    // }, [dispatch])
+    useEffect(() => {
+        dispatch(clearProblemErrors())
+    }, [dispatch])
 
     const handleUpdate = (field) => {
         return e => setState({
@@ -33,25 +34,30 @@ const EditRoomForm = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        editProblem(room.id, problem.id, state).then(() => closeModal())
+        props.editProblem(room.id, problem._id, state).then((resp) => {
+            if (resp.type !== "RECEIVE_PROBLEM_ERRORS") {
+                props.closeModal();
+            }
+        });
     }
 
     const handleDelete = (e) => {
         e.preventDefault()
-        props.openModal("deleteroom", {roomId: room.id, problemId: problem.id})
+        props.openModal("deleteproblem", {roomId: room.id, problemId: problem._id})
     }
 
-    // const renderErrors = () => {
-    //     return(
-    //       <ul>
-    //         {Object.values(errors).map((error, i) => (
-    //           <li key={`error-${i}`} className="room-errors">
-    //             {error}
-    //           </li>
-    //         ))}
-    //       </ul>
-    //     );
-    // }
+    const renderErrors = () => {
+        console.log(errors)
+        return(
+          <ul>
+            {Object.values(errors).map((error, i) => (
+              <li key={`error-${i}`} className="problem-errors">
+                {error}
+              </li>
+            ))}
+          </ul>
+        );
+    }
     
 
     const content = () => {
@@ -133,10 +139,12 @@ const EditRoomForm = (props) => {
                         placeholder="ex: [1,2]"
                         type="text" value={state.solution2} onChange={handleUpdate("solution2")}/>
                     </label>
+                    <div className="room-errors">
+                        {renderErrors()}
+                    </div>
                     <button type="button" onClick={handleDelete} className="delete-problem button">Delete Problem </button>
                     <button className="problem button" type="submit">Edit Problem</button>
                 </form>
-    
             </div>
         );
     }
@@ -147,7 +155,7 @@ const EditRoomForm = (props) => {
 
 const mSTP = ({errors, ui: {modal}}) => {
     return {
-        errors: errors.room,
+        errors: errors.problems,
         room: modal.props.room, 
         problem: modal.props.problem
     }
@@ -155,10 +163,10 @@ const mSTP = ({errors, ui: {modal}}) => {
 
 const mDTP = (dispatch) => {
     return {
-        editProblem: (roomId, problemId, problemData) => dispatch(editProblem((roomId, problemId, problemData))),
+        editProblem: (roomId, problemId, problemData) => dispatch(editProblem(roomId, problemId, problemData)),
         closeModal: () => dispatch(closeModal()), 
         openModal: (formType, props) => dispatch(openModal(formType, props))
     }
 }
 
-export default connect(mSTP, mDTP)(EditRoomForm)
+export default connect(mSTP, mDTP)(EditProblemForm)
