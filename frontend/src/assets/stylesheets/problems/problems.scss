@@ -194,3 +194,17 @@
     margin-left: 40px;
 }
 
+.problem.options-trigger {
+    right: 90px;
+    top: 15px;
+}
+
+.problem.options-menu {
+    display: flex;
+    flex-direction: column;
+    height: 40px;
+    
+    div {
+        margin-left: 0;
+    }
+}

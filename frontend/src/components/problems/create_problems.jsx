@@ -12,6 +12,7 @@ const CreateProblems = props => {
         solution: "",
         testCase2: "",
         solution2: "",
+        difficulty: "",
         seed: false
     });
 
@@ -75,17 +76,17 @@ const CreateProblems = props => {
                             <div>
                                 <label htmlFor="easy">Easy
                                 </label>
-                                <input name="difficulty" id="easy" type="radio" value="easy"/>
+                                <input onClick={handleUpdate("difficulty")} name="difficulty" id="easy" type="radio" value="easy"/>
                             </div>
                             <div>
                                 <label htmlFor="medium">Medium
                                 </label>
-                                <input name="difficulty" id="medium" type="radio" value="medium"/>
+                                <input  onClick={handleUpdate("difficulty")} name="difficulty" id="medium" type="radio" value="medium"/>
                             </div>
                             <div>
                                 <label htmlFor="hard">Hard
                                 </label>
-                                <input name="difficulty" id="hard" type="radio" value="hard"/>
+                                <input  onClick={handleUpdate("difficulty")} name="difficulty" id="hard" type="radio" value="hard"/>
                             </div>
                     </div>
                 </label>
@@ -98,7 +99,7 @@ const CreateProblems = props => {
 
                 <label>Solution 2
                     <input 
-                    placeholder="[1,2]"
+                    placeholder="ex: [1,2]"
                     type="text" value={state.solution2} onChange={handleUpdate("solution2")}/>
                 </label>
 
