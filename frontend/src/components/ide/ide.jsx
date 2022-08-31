@@ -123,7 +123,7 @@ export const IDE = props => {
         }
 
         socket.emit('documentSaved', user.id);
-    }, 2000);
+    }, 2000)
 
     return (
         <div className="ide">

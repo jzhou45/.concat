@@ -25,6 +25,8 @@
         width: 40%;
         display: flex; 
         flex-direction: column;
+        justify-content: space-between;
+        height: 90%;
     }
 
     .problem-item-info {
@@ -108,5 +110,17 @@
     h2 {
         margin-right: 10px;
         font-weight: $medium;
+    }
+}
+
+.back-to-problems {
+    position: relative;
+    height: 20px;
+    filter: invert(100);
+    width: 20px;
+    cursor: pointer;
+
+    &:hover {
+        filter: invert(72%) sepia(61%) saturate(11%) hue-rotate(32deg) brightness(104%) contrast(94%);
     }
 }

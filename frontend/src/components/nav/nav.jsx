@@ -54,9 +54,10 @@ const LoggedInNav = (props) => {
     return currentUser ? location.pathname !== "/rooms" ? chat() : content() : ""
 }
 
-const mSTP = ({session: {user}}) => {
+const mSTP = ({session: {user}, rooms}) => {
     return {
-        currentUser: user
+        currentUser: user,
+        rooms
     }
 }
 
