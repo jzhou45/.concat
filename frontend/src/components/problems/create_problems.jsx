@@ -1,12 +1,11 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import { connect, useDispatch } from "react-redux";
-import { createProblem } from "../../actions/problem_actions";
-import { useState } from "react";
+import { createProblem, clearProblemErrors } from "../../actions/problem_actions";
 import { closeModal } from "../../actions/modal_actions";
-import { clearProblemErrors } from "../../actions/problem_actions";
+import { createDocument } from "../../actions/document_actions";
 
 const CreateProblems = props => {
-    const {errors} = props;
+    const {errors, createProblem, currentRoomId, closeModal, rerenderProblems, createDocument} = props;
 
     const dispatch = useDispatch()
 
@@ -25,15 +24,21 @@ const CreateProblems = props => {
         seed: false
     });
 
+
     const handleSubmit = e => {
         e.preventDefault();
         const problem = Object.assign({}, state);
-        props.createProblem(props.currentRoomId, problem).then((resp) => {
+        createProblem(currentRoomId, problem).then((resp) => {
+
             if (resp.type !== "RECEIVE_PROBLEM_ERRORS") {
-                props.closeModal();
-                props.rerenderProblems();
-            }
+                closeModal();
+                rerenderProblems();
+            };
+
+            // createDocument(currentRoomId, resp.problem.data._id, {body: "", problem: resp.problem.data._id, room: currentRoomId})
+
         });
+        // createDocument(currentRoomId, document.problemId, document.body);
     };
 
     const handleUpdate = field => (
@@ -134,7 +139,8 @@ const mSTP = (state) => ({
 
 const mDTP = dispatch => ({
     createProblem: (roomId, problem) => dispatch(createProblem(roomId, problem)),
-    closeModal: () => dispatch(closeModal())
+    closeModal: () => dispatch(closeModal()),
+    createDocument: (roomId, problemId, documentData) => dispatch(createDocument(roomId, problemId, documentData))
 });
 
 export default connect(mSTP, mDTP)(CreateProblems);
