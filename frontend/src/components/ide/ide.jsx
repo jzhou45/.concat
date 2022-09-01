@@ -59,6 +59,7 @@ export const IDE = props => {
     const preloadedCode = `const ${camelize(problem.title)} = (${testArray(problem.testCase).map(arg => arg[0]).join(', ')}) => {\n\t\n};`;
 
     const [code, setCode] = useState(document ? document.body : preloadedCode);
+    const [testCode, setTestCode] = useState(document ? document.body : preloadedCode);
     const [result, setResult] = useState(null);
     const [saved, setSaved] = useState(true);
 
@@ -71,7 +72,7 @@ export const IDE = props => {
         }
 
         try {
-            const func = Function(`${code}\nreturn ${camelize(problem.title)};`)();
+            const func = Function(`${testCode}\nreturn ${camelize(problem.title)};`)();
             const funcReturn = func(...(testArray(problem.testCase).map(arg => arg[1])));
             const resultArray = [`Input: ${problem.testCase}`, `Output: ${JSON.stringify(funcReturn)}`, `Expected: ${JSON.stringify(parsedSolution)}`]
 
@@ -89,6 +90,7 @@ export const IDE = props => {
 
     const handleEditorChange = value => {
         socket.emit('codeChange', {value, userId: user.id});
+        setTestCode(value);
     };
 
     useEffect(() => {
@@ -100,6 +102,7 @@ export const IDE = props => {
                 timeoutId = autosave(payload.value, user.username);
             } else {
                 setCode(payload.value);
+                setTestCode(payload.value);
             }
             setSaved(false);
         });
