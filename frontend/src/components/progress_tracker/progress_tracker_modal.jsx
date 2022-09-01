@@ -1,36 +1,38 @@
 import React from 'react';
-import ProgressIcon from '../../assets/images/loading-cat.gif'
 import { connect } from 'react-redux'
-import { closeModal } from '../../actions/modal_actions';
+import ProgressTrackerGrid from './progress_tracker_grid';
 
 const ProgressTrackerModal = (props) => {
 
-    const {currentUser, rooms, closeModal} = props
+    const {currentUser, rooms} = props
+    const userRooms = (Object.keys(rooms)).map((roomId) => rooms[roomId])
 
-
-    const fetchUserCompletedProblems = () => {
-        const userRooms = (Object.keys(rooms)).map((roomId) => rooms[roomId])
-        let completedCounter = 0
-
-        userRooms.forEach ((room) => {
-            if (room?.problems.complete?.length !== undefined) {
-                completedCounter += room?.problems?.complete?.length
-            } 
-        })
-
-
-        return completedCounter
-    }
+    // const allProblems = Object.keys(problems).map( (problemId) => problems[problemId])
+    // const defaultProblems = allProblems.filter((problem) => problem.seed === true)
 
     const content = () => {
         return (
             <div className='progress-tracker-modal'>
                 <div className='progress-label'>
                     {`${currentUser.username}'s progress`}
+                    <div className='grid-key'>
+                        <div className="grid-square"></div>
+                        <div>incompleted</div>
+                        <div className="grid-square completed easy"></div>
+                        <div>easy/unspecified</div>
+                        <div className="grid-square completed medium"></div>
+                        <div>medium</div>
+                        <div className="grid-square completed hard"></div>
+                        <div>hard</div>
+                    </div>
                 </div>
-                <div className="progress-counter">
-                    <div>Completed problems: </div>
-                    {fetchUserCompletedProblems()}
+                <div className="progress-grids-container">
+                    {userRooms.map((userRoom, i) => <ProgressTrackerGrid 
+                        key={i} 
+                        room={userRoom}
+                        // defaultProblems={defaultProblems}
+                        />
+                    )}
                 </div>
             </div>
         )
@@ -38,17 +40,13 @@ const ProgressTrackerModal = (props) => {
     return content()
 }
 
-const mSTP = ({session: {user}, rooms}) => {
+const mSTP = ({session: {user}, rooms, problems}) => {
     return {
         currentUser: user, 
-        rooms
+        rooms, 
+        // problems
     }
 }
 
-const mDTP = (dispatch) => {
-    return {
-        closeModal: () => dispatch(closeModal())
-    }
-}
 
-export default connect(mSTP, mDTP)(ProgressTrackerModal)
+export default connect(mSTP, null)(ProgressTrackerModal)

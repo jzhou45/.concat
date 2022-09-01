@@ -5,22 +5,23 @@
     right: 40px;
     top: 40px;
     height: 100px;
-    width: 160px;
+    width: 190px;
     
     display: flex; 
     flex-direction: row;
     justify-content: flex-end;
-
+    align-items: center;
+    
     animation: bouncing;
     animation-duration: 2s;
-    animation-iteration-count: 3;
+    animation-iteration-count: infinite;
 }
 
 .progress-tracker-icon {
     cursor: pointer;
     z-index: 300;
-    height: 50px;
-    width: 50px;
+    height: 80px;
+    width: 80px;
     background-color: $default-white;
     border-radius: 50%;
     box-shadow: $box-shadow;
@@ -33,6 +34,7 @@
 
     img {
         height: 100px;
+        border-radius: 50%;
     }
 }
 
@@ -47,9 +49,10 @@
 }
 
 .progress-tracker-modal {
-    height: 400px;
-    width: 600px;
-    background-color: $default-white;
+    height: 700px;
+    width: 700px;
+    overflow:scroll;
+    background-color: $background-color;
     border-radius: $div-border-radius;
 }
 
@@ -58,7 +61,8 @@
     color: $default-white;
     background-color: $default-blue;
     text-align: center;
-    height: 50px;
+    height: 60px;
+    width: 90px;
 
     display: flex;
     flex-direction: column;
@@ -86,14 +90,48 @@
 .progress-tracker-modal {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
     box-shadow: $box-shadow
 }
 
 .progress-label {
     font-family: $logo-font; 
-    color: $default-lightblue;
+    color: $default-white;
     font-weight: $logo-font-weight;
     font-size: $logo-font-size;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+.progress-grids-container {
+    height: 80%;
+    width: 90%;
+    margin-left: 30px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
+.grid-key {
+    margin-top: 20px;
+    margin-bottom: -30px;
+    height: 20px;
+    width: 60%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    font-size: 12px;
+    font-weight: normal;
+    font-family: $default-font;
+}
+
+
+
+

@@ -7,15 +7,23 @@ import Chat from '../chat/chat'
 import { useLocation } from 'react-router-dom'
 
 const LoggedInNav = (props) => {
+    
+    const {currentUser, rooms} = props
 
-    const location = useLocation()
-    const currentUser = props.currentUser?.username
     const history = useHistory()
+    const location = useLocation()
+
+    const currentUsersUsername = currentUser?.username
 
     const handleLogout = (e) => {
         e.preventDefault()
         props.logout()
         history.push('/')
+    }
+
+    const roomIsUsers = () => {
+        const roomId = location.pathname.split('/')[2]
+        return roomId === Object.keys(rooms)[0]
     }
 
     const content = () => {
@@ -25,7 +33,7 @@ const LoggedInNav = (props) => {
                     <img src={logo} alt="" />
                     <h1>.concat</h1>
                     <div className="logged-in-nav-user">
-                        <h1>Welcome {currentUser} </h1>
+                        <h1>why hello {currentUsersUsername} </h1>
                     </div>
                     <div onClick={handleLogout} className='logout-button'>
                         <div>
@@ -51,7 +59,8 @@ const LoggedInNav = (props) => {
         )
     }
 
-    return currentUser ? location.pathname !== "/rooms" ? chat() : content() : ""
+
+    return currentUsersUsername ? location.pathname !== "/rooms" && !roomIsUsers() ? chat() : content() : ""
 }
 
 const mSTP = ({session: {user}, rooms}) => {

@@ -5,6 +5,7 @@ import RoomItemContainer from './room_item'
 import { fetchRooms } from '../../actions/room_actions'
 import { openModal } from '../../actions/modal_actions'
 import SearchIcon from '../../assets/images/search-icon.png'
+import ProgressTracker from '../progress_tracker/progress_tracker'
 
 const RoomsPageContainer = (props) => {
 
@@ -33,6 +34,7 @@ const RoomsPageContainer = (props) => {
     const content = () => {
         return (
             <div className="rooms-page-container">
+                <ProgressTracker/>
                 <div className='rooms-header'>
                     <div className="rooms-header-title">
                         {`${currentUser}'s rooms`}
