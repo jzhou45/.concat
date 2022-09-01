@@ -24,7 +24,8 @@ const RoomSchema = new Schema({
     },
     messages: [{
         username: { type: String },
-        message: { type: String }
+        message: { type: String },
+        timestamp: { type: Date }
     }]
   }, {
     timestamps: true

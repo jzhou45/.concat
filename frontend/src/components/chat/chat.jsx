@@ -40,9 +40,9 @@ const Chat = (props) => {
     const messageSubmit = (e) => {
         e.preventDefault()
         if (message.trim().length > 0) {
-            const sentMessage = { username: props.username, message };
-            socket.emit('message',{ message: sentMessage, roomId });
-            sendMessage(roomId, sentMessage);
+            const messageObj = { username: props.username, message, timestamp: new Date() };
+            socket.emit('message', { message: messageObj, roomId });
+            sendMessage(roomId, messageObj);
             setMessage('');
         }
     }

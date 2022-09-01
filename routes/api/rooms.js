@@ -84,7 +84,8 @@ router.patch('/:roomId/:id/incomplete', (req, res) => {
 router.patch('/:roomId/sendMessage', (req, res) => {
     Room.findById(req.params.roomId)
         .then(room => {
-            room.messages.push({ username: req.body.username, message: req.body.message });
+            const { username, message, timestamp } = req.body;
+            room.messages.push({ username, message, timestamp });
             room.save().then(room => roomResponse(room).then(room => res.json(room)));
         });
 })
