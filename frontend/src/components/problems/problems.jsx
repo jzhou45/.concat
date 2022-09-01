@@ -78,7 +78,7 @@ const Problems = props => {
     };
 
     const history = useHistory();
-    const joinRoomLink = `localhost:3000/#/rooms/${currentRoomId}/join`;
+    const joinRoomLink = `https://concat-mern.herokuapp.com/#/rooms/${currentRoomId}/join`;
 
     const [query, setQuery] = useState('')
     const updateQuery = (e) => {

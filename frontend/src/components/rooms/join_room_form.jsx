@@ -6,7 +6,7 @@ const JoinRoomForm = (props) => {
     
     const {roomId} = props
 
-    const joinRoomLink = `localhost:3000/#/rooms/${roomId}/join`
+    const joinRoomLink = `https://concat-mern.herokuapp.com/#/rooms/${roomId}/join`
     const [clicked, setClicked] = useState(false)
 
     const handleClick = (e) => {

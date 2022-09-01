@@ -5,7 +5,7 @@ import { fetchDocument, createDocument, updateDocument } from "../../actions/doc
 import io from 'socket.io-client';
 import { timeSince } from "../util/function_util";
 
-const socket = io(process.env.PORT || 'http://localhost:3000');
+const socket = io('https://concat-mern.herokuapp.com/#/');
 
 export const IDE = props => {
     const {roomId, problemId, problem, fetchDocument, createDocument, updateDocument, user, document} = props;
