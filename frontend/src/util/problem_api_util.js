@@ -13,13 +13,14 @@ export const fetchCreatedProblems = (roomId) => (
 );
 
 export const fetchProblem = (roomId, problemId) => {
-    return axios.get(`/api/problems/${roomId}/${problemId}`)
-}
+    return axios.get(`/api/problems/${roomId}/${problemId}`);
+};
 
 export const deleteProblem = (roomId, problemId) => {
-    return axios.delete(`/api/problems/${roomId}/${problemId}`)
-}
+    return axios.delete(`/api/problems/${roomId}/${problemId}`);
+};
 
 export const editProblem = (roomId, problemId, problemData) => {
-    return axios.patch(`/api/problems/${roomId}/${problemId}`, problemData)
-}
+    return axios.patch(`/api/problems/${roomId}/${problemId}`, problemData);
+};
+
