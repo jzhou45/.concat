@@ -3,11 +3,12 @@ import logo from "../../assets/images/concat_logo.png"
 import { Link } from "react-router-dom";
 
 const SplashNavBar = (props) => {
-    
+        const {openModal, joinPath, roomId} = props
+
     const handleClick = (formType) => {
         return e => {
             e.preventDefault();
-            props.openModal(formType, {path: props.joinPath, roomId: props.roomId});
+            openModal(formType, {path: joinPath, roomId: roomId});
         };
     };
 
