@@ -36,27 +36,32 @@ router.post('/signup', (req, res) => {
               newUser.password = hash;
               newUser.save()
                 .then(user => {
-                    const soloRoom = new Room({
-                        name: `${user.username}'s Room`,
-                        solo: true,
-                        users: [user.id],
-                        roomPhotoUrl: roomPhotoUrls[Math.floor(Math.random() * 25)]
-                    });
-                    soloRoom.save()
 
-                    newUser.rooms.push(soloRoom.id);
-                    newUser.soloRoomId = soloRoom.id;
-                    newUser.save()
-                        .then(({ id, username }) => {
-                            Room.find({ users: id })
-                                .then(rooms => res.json({
-                                    id,
-                                    username,
-                                    rooms: rooms.map(room => room.id)
-                                }))
-                                .catch(err => console.log(err));
-                        })
-                        .catch(err => console.log(err));
+                  Problem.find({ seed: true })
+                    .then(problems => {
+                        const soloRoom = new Room({
+                            name: `${user.username}'s Room`,
+                            solo: true,
+                            users: [user.id],
+                            roomPhotoUrl: roomPhotoUrls[Math.floor(Math.random() * 25)],
+                            problems: { incomplete: problems.map(problem => problem.id) }
+                        });
+                
+                        soloRoom.save().then(room => {
+                          newUser.rooms.push(soloRoom.id);
+                          newUser.save()
+                              .then(({ id, username }) => {
+                                  Room.find({ users: id })
+                                      .then(rooms => res.json({
+                                          id,
+                                          username,
+                                          rooms: rooms.map(room => room.id)
+                                      }))
+                                      .catch(err => console.log(err));
+                              })
+                              .catch(err => console.log(err));
+                        });
+                    })
                 })
                 .catch(err => console.log(err));
             });

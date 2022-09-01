@@ -7,9 +7,9 @@ const Problem = require('../../models/Problem');
 const validateRoomInput = require('../../validation/rooms');
 const roomPhotoUrls = require('../../util/room-photo-url');
 
-const roomResponse = ({ id, name, solo, users, problems, roomPhotoUrl }) => {
+const roomResponse = ({ id, name, solo, users, problems, roomPhotoUrl, messages }) => {
     return User.find({ _id: { $in: users } }).then(users => {
-        return { id, name, solo, users, problems, roomPhotoUrl };
+        return { id, name, solo, users, problems, roomPhotoUrl, messages };
     });
 };
 
@@ -51,10 +51,7 @@ router.post('/',
                     name: req.body.name,
                     users: [user.id],
                     roomPhotoUrl: roomPhotoUrls[Math.floor(Math.random() * 25)],
-                    problems: {
-                        incomplete: problems.map(problem => problem.id),
-                        complete: []
-                    }
+                    problems: { incomplete: problems.map(problem => problem.id) }
                 });
         
                 newRoom.save().then(room => {
@@ -70,21 +67,17 @@ router.post('/',
 router.patch('/:roomId/:id/complete', (req, res) => {
     Room.findById(req.params.roomId)
         .then(room => {
-            const index = room.problems.incomplete.indexOf(req.params.id)
-            if (index > -1) {
-                room.problems.incomplete.pull(req.params.id)
-                room.problems.complete.push(req.params.id)
-                room.save().then(room => res.json(room))
-            }
+            room.problems.incomplete.pull(req.params.id)
+            room.problems.complete.push(req.params.id)
+            room.save().then(room => res.json(room))
         })
 })
 router.patch('/:roomId/:id/incomplete', (req, res) => {
     Room.findById(req.params.roomId)
         .then(room => {
-                room.problems.complete.pull(req.params.id)
-                room.problems.incomplete.push(req.params.id)
-                room.save().then(room => res.json(room))
-            
+            room.problems.complete.pull(req.params.id)
+            room.problems.incomplete.push(req.params.id)
+            room.save().then(room => res.json(room))
         })
 })
 
