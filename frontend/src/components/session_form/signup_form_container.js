@@ -37,6 +37,7 @@ const SignupForm = props => {
         const user = Object.assign({}, state);
         if (joinPath) {
             joinRoom(roomId).then(() => {
+                closeModal();
                 history.push(joinPath);
             });
         };
