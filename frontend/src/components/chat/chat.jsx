@@ -18,7 +18,7 @@ const Chat = (props) => {
     const [typing, setTyping] = useState(false);
 
     useEffect(() => {
-        if (props.rooms && chat.length <= 1) setChat(chat.concat(props.rooms[roomId].messages));
+        if (props.rooms && chat.length <= 1) setChat(chat.concat(props.rooms[roomId]?.messages));
     }, [props.rooms])
 
     const addMessage = payload => {
@@ -75,6 +75,7 @@ const Chat = (props) => {
     }
 
     const getTime = (dateObject) => {
+        if (!dateObject) return 
         let newDateObject = dateObject;
         if (typeof dateObject === 'string') {
             newDateObject = new Date(dateObject)
@@ -87,13 +88,13 @@ const Chat = (props) => {
             <div className="messages">
                 <div className="messages-text">
                     {chat.map((message, index) => {
-                        if (message.log) return (
+                        if (message?.log) return (
                             <div className="chat-log" key={index}>
                                 <div className="chat-blue">
                                     {message.log[0]}
                                 </div>
                                 <div className="log chat-timestamp">
-                                    {getTime(message.timestamp)}
+                                    {getTime(message?.timestamp)}
                                 </div>
                                 <div>
                                     {message.log[1]}
@@ -103,13 +104,13 @@ const Chat = (props) => {
                         else return (
                             <div className="chat-line" key={index}>
                                 <div className="chat-user">
-                                    {message.username}
+                                    {message?.username}
                                 </div>
                                 <div className="chat-message">
-                                    {message.message}
+                                    {message?.message}
                                 </div>
                                 <div className="chat-timestamp">
-                                    {getTime(message.timestamp)}
+                                    {getTime(message?.timestamp)}
                                 </div>
                             </div>
                         )
