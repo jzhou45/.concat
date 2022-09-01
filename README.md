@@ -11,7 +11,7 @@
 ### User Auth 
   - User authentication: login, logout, and signup
   
-*** Rooms 
+### Rooms 
   - Users can create rooms and invite their friends or classmates to be part of the room. 
   - Users can choose to leave rooms and delete rooms.
   - Users will have their own personal rooms to work by themselves upon account creation
@@ -29,7 +29,8 @@
 ### Websocket
   - Through the use of websockets, users are able to communicate live through the chat.
   - Websocket provides the ability to update and watch each others code in the IDE
- ~ USE CHAT.JSX LINES 18-40, i think this is pretty good code to show ~
+  
+~ USE CHAT.JSX LINES 18-40, i think this is pretty good code to show ~
 []()
 
 ### Progress Tracker
