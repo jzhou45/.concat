@@ -20,18 +20,46 @@ const Chat = (props) => {
     useEffect(() => {
         if (props.rooms) setChat(props.rooms[roomId].messages);
     }, [props.rooms])
+
+    const addMessage = payload => {
+        if (roomId === payload.roomId) setChat([...chat, payload.message]);
+    }
     
     useEffect(() => {
-        socket.on('message', payload => {
-            if (roomId === payload.roomId) setChat([...chat, payload.message]);
-        })
+
+        socket.on('message', payload => addMessage(payload));
+        socket.on('joinRoom', payload => addMessage(payload));
+        socket.on('leaveRoom', payload => addMessage(payload));
         
-        return () => socket.off('message');
-    })
+        return () => {
+            socket.off('message');
+            socket.off('joinRoom');
+            socket.off('leaveRoom');
+        }
+    });
+
+    useEffect(() => {
+        socket.emit('joinRoom', {
+            message: {
+                log: `${props.username} joined the room`,
+                timestamp: new Date()
+            },
+            roomId
+        });
+
+        return () => socket.emit('leaveRoom', {
+            message: {
+                log: `${props.username} left the room`,
+                timestamp: new Date()
+            },
+            roomId
+        });
+    }, []);
     
     useEffect( () => {
         bottomRef.current?.scrollIntoView({behavior:'smooth'})
-    }, [chat])
+    }, [chat]);
+
     const updateMessage = (e) => {
         setMessage(e.currentTarget.value)
         setTyping(e.currentTarget.value !=="")
@@ -52,7 +80,12 @@ const Chat = (props) => {
             <div className="messages">
                 <div className="messages-text">
                     {chat.map((message, index) => {
-                        return (
+                        if (message.log) return (
+                            <div className="chat-log" key={index}>
+                                {message.log}
+                            </div>
+                        )
+                        else return (
                             <div className="chat-line" key={index}>
                                 <div className="chat-user">
                                     {message.username}

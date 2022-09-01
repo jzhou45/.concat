@@ -43,6 +43,14 @@ const io = require('socket.io')(server, {
 io.on('connection', socket => {
   console.log('connection made successfully');
 
+  socket.on('joinRoom', payload => {
+    io.emit('joinRoom', payload);
+  });
+
+  socket.on('leaveRoom', payload => {
+    io.emit('leaveRoom', payload);
+  });
+
   socket.on('message', payload => {
     io.emit('message', payload);
   });
