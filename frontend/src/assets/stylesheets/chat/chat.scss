@@ -72,6 +72,7 @@
 
 
 .chat-line {
+    position: relative;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -91,6 +92,7 @@
     .chat-message {
         width: 200px;
         word-wrap: break-word;
+        cursor: default;
     }
 
 }
@@ -98,4 +100,37 @@
 .bottom-of-div {
     height: 1px;
     width: 100%;
+}
+
+.chat-timestamp {
+    margin-top: 16px;
+    margin-left: 43px;
+    position: absolute;
+    width: 70px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: none;
+    background-color: $default-black;
+    color: $default-white;
+    text-align: center;
+    border-radius: $button-border-radius;
+    z-index: 2;
+    font-size: 12px;
+}
+
+.chat-timestamp:after {
+    content:'';
+    position: absolute;
+    margin-left: -40px;
+    margin-top: -12px;
+    rotate: (180deg);
+    width: 0;
+    height: 0;
+    border-top: solid 10px $default-black;
+    border-left: solid 10px transparent;
+    border-right: solid 10px transparent;
+}
+
+.chat-message:hover + .chat-timestamp {
+    display: block;
 }

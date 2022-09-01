@@ -5,7 +5,7 @@ export const instructionsHeading = [
 ]
 
 export const instructionsText = [
-    "Create rooms to work on problems with your friends. Our progress reports allow users to see their work as they progress",
-    "With our collobarative IDE tab, it allows users to code alongside one another. It keeps explaining concise and efficient",
-    "Using our live call and chat, it allows people to easily interact with each other and making coding together easier"
+    "Create rooms to work on problems with your friends. Share your room's link to your friends so they can join you.",
+    "Using our preset Leetcode questions and search bar allows you to just easily select one to work on, opening up that problem's own page.",
+    "Each problem's page comes equipped with their own live chat and live IDE. This allows people to easily interact with each other and makes communication more efficient."
 ]
