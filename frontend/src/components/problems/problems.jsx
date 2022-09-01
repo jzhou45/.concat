@@ -101,10 +101,12 @@ const Problems = props => {
         });
     };
 
-    const rerenderRooms = () => {
-        fetchRooms().then(rooms => setState({
-            rooms
-        }));
+    const rerenderRooms = (problemType) => {
+        fetchRooms()
+        // fetchRooms().then(rooms => setState({
+        //     // rooms,
+        //     problemType
+        // }));
     };
 
     const content = () => {
