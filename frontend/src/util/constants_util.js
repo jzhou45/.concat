@@ -10,4 +10,4 @@ export const instructionsText = [
     "Each problem's page comes equipped with their own live chat and live IDE. This allows people to easily interact with each other and makes communication more efficient."
 ]
 
-export const demoUsername = "demo-user"
+export const demoUsername = "demo user"

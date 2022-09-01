@@ -3,6 +3,8 @@ import SplashNavbarContainer from './splash_navbar_container'
 import SplashFirstPageContainer from './splash-first-page'
 import SplashInstructionPageContainer from './splash-instruction-page'
 import ProblemGIF from '../../assets/images/problems.gif'
+import ChatGIF from '../../assets/images/chat.gif'
+import RoomsGIF from '../../assets/images/rooms.gif'
 
 const SplashContainer = (props) => {
 
@@ -16,13 +18,13 @@ const SplashContainer = (props) => {
                   <SplashFirstPageContainer/>
               </section>
               <section className='splash-second-page-container'>
-                  <SplashInstructionPageContainer pageNumber={0} pageWord={"second"}/>
+                  <SplashInstructionPageContainer image={RoomsGIF} pageNumber={0} pageWord={"second"}/>
               </section>
               <section className='splash-third-page-container'>
                   <SplashInstructionPageContainer image={ProblemGIF} pageNumber={1} pageWord={"third"}/>
               </section>
               <section className='splash-fourth-page-container'>
-                  <SplashInstructionPageContainer pageNumber={2} pageWord={"fourth"}/>
+                  <SplashInstructionPageContainer image={ChatGIF} pageNumber={2} pageWord={"fourth"}/>
               </section>
           </div>
         )

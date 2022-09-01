@@ -120,6 +120,7 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    cursor: default;
 
     .chat-blue {
         color: $default-lightblue;
@@ -167,4 +168,12 @@
 
 .chat-message:hover + .chat-timestamp {
     display: block;
+}
+
+.chat-blue:hover + .log.chat-timestamp {
+    display: block;
+}
+
+.log.chat-timestamp {
+    color: $default-white;
 }
