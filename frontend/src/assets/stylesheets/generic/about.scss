@@ -1,0 +1,173 @@
+@import '../variables.scss';
+
+.about-container {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.about-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 20%;
+}
+
+.about-title {
+    color: $default-white;
+    font-size: $logo-font-size;
+    font-weight: $logo-font-weight;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+}
+
+.about-logo { 
+    display: flex;
+    flex-direction: row;
+}
+
+.about-logo img {
+    width: 30px;
+    height: 30px;
+    filter: invert(100);
+    margin-top: 5px;
+}
+
+.about.back-to-rooms {
+    position: absolute;
+    left: -100px;
+}
+
+.about-content {
+    box-shadow: $box-shadow;
+    background-color: $default-blue;
+    height: 78%;
+    width: 80%;
+    border-radius: $div-border-radius;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    h1 {
+        margin-top: 20px;
+        letter-spacing: 1px;
+        color: $default-white;
+        font-size: 20px;
+        font-weight: $logo-font-weight;
+    }
+}
+
+.about-row {
+    height: 45%;
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.member-container {
+    position: relative;
+    height: 300px;
+    width: 45%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    > img {
+        height: 500px;
+        position: absolute;
+        z-index: 2;
+        margin-bottom: 250px;
+    }
+}
+
+.member-content {
+    height: 50%;
+    width: 80%;
+    border-radius: $div-border-radius;
+    background-color: $default-lightestgray;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.deborah.member-container {
+
+    .member-content {
+        outline: 3px solid #663c33;
+        border: 1px solid white;
+    }
+}
+
+.alex.member-container {
+
+    > img {
+        margin-top: 14px;
+    }
+
+    .member-content {
+        border: 3px solid #202020;
+    }
+}
+
+.jonathan.member-container {
+
+    > img {
+        margin-top: 22px;
+    }
+
+    .member-content {
+        border: 3px solid #202020;
+    }
+}
+
+.victor.member-container {
+
+    > img {
+        margin-top: 5px;
+    }
+
+    .member-content {
+        outline:  3px solid #653a36;
+        border: 1px solid white;
+    }
+}
+
+.socials {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+
+    a {
+        height: 35px;
+        width: 35px;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 5;
+        
+            img {
+                filter: invert(85%) sepia(34%) saturate(6164%) hue-rotate(189deg) brightness(106%) contrast(94%);
+                height: 35px;
+                width: 35px;
+            }
+    }
+}
