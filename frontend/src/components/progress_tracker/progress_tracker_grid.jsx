@@ -49,7 +49,7 @@ const ProgressTrackerGrid = (props) => {
         )
     }
     
-    return loading ? <LoadingContainer/> : content()
+    return loading ? "" : content()
 }
 
 const mSTP = ({problems}) => {

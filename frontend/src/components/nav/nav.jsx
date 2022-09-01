@@ -22,6 +22,7 @@ const LoggedInNav = (props) => {
     }
 
     const roomIsUsers = () => {
+        if (location.pathname === "/rooms") return false
         const roomId = location.pathname.split('/')[2];
         return rooms[roomId].solo;
     }
@@ -58,7 +59,6 @@ const LoggedInNav = (props) => {
             </div>
         )
     }
-
 
     if (Object.keys(rooms).length > 0) return currentUsersUsername ? location.pathname !== "/rooms" && !roomIsUsers() ? chat() : content() : ""
 }

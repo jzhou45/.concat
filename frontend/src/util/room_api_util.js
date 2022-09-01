@@ -28,9 +28,9 @@ export const leaveRoom = (roomId) => {
   return axios.patch(`/api/rooms/${roomId}/leave`)
 }
 
-export const patchComplete = (roomId, problemId) => (
-  axios.patch(`/api/rooms/${roomId}/${problemId}/complete`)
-);
+export const patchComplete = (roomId, problemId) => {
+  return axios.patch(`/api/rooms/${roomId}/${problemId}/complete`)
+};
 
 export const patchIncomplete = (roomId, problemId) => (
   axios.patch(`/api/rooms/${roomId}/${problemId}/incomplete`)
