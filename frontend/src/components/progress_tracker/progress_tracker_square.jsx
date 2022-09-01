@@ -5,7 +5,7 @@ const ProgressTrackerSquare = (props) => {
 
     const {problem, isCompleted} = props
 
-    const difficulty = problem?.difficulty 
+    const difficulty = problem?.difficulty?.toLowerCase()
 
     return (
         <div className="progress-tracker-square">

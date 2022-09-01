@@ -40,7 +40,7 @@ const ProgressTrackerGrid = (props) => {
                             key={i}
                             problem={problem}
                             room={room}
-                            isCompleted={!completedProblems.includes(problem.id)}
+                            isCompleted={completedProblems.includes(problem.id)}
                             />)
                         }
                     </div>

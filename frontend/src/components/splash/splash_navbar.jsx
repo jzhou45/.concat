@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../../assets/images/concat_logo.png"
+import { Link } from "react-router-dom";
 
 const SplashNavBar = (props) => {
     
@@ -19,7 +20,12 @@ const SplashNavBar = (props) => {
                     <p>at</p>
                 </div>
                 <div className="splash-navbar-buttons">
-                    <button onClick={handleClick("login")}>Login</button>
+                    <Link to="/about">
+                        <div className="button about">
+                            About Team
+                        </div>  
+                    </Link>
+                    <button className="login" onClick={handleClick("login")}>Login</button>
                     <button onClick={handleClick("signup")}>Signup</button>
                 </div>
             </div>
