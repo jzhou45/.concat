@@ -1,4 +1,4 @@
-import React, {} from "react";
+import React, {useState} from "react";
 import { connect } from "react-redux";
 import CopyIcon from '../../assets/images/copy-icon.png'
 
@@ -7,10 +7,12 @@ const JoinRoomForm = (props) => {
     const {roomId} = props
 
     const joinRoomLink = `localhost:3000/#/rooms/${roomId}/join`
+    const [clicked, setClicked] = useState(false)
 
     const handleClick = (e) => {
         e.preventDefault()
         navigator.clipboard.writeText(joinRoomLink)
+        setClicked(true)
     }
 
     const content = () => {
@@ -30,6 +32,9 @@ const JoinRoomForm = (props) => {
                             <img src={CopyIcon} alt="" />
                         </button>
                     </form>
+                </div>
+                <div className={`link-copied ${clicked ? "" : "hide"}`}>
+                    Link has been copied!
                 </div>
             </div>
         )

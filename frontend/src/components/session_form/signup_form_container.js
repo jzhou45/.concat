@@ -6,6 +6,7 @@ import { joinRoom } from '../../actions/room_actions';
 import { useHistory } from "react-router-dom";
 import closeButton from "../../assets/images/close.png";
 import logo from "../../assets/images/concat_logo.png";
+import { demoUsername } from "../../util/constants_util";
 
 const SignupForm = props => {
     const {session, errors, joinPath, closeModal, signup, login,
@@ -57,7 +58,7 @@ const SignupForm = props => {
     if (errors.password2) password2Error = "input-error";
 
     const demoUser = {
-        username: "test1",
+        username: demoUsername,
         password: "password"
     };
 
