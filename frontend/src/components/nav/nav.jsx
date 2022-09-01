@@ -22,8 +22,8 @@ const LoggedInNav = (props) => {
     }
 
     const roomIsUsers = () => {
-        const roomId = location.pathname.split('/')[2]
-        return roomId === Object.keys(rooms)[0]
+        const roomId = location.pathname.split('/')[2];
+        return rooms[roomId].solo;
     }
 
     const content = () => {
@@ -60,7 +60,7 @@ const LoggedInNav = (props) => {
     }
 
 
-    return currentUsersUsername ? location.pathname !== "/rooms" && !roomIsUsers() ? chat() : content() : ""
+    if (Object.keys(rooms).length > 0) return currentUsersUsername ? location.pathname !== "/rooms" && !roomIsUsers() ? chat() : content() : ""
 }
 
 const mSTP = ({session: {user}, rooms}) => {

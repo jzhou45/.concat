@@ -2,6 +2,7 @@ import React, {useState, useEffect, useRef} from "react"
 import io from 'socket.io-client'
 import SendIcon from '../../assets/images/send-icon.png'
 import { connect } from "react-redux"
+import { useLocation } from 'react-router-dom'
 
 const socket = io(process.env.PORT || 'http://localhost:3000')
 // const socket = io('https://concat-mern.herokuapp.com')
@@ -11,13 +12,17 @@ const Chat = (props) => {
     const userName = props.currentUser.username
     const bottomRef = useRef(null)
     
+    const location = useLocation();
     const [message, setMessage] = useState('')
     const [chat, setChat] = useState([])
     const [typing, setTyping] = useState(false)
+
+    const roomId = location.pathname.split('/')[2];
     
     useEffect(() => {
         socket.on('message', payload => {
-            setChat([...chat, payload])
+            const message = { userName: payload.userName, message: payload.message };
+            if (roomId === payload.roomId) setChat([...chat, message]);
         })
         
         return () => socket.off('message')
@@ -34,7 +39,7 @@ const Chat = (props) => {
     const sendMessage = (e) => {
         e.preventDefault()
         if (message.trim().length > 0) {
-            socket.emit('message',{userName, message})
+            socket.emit('message',{userName, message, roomId})
         }
         setMessage('')
     }
@@ -81,7 +86,8 @@ const Chat = (props) => {
 
 const mSTP = ({session: {user}}) => {
     return {
-        currentUser: user
+        currentUser: user,
+
     }
 }
 
