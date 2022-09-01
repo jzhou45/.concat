@@ -14,19 +14,18 @@ const Chat = (props) => {
     const location = useLocation();
     const roomId = location.pathname.split('/')[2];
     const [message, setMessage] = useState('');
-    const [chat, setChat] = useState(null);
+    const [chat, setChat] = useState([]);
     const [typing, setTyping] = useState(false);
 
     useEffect(() => {
-        if (props.rooms) setChat(props.rooms[roomId].messages);
+        if (props.rooms && chat.length <= 1) setChat(chat.concat(props.rooms[roomId].messages));
     }, [props.rooms])
 
     const addMessage = payload => {
-        if (roomId === payload.roomId) setChat([...chat, payload.message]);
+        if (chat && roomId === payload.roomId) setChat([...chat, payload.message]);
     }
     
     useEffect(() => {
-
         socket.on('message', payload => addMessage(payload));
         socket.on('joinRoom', payload => addMessage(payload));
         socket.on('leaveRoom', payload => addMessage(payload));
