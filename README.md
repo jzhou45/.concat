@@ -11,13 +11,14 @@
 
 ### User Auth 
   - User authentication: login, logout, and signup
-  
+![https://github.com/jzhou45/.concat/blob/main/frontend/src/assets/images/user-auth.gif]
+
 ### Rooms 
   - Users can create rooms and invite their friends or classmates to be part of the room. 
   - Users can send links to their friends prompting them to login or create a new account
   - Users can choose to leave rooms and delete rooms.
   - Users will have their own personal rooms to work by themselves upon account creation
-[](https://github.com/jzhou45/.concat/blob/main/frontend/src/assets/images/user-auth.gif)
+![](  https://github.com/jzhou45/.concat/blob/main/frontend/src/assets/images/rooms.gif)
 
 ### Problems
   - Each room contains a list of default problems
@@ -31,7 +32,34 @@
 ### Websocket
   - Through the use of websockets, users are able to communicate live through the chat.
   - Websocket provides the ability to update and watch each others code in the IDE
+
+```
+  useEffect(() => {
+      socket.emit('joinRoom', {
+          message: {
+              log: [props.username, "joined the room"],
+              timestamp: new Date()
+          },
+          roomId
+      });
+
+      return () => socket.emit('leaveRoom', {
+          message: {
+              log: [props.username, "left the room"],
+              timestamp: new Date()
+          },
+          roomId
+      });
+  }, []);
   
+  const getTime = (dateObject) => {
+        let newDateObject = dateObject;
+        if (typeof dateObject === 'string') {
+            newDateObject = new Date(dateObject)
+        }
+        return newDateObject.toLocaleDateString([], {hour: '2-digit', minute: '2-digit'}).split(',')[1]
+    }
+```
 ![](https://github.com/jzhou45/.concat/blob/main/frontend/src/assets/images/chat.gif)
 ![](https://github.com/jzhou45/.concat/blob/main/frontend/src/assets/images/ide.gif)
 
