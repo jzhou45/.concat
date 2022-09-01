@@ -97,6 +97,3 @@ export const patchIncomplete = (roomId, problemId) => dispatch => (
     .then(room => dispatch(receiveUnchecked(room)))
     .catch(errors => dispatch(receiveRoomErrors(errors)))
 );
-
-
-
