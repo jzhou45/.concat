@@ -10,28 +10,20 @@
 ## Functionality and Features
 
 ### User Auth 
-  - User authentication: login, logout, and signup
+User authentication: login, logout, and signup
 ![https://github.com/jzhou45/.concat/blob/main/frontend/src/assets/images/user-auth.gif]
 
 ### Rooms 
-  - Users can create rooms and invite their friends or classmates to be part of the room. 
-  - Users can send links to their friends prompting them to login or create a new account
-  - Users can choose to leave rooms and delete rooms.
-  - Users will have their own personal rooms to work by themselves upon account creation
+Users can create rooms and invite their friends or classmates to be part of the room. By directly sending the room's link to their friends, they will be prompted to login or create a new account. Users have the option to leave or delete rooms. Upon account creation, every user will have their own personal rooms to work by themselves.
 ![](  https://github.com/jzhou45/.concat/blob/main/frontend/src/assets/images/rooms.gif)
 
 ### Problems
-  - Each room contains a list of default problems
-  - As users complete problems, they can check or uncheck the problem as complete
-  - Each problem contains a code editor
-  - If users are in a room, they can use code editor together
-  - Users can create, update, and delete their own problems
+Each room contains a list of 75 default problems. Each problem contains a code editor which which will automatically save every few seconds. If users are part of a room, members of the room can use the code editor together. If the 75 questions aren't enough there is the option to create, update, and delete their own problems.
 ![](https://github.com/jzhou45/.concat/blob/main/frontend/src/assets/images/problems.gif)
 
 
 ### Websocket
-  - Through the use of websockets, users are able to communicate live through the chat.
-  - Websocket provides the ability to update and watch each others code in the IDE
+Through the use of websockets, users are able to communicate live through the chat. Websocket provides the ability to update and watch each other code in the IDE.
 
 ```
   useEffect(() => {
@@ -64,8 +56,7 @@
 ![](https://github.com/jzhou45/.concat/blob/main/frontend/src/assets/images/ide.gif)
 
 ### Progress Tracker
-  - Users will have a progress tracker
-  - Progress tracker will update as user completes problems
+As users complete problems, they can check or uncheck the problems as complete. Every user will have their own unique progress tracker reflecting which and how many questions they have completed. The different colors of the progress tracker indicated the questions difficulty.
 ![](https://github.com/jzhou45/.concat/blob/main/frontend/src/assets/images/progress-tracker.gif)
 
 ## Technologies Used
