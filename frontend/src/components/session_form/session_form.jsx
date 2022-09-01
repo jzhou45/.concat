@@ -44,7 +44,7 @@ const SessionForm = props => {
             } else if (props.formType === "Login" && Object.values(props.errors.session).length === 0){
                 props.closeModal();
             };
-        });
+        }).finally(() => closeModal());
     };
 
 
