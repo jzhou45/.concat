@@ -37,7 +37,11 @@ const LoginForm = props => {
                 history.push(joinPath);
             });
         };
-        login(user).then(() => closeModal());
+        login(user).then(() => {
+            if (history.location.pathname === "/rooms"){
+                closeModal();
+            };
+        });
     };
 
 

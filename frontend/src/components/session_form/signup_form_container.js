@@ -39,9 +39,11 @@ const SignupForm = props => {
                 history.push(joinPath);
             });
         };
-        signup(user)
-            .then(() => login(user))
-            .finally(() => closeModal());
+        signup(user).then(response => {
+            if (!response.errors){
+                login(user).then(() => closeModal());
+            };
+        });
     };
 
 
