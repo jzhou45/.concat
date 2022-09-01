@@ -3,11 +3,9 @@
   <img width="300" height="300" src="https://github.com/jzhou45/.concat/blob/main/frontend/src/assets/images/concat_logo.png">
 </p>
 
-Live link: [live-link](https://concat-mern.herokuapp.com)
-
 ## Background 
 
-[.concat]() is a MERN stack web application that is geared towards engineers to practice Leetcode questions collaboratively with their friends or classmates. There will be live chat functionality that allows for easy communication as well as live share of IDE to make it easy to work together.                                      
+[.concat](https://concat-mern.herokuapp.com) is a MERN stack web application that is geared towards engineers to practice Leetcode questions collaboratively with their friends or classmates. There will be live chat functionality that allows for easy communication as well as live share of IDE to make it easy to work together.                                      
 ## Functionality and Features
 
 ### User Auth 
