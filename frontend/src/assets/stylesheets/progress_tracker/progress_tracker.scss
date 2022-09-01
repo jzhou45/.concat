@@ -51,9 +51,14 @@
 .progress-tracker-modal {
     height: 700px;
     width: 700px;
-    overflow:scroll;
     background-color: $background-color;
     border-radius: $div-border-radius;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    box-shadow: $box-shadow
 }
 
 .progress-tracker-label {
@@ -87,15 +92,8 @@
     border-right: solid 10px transparent;
 }
 
-.progress-tracker-modal {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    box-shadow: $box-shadow
-}
-
 .progress-label {
+    width: 100%;
     font-family: $logo-font; 
     color: $default-white;
     font-weight: $logo-font-weight;
@@ -110,6 +108,7 @@
     height: 80%;
     width: 90%;
     margin-left: 30px;
+    overflow: scroll;
 
     display: flex;
     flex-direction: column;
