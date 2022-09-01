@@ -41,7 +41,7 @@ const Chat = (props) => {
     useEffect(() => {
         socket.emit('joinRoom', {
             message: {
-                log: `${props.username} joined the room`,
+                log: [props.username, "joined the room"],
                 timestamp: new Date()
             },
             roomId
@@ -49,7 +49,7 @@ const Chat = (props) => {
 
         return () => socket.emit('leaveRoom', {
             message: {
-                log: `${props.username} left the room`,
+                log: [props.username, "left the room"],
                 timestamp: new Date()
             },
             roomId
@@ -90,7 +90,12 @@ const Chat = (props) => {
                     {chat.map((message, index) => {
                         if (message.log) return (
                             <div className="chat-log" key={index}>
-                                {message.log}
+                                <div className="chat-blue">
+                                    {message.log[0]}
+                                </div>
+                                <div>
+                                    {message.log[1]}
+                                </div>
                             </div>
                         )
                         else return (
