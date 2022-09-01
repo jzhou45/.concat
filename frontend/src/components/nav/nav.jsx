@@ -24,7 +24,7 @@ const LoggedInNav = (props) => {
     const roomIsUsers = () => {
         if (location.pathname === "/rooms") return false
         const roomId = location.pathname.split('/')[2];
-        return rooms[roomId].solo;
+        return rooms[roomId]?.solo;
     }
 
     const content = () => {
