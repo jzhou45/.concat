@@ -47,13 +47,12 @@ router.post('/signup', (req, res) => {
                     newUser.rooms.push(soloRoom.id);
                     newUser.soloRoomId = soloRoom.id;
                     newUser.save()
-                        .then(({ id, username, soloRoomId }) => {
+                        .then(({ id, username }) => {
                             Room.find({ users: id })
                                 .then(rooms => res.json({
                                     id,
                                     username,
-                                    rooms: rooms.map(room => room.id),
-                                    soloRoomId
+                                    rooms: rooms.map(room => room.id)
                                 }))
                                 .catch(err => console.log(err));
                         })
