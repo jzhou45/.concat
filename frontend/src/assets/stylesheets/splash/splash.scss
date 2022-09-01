@@ -96,3 +96,15 @@
         opacity: 1;
     }
 }
+
+.splash-image {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    img {
+    height: 80%;
+    } 
+}  

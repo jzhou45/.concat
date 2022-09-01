@@ -75,6 +75,14 @@ const Chat = (props) => {
         }
     }
 
+    const getTime = (dateObject) => {
+        let newDateObject = dateObject;
+        if (typeof dateObject === 'string') {
+            newDateObject = new Date(dateObject)
+        }
+        return newDateObject.toLocaleDateString([], {hour: '2-digit', minute: '2-digit'}).split(',')[1]
+    }
+
     if (chat) return (
         <div className="websocket-container">
             <div className="messages">
@@ -92,6 +100,9 @@ const Chat = (props) => {
                                 </div>
                                 <div className="chat-message">
                                     {message.message}
+                                </div>
+                                <div className="chat-timestamp">
+                                    {getTime(message.timestamp)}
                                 </div>
                             </div>
                         )

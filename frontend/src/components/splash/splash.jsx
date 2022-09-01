@@ -2,6 +2,7 @@ import React from 'react'
 import SplashNavbarContainer from './splash_navbar_container'
 import SplashFirstPageContainer from './splash-first-page'
 import SplashInstructionPageContainer from './splash-instruction-page'
+import ProblemGIF from '../../assets/images/problems.gif'
 
 const SplashContainer = (props) => {
 
@@ -18,7 +19,7 @@ const SplashContainer = (props) => {
                   <SplashInstructionPageContainer pageNumber={0} pageWord={"second"}/>
               </section>
               <section className='splash-third-page-container'>
-                  <SplashInstructionPageContainer pageNumber={1} pageWord={"third"}/>
+                  <SplashInstructionPageContainer image={ProblemGIF} pageNumber={1} pageWord={"third"}/>
               </section>
               <section className='splash-fourth-page-container'>
                   <SplashInstructionPageContainer pageNumber={2} pageWord={"fourth"}/>
