@@ -21,7 +21,11 @@ const RoomSchema = new Schema({
     roomPhotoUrl: {
         type: String,
         required: true
-    }
+    },
+    messages: [{
+        username: { type: String },
+        message: { type: String }
+    }]
   }, {
     timestamps: true
 });
