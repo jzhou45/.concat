@@ -1,5 +1,5 @@
 
-import React, {useEffect} from "react";
+import React, {useEffect, connect} from "react";
 import closeButton from "../../assets/images/close.png";
 import logo from "../../assets/images/concat_logo.png";
 import { useState } from "react";
@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 
 const SessionForm = props => {
 
-    const dispatch = useDispatch() 
+    const dispatch = useDispatch();
 
     const [state, setState] = useState({
         username: '',
@@ -31,6 +31,7 @@ const SessionForm = props => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        // if (errors) alert(errors);
         const user = Object.assign({}, state);
         if (props.joinPath) {
             props.joinRoom(props.roomId).then(() => {
@@ -38,13 +39,14 @@ const SessionForm = props => {
             });
         };
         props.processForm(user).then(() => {
-            if (props.formType === "Signup" && props.errors.username){
-                props.closeModal();
-                props.login(user);
-            } else if (props.formType === "Login" && Object.values(props.errors.session).length === 0){
-                props.closeModal();
+            if (props.formType === "Signup" && props.errors.username.length > 0){
+                props.login(user).finally(() => closeModal());
             };
-        }).finally(() => closeModal());
+            if (props.formType === "Login" && Object.values(props.errors).length === 0){
+                console.log(Object.values(props.errors) === 0)
+                
+            }
+        });
     };
 
 
@@ -107,7 +109,7 @@ const SessionForm = props => {
                 <p onClick={handleDemoSignin}>Log in as demo user</p>
             </form>
         </div>
-    )
+    );
 };
 
 export default SessionForm;

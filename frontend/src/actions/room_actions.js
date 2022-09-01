@@ -89,11 +89,13 @@ export const createRoom = (roomData) => dispatch => {
 export const patchComplete = (roomId, problemId) => dispatch => {
     return RoomAPIUtil.patchComplete(roomId, problemId)
     .then(room => dispatch(receiveChecked(room)))
+    .catch(errors => dispatch(receiveRoomErrors(errors.response.data)));
 };
 
 export const patchIncomplete = (roomId, problemId) => dispatch => (
     RoomAPIUtil.patchIncomplete(roomId, problemId)
     .then(room => dispatch(receiveUnchecked(room)))
+    .catch(errors => dispatch(receiveRoomErrors(errors)))
 );
 
 

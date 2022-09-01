@@ -1,13 +1,14 @@
-import React, { useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import closeDropdown from "../util/close_dropdown";
 import { patchComplete, patchIncomplete } from "../../actions/room_actions";
+const debounce = require("lodash.debounce");
 
 const ProblemListItem = props => {
 
     const { problem, seed=false, query, openModal, currentRoom, problemsListClassName,
-    patchComplete, patchIncomplete, rerenderRooms } = props;
+    patchComplete, patchIncomplete, rerenderRooms, errors } = props;
     
     const openRef = useRef(null);
     const [open, setOpen] = closeDropdown(openRef, false);
@@ -26,9 +27,7 @@ const ProblemListItem = props => {
         incompleteQuestions: currentRoom.problems.incomplete
     });
 
-    const handleChange = (e) => {
-        console.log("HANDLECHANGE")
-        console.log(checked)
+    const handleChange = useCallback(debounce(() => {
         if (checked){
             patchIncomplete(currentRoom.id, problem._id).then(() => {
                 const newCompletedQuestions = (state.completedQuestions).filter(problemId => problemId !== problem._id);
@@ -36,7 +35,8 @@ const ProblemListItem = props => {
                 setState({
                     completedQuestions: newCompletedQuestions,
                     incompleteQuestions: newIncompleteQuestions
-                })
+                });
+                rerenderRooms("seed");
             });
             
         } else{
@@ -47,10 +47,10 @@ const ProblemListItem = props => {
                     completedQuestions: newCompletedQuestions,
                     incompleteQuestions: newIncompleteQuestions
                 });
+                rerenderRooms("custom")
             });
-        };
-        rerenderRooms();
-    };
+        }
+    }, 500));
     
     const checked = currentRoom.problems.complete?.includes(problem._id)
 
@@ -78,11 +78,15 @@ const ProblemListItem = props => {
     );
 };
 
+const mSTP = state => ({
+    errors: state.errors
+});
+
 const mDTP = (dispatch) => {
     return {
         patchComplete: (roomId, problemId) => dispatch(patchComplete(roomId, problemId)),
         patchIncomplete: (roomId, problemId) => dispatch(patchIncomplete(roomId, problemId))
-    }
-}
+    };
+};
 
-export default connect(null, mDTP)(ProblemListItem);
+export default connect(mSTP, mDTP)(ProblemListItem);
