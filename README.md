@@ -1,6 +1,6 @@
 # .concat
 <p align="center">
-  <img width="300" height="300" src="https://github.com/jzhou45/.concat/blob/main/frontend/src/assets/images/concat_logo.png">
+  <img width="300" height="300" style="filter: invert(81%) sepia(11%) saturate(771%) hue-rotate(183deg) brightness(102%) contrast(97%);" src="https://github.com/jzhou45/.concat/blob/main/frontend/src/assets/images/concat_logo.png">
 </p>
 
 ## Background 
@@ -25,20 +25,20 @@
   - Each problem contains a code editor
   - If users are in a room, they can use code editor together
   - Users can create, update, and delete their own problems
-[](https://github.com/jzhou45/.concat/blob/main/frontend/src/assets/images/problems.gif)
+![](https://github.com/jzhou45/.concat/blob/main/frontend/src/assets/images/problems.gif)
 
 
 ### Websocket
   - Through the use of websockets, users are able to communicate live through the chat.
   - Websocket provides the ability to update and watch each others code in the IDE
   
-[](https://github.com/jzhou45/.concat/blob/main/frontend/src/assets/images/chat.gif)
-[](https://github.com/jzhou45/.concat/blob/main/frontend/src/assets/images/ide.gif)
+![](https://github.com/jzhou45/.concat/blob/main/frontend/src/assets/images/chat.gif)
+![](https://github.com/jzhou45/.concat/blob/main/frontend/src/assets/images/ide.gif)
 
 ### Progress Tracker
   - Users will have a progress tracker
   - Progress tracker will update as user completes problems
-[](https://github.com/jzhou45/.concat/blob/main/frontend/src/assets/images/progress-tracker.gif)
+![](https://github.com/jzhou45/.concat/blob/main/frontend/src/assets/images/progress-tracker.gif)
 
 ## Technologies Used
 
