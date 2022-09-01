@@ -15,7 +15,6 @@ const App = () => (
     <div>
         <header>
             <Nav/>
-            {/* <Chat /> */}
         </header>
         <Modal />
         {/* <ProgressTracker/> */}

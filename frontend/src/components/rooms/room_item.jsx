@@ -50,11 +50,11 @@ const RoomItemContainer = (props) => {
                 <Link to={`${roomPhotoUrl ? `/rooms/${room.id}` : "/rooms" }`}>
                     <div className={`room-photo-container ${!roomPhotoUrl ? "create-room" : ""}`}>
                         <img className={roomPhotoUrl? "" : "plus"} src={roomPhotoUrl && !solo ? roomPhotoUrl : solo ? "" : Plus} alt="" />
-                        <div className={`default-room ${solo ? "" : "hide"}`}>{abbreviate(currentUser?.toUpperCase(), 14)}</div>
+                        <div className={`default-room ${solo ? "" : "hide"}`}>{abbreviate(currentUser?.toUpperCase(), 10)}</div>
                     </div>
                 </Link>
                 <div className="room-title">
-                    <div>{roomName}</div>
+                    <div>{abbreviate(abbreviate(roomName, 16))}</div>
                 </div>
             </div>
         )

@@ -1,0 +1,101 @@
+@import '../variables.scss';
+
+.progress-tracker-grid {
+    min-height: 100px;
+    width: 100%;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.grid-room-title {
+    font-size: 16px;
+    font-family: $logo-font;
+    font-weight: $medium;
+    color: $default-lightestgray;
+}
+
+.outer-grid-container {
+    background-color: $default-lightgray;
+    height: 90%;
+    width: 90%;
+    margin-top: 10px;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    
+    width: 95%;
+    height: 90%;
+    display: grid;
+    grid-gap: 6px;
+
+    grid-template-columns: repeat(auto-fill, minmax(15px, 1fr));
+
+}
+
+.grid-square {
+    border-radius: 2px;
+    height: 15px;
+    width: 15px;
+    background-color: $default-white;
+}
+
+.grid-square.completed.hard {
+    background-color: $default-blue;
+}
+
+.grid-square.completed.medium {
+    background-color: $default-lightblue;
+}
+
+.grid-square.completed.easy {
+    background-color: $default-lightestblue;
+}
+
+.progress-tracker-square {
+    position: relative;
+}
+
+.grid-square-label {
+    visibility: hidden;
+    position: absolute;
+    right: -32px;
+    top: -46px;
+
+    background-color: $default-black;
+    color: white;
+    font-size: 12px;
+    text-align: center;
+    height: 30px;
+    width: 80px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: $button-border-radius;
+}
+
+.grid-square-label:after {
+    content:'';
+    position: absolute;
+    margin-top: 40px;
+    width: 0;
+    height: 0;
+    border-top: solid 10px $default-black;
+    border-left: solid 10px transparent;
+    border-right: solid 10px transparent;
+}
+
+.grid-square:hover + .grid-square-label{
+    visibility: visible;
+}
