@@ -6,6 +6,7 @@ import { joinRoom } from '../../actions/room_actions';
 import { useHistory } from "react-router-dom";
 import closeButton from "../../assets/images/close.png";
 import logo from "../../assets/images/concat_logo.png";
+import { demoUsername } from "../../util/constants_util";
 
 const LoginForm = props => {
     const {session, errors, joinPath, closeModal, login, joinRoom, roomId} = props;
@@ -52,7 +53,7 @@ const LoginForm = props => {
     if (errors.password) passwordError = "input-error";
 
     const demoUser = {
-        username: "test1",
+        username: demoUsername,
         password: "password"
     };
 

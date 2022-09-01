@@ -10,8 +10,6 @@ const ProgressTrackerGrid = (props) => {
     // refactor so it doesnt get the 75 again for each room 
 
     const [loading, setLoading] = useState(true)
-
-    console.log(room)
     
     useEffect( () => {
         fetchCreatedProblems(room?.id)
@@ -34,13 +32,13 @@ const ProgressTrackerGrid = (props) => {
                 <div className='outer-grid-container'>
                     <div className="grid-container">
                         {   
-                            // fetchAllRoomProblems().map((problem, i) => console.log(problem.difficulty)
+                            // allRoomProblems.map((problem, i) => console.log(completedProblems, completedProblems.includes(problem._id), problem._id===completedProblems[0])
                             // )
                             allRoomProblems.map((problem, i) => <ProgressTrackerSquare
                             key={i}
                             problem={problem}
                             room={room}
-                            isCompleted={completedProblems.includes(problem.id)}
+                            isCompleted={completedProblems.includes(problem._id)}
                             />)
                         }
                     </div>

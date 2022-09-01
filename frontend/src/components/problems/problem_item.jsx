@@ -5,14 +5,20 @@ import { fetchProblem } from "../../actions/problem_actions";
 import LoadingContainer from '../util/loading_container';
 import Arrow from '../../assets/images/left-arrow-icon.png'
 import { useHistory } from "react-router-dom";
+import { fetchRooms } from "../../actions/room_actions"
 
 const ProblemItemContainer = (props) => {
 
-    const {roomId, problemId, problems, fetchProblem} = props;
+    const {roomId, problemId, problems, fetchProblem, rooms, fetchRooms} = props;
     const [loading, setLoading] = useState(true);
     const history = useHistory()
 
+    console.log(rooms)
+
     useEffect( () => {
+        if (Object.keys(rooms).length === 0) {
+            fetchRooms()
+        }
         fetchProblem(roomId, problemId).finally(() => setLoading(false))
     }, []);
 
@@ -81,18 +87,20 @@ const ProblemItemContainer = (props) => {
     return loading ? <LoadingContainer/> : content();
 };
 
-const mSTP = ({problems}, props) => {
+const mSTP = ({problems, rooms}, props) => {
     const url = props.match.url.split('/');
     return {
         roomId: url[2],
         problemId: url[4],
-        problems
+        problems,
+        rooms
     };
 };
 
 const mDTP = (dispatch) => {
     return {
-        fetchProblem: (roomId, problemId) => dispatch(fetchProblem(roomId, problemId))
+        fetchProblem: (roomId, problemId) => dispatch(fetchProblem(roomId, problemId)),
+        fetchRooms: () => dispatch(fetchRooms())
     };
 };
 

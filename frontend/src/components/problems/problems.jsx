@@ -15,13 +15,13 @@ const Problems = props => {
         currentRoomId, openModal, rooms} = props;
 
     const [loading, setLoading] = useState(true);
+    const [clicked, setClicked] = useState(false)
 
     const [state, setState] = useState({
         problemType: "seed",
         problems: problems,
         rooms
     });
-
     
     useEffect(() => {
         fetchProblems()
@@ -33,6 +33,7 @@ const Problems = props => {
     const handleCopy = (e) => {
         e.preventDefault()
         navigator.clipboard.writeText(joinRoomLink)
+        setClicked(true)
     };
 
     const seededProblems = [];
@@ -127,6 +128,9 @@ const Problems = props => {
                                     <img src={CopyIcon} alt="" />
                                 </button>
                             </form>
+                        </div>
+                        <div className={`link-copied ${clicked ? "" : "hide"}`}>
+                            Link has been copied!
                         </div>
                     </div>
                 </div>

@@ -93,6 +93,9 @@ const Chat = (props) => {
                                 <div className="chat-blue">
                                     {message.log[0]}
                                 </div>
+                                <div className="log chat-timestamp">
+                                    {getTime(message.timestamp)}
+                                </div>
                                 <div>
                                     {message.log[1]}
                                 </div>
