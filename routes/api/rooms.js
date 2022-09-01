@@ -69,7 +69,7 @@ router.patch('/:roomId/:id/complete', (req, res) => {
         .then(room => {
             room.problems.incomplete.pull(req.params.id)
             room.problems.complete.push(req.params.id)
-            room.save().then(room => res.json(room))
+            room.save().then(room => roomResponse(room).then(room => res.json(room)))
         })
 })
 router.patch('/:roomId/:id/incomplete', (req, res) => {
@@ -77,8 +77,16 @@ router.patch('/:roomId/:id/incomplete', (req, res) => {
         .then(room => {
             room.problems.complete.pull(req.params.id)
             room.problems.incomplete.push(req.params.id)
-            room.save().then(room => res.json(room))
+            room.save().then(room => roomResponse(room).then(room => res.json(room)))
         })
+})
+
+router.patch('/:roomId/sendMessage', (req, res) => {
+    Room.findById(req.params.roomId)
+        .then(room => {
+            room.messages.push({ username: req.body.username, message: req.body.message });
+            room.save().then(room => roomResponse(room).then(room => res.json(room)));
+        });
 })
 
 router.patch('/:id/rename',

@@ -81,6 +81,3 @@ export const patchComplete = (roomId, problemId) => dispatch => (
 export const patchIncomplete = (roomId, problemId) => dispatch => (
     RoomAPIUtil.patchIncomplete(roomId, problemId).then(room => dispatch(receiveRoom(room)))
 );
-
-
-

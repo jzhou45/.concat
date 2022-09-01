@@ -35,3 +35,7 @@ export const patchComplete = (roomId, problemId) => (
 export const patchIncomplete = (roomId, problemId) => (
   axios.patch(`/api/rooms/${roomId}/${problemId}/incomplete`)
 );
+
+export const sendMessage = (roomId, message) => (
+  axios.patch(`/api/rooms/${roomId}/sendMessage`, message)
+);

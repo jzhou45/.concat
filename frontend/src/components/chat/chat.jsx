@@ -3,29 +3,30 @@ import io from 'socket.io-client'
 import SendIcon from '../../assets/images/send-icon.png'
 import { connect } from "react-redux"
 import { useLocation } from 'react-router-dom'
+import { sendMessage } from "../../util/room_api_util"
 
 const socket = io(process.env.PORT || 'http://localhost:3000')
 // const socket = io('https://concat-mern.herokuapp.com')
 
 const Chat = (props) => {
 
-    const userName = props.currentUser.username
     const bottomRef = useRef(null)
-    
     const location = useLocation();
-    const [message, setMessage] = useState('')
-    const [chat, setChat] = useState([])
-    const [typing, setTyping] = useState(false)
-
     const roomId = location.pathname.split('/')[2];
+    const [message, setMessage] = useState('');
+    const [chat, setChat] = useState(null);
+    const [typing, setTyping] = useState(false);
+
+    useEffect(() => {
+        if (props.rooms) setChat(props.rooms[roomId].messages);
+    }, [props.rooms])
     
     useEffect(() => {
         socket.on('message', payload => {
-            const message = { userName: payload.userName, message: payload.message };
-            if (roomId === payload.roomId) setChat([...chat, message]);
+            if (roomId === payload.roomId) setChat([...chat, payload.message]);
         })
         
-        return () => socket.off('message')
+        return () => socket.off('message');
     })
     
     useEffect( () => {
@@ -36,59 +37,55 @@ const Chat = (props) => {
         setTyping(e.currentTarget.value !=="")
     }
 
-    const sendMessage = (e) => {
+    const messageSubmit = (e) => {
         e.preventDefault()
         if (message.trim().length > 0) {
-            socket.emit('message',{userName, message, roomId})
+            const sentMessage = { username: props.username, message };
+            socket.emit('message',{ message: sentMessage, roomId });
+            sendMessage(roomId, sentMessage);
+            setMessage('');
         }
-        setMessage('')
     }
 
-    const content = () => {
-        return (
-            <div className="websocket-container">
-                <div className="messages">
-                    <div className="messages-text">
-                        {chat.map((payload, index) => {
-                            return (
-                                <div className="chat-line" key={index}>
-                                    <div className="chat-user">
-                                        {payload.userName}
-                                    </div>
-                                    <div className="chat-message">
-                                        {payload.message}
-                                    </div>
+    if (chat) return (
+        <div className="websocket-container">
+            <div className="messages">
+                <div className="messages-text">
+                    {chat.map((message, index) => {
+                        return (
+                            <div className="chat-line" key={index}>
+                                <div className="chat-user">
+                                    {message.username}
                                 </div>
-                            )
-                        })}
-                        <div ref={bottomRef} className="bottom-of-div"></div>
-                    </div>
+                                <div className="chat-message">
+                                    {message.message}
+                                </div>
+                            </div>
+                        )
+                    })}
+                    <div ref={bottomRef} className="bottom-of-div"></div>
                 </div>
-                <form className="message-form" onSubmit={sendMessage}>
-                    <input type="text" 
-                    name="message" 
-                    placeholder="Type Message" 
-                    value={message}
-                    className="message-input"
-                    autoComplete="off"
-                    onChange={updateMessage}
-                    />
-                    <button className={`send-message-button ${typing ? "" : "hide"}`} type="">
-                        <img src={SendIcon} alt="" />
-                    </button>
-                </form>
             </div>
-        )
-    }
-    
-    return content()
+            <form className="message-form" onSubmit={messageSubmit}>
+                <input type="text" 
+                name="message" 
+                placeholder="Type Message" 
+                value={message}
+                className="message-input"
+                autoComplete="off"
+                onChange={updateMessage}
+                />
+                <button className={`send-message-button ${typing ? "" : "hide"}`} type="">
+                    <img src={SendIcon} alt="" />
+                </button>
+            </form>
+        </div>
+    )
 }
 
-const mSTP = ({session: {user}}) => {
-    return {
-        currentUser: user,
+const mSTP = ({session, rooms}) => ({
+    username: session.user.username,
+    rooms
+});
 
-    }
-}
-
-export default connect(mSTP, null)(Chat)
+export default connect(mSTP)(Chat);
