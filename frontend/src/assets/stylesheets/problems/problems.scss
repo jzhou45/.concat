@@ -78,6 +78,12 @@
     border-bottom-left-radius: 28px;
     border-bottom-right-radius: 28px;
     overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.seeded-problems-index::-webkit-scrollbar, .custom-problems-index::-webkit-scrollbar{
+    display: none;
 }
 
 .custom-problems-index{

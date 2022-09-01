@@ -169,5 +169,9 @@
                 height: 35px;
                 width: 35px;
             }
+
+            img:hover{
+                filter: invert(54%) sepia(17%) saturate(1742%) hue-rotate(185deg) brightness(93%) contrast(85%);
+            }
     }
 }

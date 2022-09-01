@@ -114,6 +114,12 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.progress-grids-container::-webkit-scrollbar {
+    display: none;
 }
 
 .grid-key {
