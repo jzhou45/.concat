@@ -1,8 +1,11 @@
 import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import closeDropdown from "../util/close_dropdown";
+import { patchComplete, patchIncomplete } from "../../actions/room_actions";
 
 const ProblemListItem = props => {
+
     const { problem, seed=false, query, openModal, currentRoom, problemsListClassName,
     patchComplete, patchIncomplete, rerenderRooms } = props;
     
@@ -23,11 +26,9 @@ const ProblemListItem = props => {
         incompleteQuestions: currentRoom.problems.incomplete
     });
 
-    const checked = (state.completedQuestions)?.includes(problem._id) || false;
-
-    const handleChecks = (e) => {
-        e.preventDefault();
-
+    const handleChange = (e) => {
+        console.log("HANDLECHANGE")
+        console.log(checked)
         if (checked){
             patchIncomplete(currentRoom.id, problem._id).then(() => {
                 const newCompletedQuestions = (state.completedQuestions).filter(problemId => problemId !== problem._id);
@@ -50,11 +51,13 @@ const ProblemListItem = props => {
         };
         rerenderRooms();
     };
+    
+    const checked = currentRoom.problems.complete?.includes(problem._id)
 
     return(
         <div className={`${show(problem, query) ? "" : "hide"} ${problemsListClassName}`}>
             <div className={`individual-problem`}>
-                <input type="checkbox" className="problems-checkbox" onChange={handleChecks} checked={checked} />
+                <input type="checkbox" className="problems-checkbox" onChange={handleChange} checked={checked} />
                 <Link to={`/rooms/${currentRoom.id}/problems/${problem._id}`}>
                     <p>{problem.title}</p>
                 </Link>
@@ -75,4 +78,11 @@ const ProblemListItem = props => {
     );
 };
 
-export default ProblemListItem;
+const mDTP = (dispatch) => {
+    return {
+        patchComplete: (roomId, problemId) => dispatch(patchComplete(roomId, problemId)),
+        patchIncomplete: (roomId, problemId) => dispatch(patchIncomplete(roomId, problemId))
+    }
+}
+
+export default connect(null, mDTP)(ProblemListItem);

@@ -3,7 +3,9 @@ import {
     RECEIVE_ROOM, 
     RECEIVE_ROOMS,
     REMOVE_ROOM,
-    RECEIVE_RENAMED_ROOM
+    RECEIVE_RENAMED_ROOM,
+    RECEIVE_CHECKED,
+    RECEIVE_UNCHECKED
 } from '../actions/room_actions';
 import {RECEIVE_USER_LOGOUT} from '../actions/session_actions'
 
@@ -28,6 +30,12 @@ const roomsReducer = (state = {}, action) => {
             return nextState
         case REMOVE_ROOM: 
             delete nextState[action.roomId];
+            return nextState
+        case RECEIVE_UNCHECKED: 
+            nextState[action.room.data._id] = action.room.data
+            return nextState
+        case RECEIVE_CHECKED: 
+            nextState[action.room.data._id] = action.room.data
             return nextState
         default:
             return state;

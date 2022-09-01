@@ -31,9 +31,7 @@ const ProblemItemContainer = (props) => {
                             <div className="problem-item-title">
                                 <div>
                                     {problemItem.title}
-                                </div>
-                                <div className={`${problemItem.difficulty ? "" : "hide"} problem-difficulty`}>
-                                    <div>
+                                    <div className={`${problemItem.difficulty ? "" : "hide"} problem-difficulty`}>
                                         {problemItem?.difficulty?.toUpperCase()}
                                     </div>
                                 </div>

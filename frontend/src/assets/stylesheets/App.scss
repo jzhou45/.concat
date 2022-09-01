@@ -76,7 +76,8 @@
     right: 0; 
     height: 100%;
     width: 100%;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
     scroll-snap-type: y mandatory;
     a {
         text-decoration: none;

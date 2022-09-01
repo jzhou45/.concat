@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { fetchProblems, fetchCreatedProblems } from "../../actions/problem_actions";
-import { fetchRooms, patchComplete, patchIncomplete } from "../../actions/room_actions";
+import { fetchRooms} from "../../actions/room_actions";
 import { openModal } from "../../actions/modal_actions";
 import { useHistory } from "react-router-dom";
 import Arrow from '../../assets/images/left-arrow-icon.png'
@@ -12,7 +12,7 @@ import LoadingContainer from '../util/loading_container';
 
 const Problems = props => {
     const {fetchRooms, fetchProblems, fetchCreatedProblems, problems, currentRoom,
-        currentRoomId, openModal, patchComplete, patchIncomplete, rooms} = props;
+        currentRoomId, openModal, rooms} = props;
 
     const [loading, setLoading] = useState(true);
 
@@ -154,7 +154,15 @@ const Problems = props => {
                             </div>
                             {seededProblems.sort(compareFn).map((problem, i) => (
                                 
-                                <ProblemListItem seed={true}key={i} problem={problem} currentRoom={currentRoom} query={query} problemsListClassName={"problems-list"} />
+                                <ProblemListItem 
+                                    seed={true}
+                                    key={i} 
+                                    problem={problem} 
+                                    currentRoom={currentRoom} 
+                                    query={query} 
+                                    problemsListClassName={"problems-list"}
+                                    rerenderRooms={rerenderRooms}
+                                />
                             ))}
                         </div>) :
 
@@ -164,11 +172,13 @@ const Problems = props => {
                                 <img className="magnifying-glass" src={SearchIcon} alt="" />
                             </div>
                             {filteredCustomProblems.map((problem, i) => (
-                                <ProblemListItem key={i} problem={problem} 
-                                    currentRoom={currentRoom} query={customQuery} 
+                                <ProblemListItem 
+                                    key={i} 
+                                    problem={problem} 
+                                    currentRoom={currentRoom} 
+                                    query={customQuery} 
                                     problemsListClassName={"custom-problems-list"} 
-                                    openModal={openModal} patchComplete={patchComplete} 
-                                    patchIncomplete={patchIncomplete} 
+                                    openModal={openModal}
                                     rerenderRooms={rerenderRooms}
                                 /> 
                             ))}
@@ -197,9 +207,7 @@ const mDTP = dispatch => ({
     fetchProblems: () => dispatch(fetchProblems()),
     fetchRooms: () => dispatch(fetchRooms()),
     openModal: (modal, props) => dispatch(openModal(modal, props)),
-    fetchCreatedProblems: (roomId) => dispatch(fetchCreatedProblems(roomId)),
-    patchComplete: (roomId, problemId) => dispatch(patchComplete(roomId, problemId)),
-    patchIncomplete: (roomId, problemId) => dispatch(patchIncomplete(roomId, problemId))
+    fetchCreatedProblems: (roomId) => dispatch(fetchCreatedProblems(roomId))
 });
 
 export default connect(mSTP, mDTP)(Problems);
