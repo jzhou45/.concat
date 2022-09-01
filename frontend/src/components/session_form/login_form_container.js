@@ -34,9 +34,11 @@ const LoginForm = props => {
         e.preventDefault();
         const user = Object.assign({}, state);
         if (joinPath) {
+            closeModal();
             joinRoom(roomId).then(() => {
                 history.push(joinPath);
             });
+
         };
         login(user).then(() => {
             if (history.location.pathname === "/rooms"){
