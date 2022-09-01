@@ -36,11 +36,11 @@ const AboutContainer = () => {
                         <div className="member-content">
                             <h1>Deborah Wei</h1>
                             <div className="socials">
-                                <a href="https://github.com/deborahwei">
-                                    <img src={Github} alt="" />
+                                <a href="https://github.com/deborahwei" target="_blank">
+                                    <img src={Github} alt="Deborah's GitHub" />
                                 </a>
-                                <a href="https://www.linkedin.com/in/deborah-wei-163b10152/">
-                                    <img src={Linkedin} alt="" />
+                                <a href="https://www.linkedin.com/in/deborah-wei-163b10152/" target="_blank">
+                                    <img src={Linkedin} alt="Deborah's LinkedIn" />
                                 </a>
                                 <a href="">
                                     <img src={AngelList} alt="" />
@@ -56,8 +56,8 @@ const AboutContainer = () => {
                         <div className="member-content">
                             <h1>Alexander Malos</h1>
                             <div className="socials">
-                                <a href="https://github.com/alexmalos">
-                                    <img src={Github} alt="" />
+                                <a href="https://github.com/alexmalos" target="_blank">
+                                    <img src={Github} alt="Alex's Github" />
                                 </a>
                                 <a href="">
                                     <img src={Linkedin} alt="" />
@@ -78,11 +78,11 @@ const AboutContainer = () => {
                         <div className="member-content">
                             <h1>Jonathan Zhou</h1>
                             <div className="socials">
-                                <a href="https://github.com/jzhou45">
-                                    <img src={Github} alt="" />
+                                <a href="https://github.com/jzhou45" target="_blank">
+                                    <img src={Github} alt="Jonathan's GitHub" />
                                 </a>
-                                <a href="https://www.linkedin.com/in/jonathanzhou77/">
-                                    <img src={Linkedin} alt="" />
+                                <a href="https://www.linkedin.com/in/jonathanzhou77/" target="_blank">
+                                    <img src={Linkedin} alt="Jonathan's LinkedIn" />
                                 </a>
                                 <a href="">
                                     <img src={AngelList} alt="" />
@@ -98,11 +98,11 @@ const AboutContainer = () => {
                         <div className="member-content">
                             <h1>Victor Hoang</h1>
                             <div className="socials">
-                                <a href="https://github.com/victorhoang07">
-                                    <img src={Github} alt="" />
+                                <a href="https://github.com/victorhoang07" target="_blank">
+                                    <img src={Github} alt="Victor's GitHub" />
                                 </a>
-                                <a href="https://www.linkedin.com/in/victorhoang07/">
-                                    <img src={Linkedin} alt="" />
+                                <a href="https://www.linkedin.com/in/victorhoang07/" target="_blank">
+                                    <img src={Linkedin} alt="Victor's LinkedIn" />
                                 </a>
                                 <a href="">
                                     <img src={AngelList} alt="" />

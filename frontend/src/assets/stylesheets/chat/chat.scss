@@ -7,6 +7,7 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
+    z-index: 5;
 }
 
 .websocket.logged-in-nav-container {
@@ -37,6 +38,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.messages::-webkit-scrollbar{
+    display: none;
 }
 
 .messages-text {
@@ -44,6 +51,12 @@
     width: 90%;
     height: 90%;
     word-wrap: break-word;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.messages-text::-webkit-scrollbar {
+    display: none;
 }
 
 .message-form {

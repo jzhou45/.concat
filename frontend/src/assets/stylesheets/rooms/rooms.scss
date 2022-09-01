@@ -63,8 +63,13 @@
     justify-content: flex-start;
     align-items: flex-start;
     flex-wrap: wrap;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
+.rooms::-webkit-scrollbar{
+    display: none;
+}
 
 .room-photo-container {
     background-color: $default-white;
