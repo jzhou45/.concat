@@ -1,11 +1,10 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import closeDropdown from "../util/close_dropdown";
 
-
 const ProblemListItem = props => {
-    const { problem, seed=false, query, openModal, currentRoom, problemsListClassName } = props;
-
+    const { problem, seed=false, query, openModal, currentRoom, problemsListClassName,
+    patchComplete, patchIncomplete, rerenderRooms } = props;
     
     const openRef = useRef(null);
     const [open, setOpen] = closeDropdown(openRef, false);
@@ -19,11 +18,43 @@ const ProblemListItem = props => {
         return problem?.title?.toLowerCase().includes(searchQuery?.toLowerCase());
     };
 
+    const [state, setState] = useState({
+        completedQuestions: currentRoom.problems.complete,
+        incompleteQuestions: currentRoom.problems.incomplete
+    });
+
+    const checked = (state.completedQuestions)?.includes(problem._id) || false;
+
+    const handleChecks = (e) => {
+        e.preventDefault();
+
+        if (checked){
+            patchIncomplete(currentRoom.id, problem._id).then(() => {
+                const newCompletedQuestions = (state.completedQuestions).filter(problemId => problemId !== problem._id);
+                const newIncompleteQuestions = state.incompleteQuestions.concat([problem._id]);
+                setState({
+                    completedQuestions: newCompletedQuestions,
+                    incompleteQuestions: newIncompleteQuestions
+                })
+            });
+            
+        } else{
+            patchComplete(currentRoom.id, problem._id).then(() => {
+                const newCompletedQuestions = (state.completedQuestions).filter(problemId => problemId !== problem._id);
+                const newIncompleteQuestions = state.incompleteQuestions.concat([problem._id]);
+                setState({
+                    completedQuestions: newCompletedQuestions,
+                    incompleteQuestions: newIncompleteQuestions
+                });
+            });
+        };
+        rerenderRooms();
+    };
 
     return(
         <div className={`${show(problem, query) ? "" : "hide"} ${problemsListClassName}`}>
             <div className={`individual-problem`}>
-                <input type="checkbox" className="problems-checkbox"/>
+                <input type="checkbox" className="problems-checkbox" onChange={handleChecks} checked={checked} />
                 <Link to={`/rooms/${currentRoom.id}/problems/${problem._id}`}>
                     <p>{problem.title}</p>
                 </Link>

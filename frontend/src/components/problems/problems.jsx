@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { fetchProblems, fetchCreatedProblems } from "../../actions/problem_actions";
-import { fetchRooms } from "../../actions/room_actions";
+import { fetchRooms, patchComplete, patchIncomplete } from "../../actions/room_actions";
 import { openModal } from "../../actions/modal_actions";
 import { useHistory } from "react-router-dom";
 import Arrow from '../../assets/images/left-arrow-icon.png'
@@ -11,22 +11,25 @@ import CopyIcon from '../../assets/images/copy-icon.png'
 import LoadingContainer from '../util/loading_container';
 
 const Problems = props => {
-    const {currentRoomId} = props
+    const {fetchRooms, fetchProblems, fetchCreatedProblems, problems, currentRoom,
+        currentRoomId, openModal, patchComplete, patchIncomplete, rooms} = props;
 
     const [loading, setLoading] = useState(true);
 
     const [state, setState] = useState({
         problemType: "seed",
-        problems: props.problems
+        problems: problems,
+        rooms
     });
 
+    
     useEffect(() => {
-        props.fetchProblems()
-            .then( () => props.fetchRooms())
-            .then( () => props.fetchCreatedProblems(props.currentRoomId))
-            .finally( () => setLoading(false))
+        fetchProblems()
+        .then( () => fetchRooms())
+        .then( () => fetchCreatedProblems(currentRoomId))
+        .finally( () => setLoading(false))
     }, []);
-
+    
     const handleCopy = (e) => {
         e.preventDefault()
         navigator.clipboard.writeText(joinRoomLink)
@@ -36,7 +39,7 @@ const Problems = props => {
     const customProblems = [];
 
     
-    for (let problem of Object.values(props.problems)){
+    for (let problem of Object.values(problems)){
         if (problem.seed){
             seededProblems.push(problem);
         } else{
@@ -46,7 +49,7 @@ const Problems = props => {
 
     const filteredCustomProblems = [];
     for (let problem of customProblems){
-        if (problem.room === props.currentRoomId){
+        if (problem.room === currentRoomId){
             filteredCustomProblems.push(problem);
         };
     };
@@ -74,7 +77,7 @@ const Problems = props => {
     };
 
     const history = useHistory();
-    const joinRoomLink = `localhost:3000/#/rooms/${props.currentRoomId}/join`;
+    const joinRoomLink = `localhost:3000/#/rooms/${currentRoomId}/join`;
 
     const [query, setQuery] = useState('')
     const updateQuery = (e) => {
@@ -91,11 +94,17 @@ const Problems = props => {
     };
 
     const rerenderProblems = () => {
-        props.fetchCreatedProblems(props.currentRoomId).then(problems => {
+        fetchCreatedProblems(currentRoomId).then(problems => {
             setState({
                 problems
             });
         });
+    };
+
+    const rerenderRooms = () => {
+        fetchRooms().then(rooms => setState({
+            rooms
+        }));
     };
 
     const content = () => {
@@ -104,8 +113,8 @@ const Problems = props => {
                 <div className="problems-header">
                     <img src={Arrow} className="back-to-rooms" onClick={handleClick} />
                     <div className="room-info">
-                        <h1>{props.currentRoom?.name}</h1>
-                        <div className={`link ${props.currentRoom?.solo ? "hide" : ""}`}>
+                        <h1>{currentRoom?.name}</h1>
+                        <div className={`link ${currentRoom?.solo ? "hide" : ""}`}>
                             <form className="link-form">
                                 <input 
                                 type="text" 
@@ -129,7 +138,7 @@ const Problems = props => {
                         <div className="your-problems" onClick={() => seededOrCustomQuestions("custom")}>
                             <div></div>
                             <span>Your Problems</span>
-                            <div onClick={() => props.openModal("createproblem", {currentRoom: props.currentRoomId, rerenderProblems: rerenderProblems})}>
+                            <div onClick={() => openModal("createproblem", {currentRoom: currentRoomId, rerenderProblems: rerenderProblems})}>
                                 <img src="https://icons-for-free.com/iconfiles/png/512/pencil-131965017493514588.png" alt="Edit" className="edit-problems" />
                             </div>
                         </div>
@@ -144,8 +153,8 @@ const Problems = props => {
                                 <img className="magnifying-glass" src={SearchIcon} alt="" />
                             </div>
                             {seededProblems.sort(compareFn).map((problem, i) => (
-
-                                <ProblemListItem seed={true}key={i} problem={problem} currentRoom={props.currentRoom} query={query} problemsListClassName={"problems-list"} openModal={props.openModal} />
+                                
+                                <ProblemListItem seed={true}key={i} problem={problem} currentRoom={currentRoom} query={query} problemsListClassName={"problems-list"} />
                             ))}
                         </div>) :
 
@@ -155,7 +164,13 @@ const Problems = props => {
                                 <img className="magnifying-glass" src={SearchIcon} alt="" />
                             </div>
                             {filteredCustomProblems.map((problem, i) => (
-                                <ProblemListItem key={i} problem={problem} currentRoom={props.currentRoom} query={customQuery} problemsListClassName={"custom-problems-list"} openModal={props.openModal} /> 
+                                <ProblemListItem key={i} problem={problem} 
+                                    currentRoom={currentRoom} query={customQuery} 
+                                    problemsListClassName={"custom-problems-list"} 
+                                    openModal={openModal} patchComplete={patchComplete} 
+                                    patchIncomplete={patchIncomplete} 
+                                    rerenderRooms={rerenderRooms}
+                                /> 
                             ))}
                         </div>)
                     }       
@@ -171,10 +186,10 @@ const mSTP = (state, ownProps) => {
     const currentRoomId = ownProps.location.pathname.split("/")[2];
     return {
         problems: state.problems,
-        rooms: state.rooms,
         currentUser: state.session.user.username,
         currentRoom: state.rooms[currentRoomId],
-        currentRoomId: currentRoomId
+        currentRoomId: currentRoomId,
+        rooms: state.rooms
     };
 };
 
@@ -183,6 +198,8 @@ const mDTP = dispatch => ({
     fetchRooms: () => dispatch(fetchRooms()),
     openModal: (modal, props) => dispatch(openModal(modal, props)),
     fetchCreatedProblems: (roomId) => dispatch(fetchCreatedProblems(roomId)),
+    patchComplete: (roomId, problemId) => dispatch(patchComplete(roomId, problemId)),
+    patchIncomplete: (roomId, problemId) => dispatch(patchIncomplete(roomId, problemId))
 });
 
 export default connect(mSTP, mDTP)(Problems);
