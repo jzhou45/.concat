@@ -50,7 +50,7 @@ const ProblemListItem = props => {
                 rerenderRooms("custom")
             });
         }
-    }, 500));
+    }, 100));
     
     const checked = currentRoom.problems.complete?.includes(problem._id)
 
