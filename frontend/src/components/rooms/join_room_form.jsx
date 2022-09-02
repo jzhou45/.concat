@@ -1,12 +1,13 @@
 import React, {useState} from "react";
 import { connect } from "react-redux";
 import CopyIcon from '../../assets/images/copy-icon.png'
+import { linkPrefix } from "../../util/constants_util";
 
 const JoinRoomForm = (props) => {
     
     const {roomId} = props
 
-    const joinRoomLink = `https://concat-mern.herokuapp.com/#/rooms/${roomId}/join`
+    const joinRoomLink = `${linkPrefix}/#/rooms/${roomId}/join`
     const [clicked, setClicked] = useState(false)
 
     const handleClick = (e) => {

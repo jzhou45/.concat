@@ -7,10 +7,9 @@ import { useEffect } from 'react'
 
 const NewJoinContainer = (props) => {
 
-    const {joinRoom, roomId, currentUser, path} = props
-    const history = useHistory()
+    const {roomId, currentUser, path} = props
 
-    return currentUser.id ? <LoggedInJoin path={path}/> : <LoggedOutJoin roomId={roomId} path={path}/>
+    return currentUser?.id ? <LoggedInJoin path={path}/> : <LoggedOutJoin roomId={roomId} path={path}/>
 }
 
 const mSTP = ({session}, props) => {

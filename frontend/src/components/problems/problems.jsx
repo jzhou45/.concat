@@ -9,6 +9,7 @@ import SearchIcon from '../../assets/images/search-icon.png'
 import ProblemListItem from "./problem_list_item";
 import CopyIcon from '../../assets/images/copy-icon.png'
 import LoadingContainer from '../util/loading_container';
+import { linkPrefix } from "../../util/constants_util"
 
 const Problems = props => {
     const {fetchRooms, fetchProblems, fetchCreatedProblems, problems, currentRoom,
@@ -84,7 +85,7 @@ const Problems = props => {
     };
 
     const history = useHistory();
-    const joinRoomLink = `https://concat-mern.herokuapp.com/#/rooms/${currentRoomId}/join`;
+    const joinRoomLink = `${linkPrefix}/#/rooms/${currentRoomId}/join`;
 
     const [query, setQuery] = useState('')
     const updateQuery = (e) => {
