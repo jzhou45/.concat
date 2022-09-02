@@ -107,7 +107,7 @@
 .deborah.member-container {
 
     .member-content {
-        outline: 3px solid #663c33;
+        box-shadow: 0 0 0 3px #663c33;
         border: 1px solid white;
     }
 }
@@ -141,7 +141,7 @@
     }
 
     .member-content {
-        outline:  3px solid #653a36;
+        box-shadow: 0 0 0 3px #653a36;
         border: 1px solid white;
     }
 }
