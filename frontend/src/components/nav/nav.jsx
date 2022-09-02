@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import Chat from '../chat/chat'
 import { useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const LoggedInNav = (props) => {
     
@@ -41,6 +42,13 @@ const LoggedInNav = (props) => {
                             Logout
                         </div>
                     </div>
+                    <Link to={"/about"}>
+                        <div className='logout-button'>
+                            <div>
+                                About Team
+                            </div>
+                        </div>
+                    </Link>
                 </div>
             </div>
         )
@@ -60,7 +68,11 @@ const LoggedInNav = (props) => {
         )
     }
 
-    if (Object.keys(rooms).length > 0) return currentUsersUsername ? location.pathname !== "/rooms" && !roomIsUsers() ? chat() : content() : ""
+    console.log(location.pathname)
+
+    if (Object.keys(rooms).length > 0) return currentUsersUsername && location.pathname !== "/about" 
+        ? location.pathname !== "/rooms" && !roomIsUsers() 
+        ? chat() : content() : ""
 }
 
 const mSTP = ({session: {user}, rooms}) => {

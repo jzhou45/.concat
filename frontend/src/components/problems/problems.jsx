@@ -17,6 +17,12 @@ const Problems = props => {
     const [loading, setLoading] = useState(true);
     const [clicked, setClicked] = useState(false)
 
+    setTimeout( ()=> {
+        if (clicked) {
+            setClicked(false)
+        }
+    }, 700)
+
     const [state, setState] = useState({
         problemType: "seed",
         problems: problems,
