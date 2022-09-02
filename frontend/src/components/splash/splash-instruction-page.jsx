@@ -4,11 +4,11 @@ import { instructionsHeading, instructionsText } from '../../util/constants_util
 
 const SplashInstructionPageContainer = (props) => {
 
-    const {pageNumber, pageWord, image} = props
+    const {pageNumber, arrowRef=null, pageWord, image} = props
 
     const content = () => {
         return (
-        <div className={`splash-${pageWord}-page`}>
+        <div ref={arrowRef} className={`splash-${pageWord}-page`}>
             <div className='splash-instructions-left'>
                 <div className={`splash-text ${pageNumber % 2 === 0? "hide" : ""}`}>
                     <h1>{instructionsHeading[pageNumber]}</h1>
