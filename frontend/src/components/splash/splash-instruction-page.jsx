@@ -1,10 +1,9 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { instructionsHeading, instructionsText } from '../../util/constants_util'
+import React from 'react';
+import { instructionsHeading, instructionsText } from '../../util/constants_util';
 
 const SplashInstructionPageContainer = (props) => {
 
-    const {pageNumber, arrowRef=null, pageWord, image} = props
+    const {pageNumber, arrowRef=null, pageWord, image} = props;
 
     const content = () => {
         return (
@@ -28,10 +27,10 @@ const SplashInstructionPageContainer = (props) => {
                     </div>
                 </div>
         </div>
-        )
-    }
+        );
+    };
 
-    return content()
-}
+    return content();
+};
 
-export default SplashInstructionPageContainer
+export default SplashInstructionPageContainer;
