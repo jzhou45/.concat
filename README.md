@@ -28,13 +28,13 @@
 
 User authentication: login, logout, and signup
 
-![][https://github.com/jzhou45/.concat/blob/main/frontend/src/assets/images/user-auth.gif]
+![](https://github.com/jzhou45/.concat/blob/main/frontend/src/assets/images/user-auth.gif)
 
 ### Rooms 
 
 Users can create rooms and invite their friends or classmates to be part of the room. By directly sending the room's link to their friends, they will be prompted to login or create a new account. Users have the option to leave or delete rooms. Upon account creation, every user will have their own personal rooms to work by themselves.
 
-![](  https://github.com/jzhou45/.concat/blob/main/frontend/src/assets/images/rooms.gif)
+![](https://github.com/jzhou45/.concat/blob/main/frontend/src/assets/images/rooms.gif)
 
 ### Problems
 
