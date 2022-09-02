@@ -9,7 +9,7 @@ const EditProblemForm = (props) => {
     
     const dispatch = useDispatch();
 
-    const {room, problem, errors} = props;
+    const {room, problem} = props;
 
     const [state, setState] = useState({
         title: problem.title,
@@ -97,7 +97,7 @@ const EditProblemForm = (props) => {
                                     <label htmlFor="easy">Easy
                                     </label>
                                     <input 
-                                        onClick={handleUpdate("difficulty")} 
+                                        onChange={handleUpdate("difficulty")} 
                                         name="difficulty" 
                                         id="easy" 
                                         type="radio" 
@@ -108,12 +108,12 @@ const EditProblemForm = (props) => {
                                 <div>
                                     <label htmlFor="medium">Medium
                                     </label>
-                                    <input  onClick={handleUpdate("difficulty")} name="difficulty" id="medium" type="radio" value="medium" checked={state.difficulty === "medium"}/>
+                                    <input  onChange={handleUpdate("difficulty")} name="difficulty" id="medium" type="radio" value="medium" checked={state.difficulty === "medium"}/>
                                 </div>
                                 <div>
                                     <label htmlFor="hard">Hard
                                     </label>
-                                    <input  onClick={handleUpdate("difficulty")} name="difficulty" id="hard" type="radio" value="hard" checked={state.difficulty === "hard"}/>
+                                    <input  onChange={handleUpdate("difficulty")} name="difficulty" id="hard" type="radio" value="hard" checked={state.difficulty === "hard"}/>
                                 </div>
                         </div>
                     </label>
