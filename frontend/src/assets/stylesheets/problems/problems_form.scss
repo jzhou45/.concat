@@ -20,7 +20,7 @@
     justify-content: center;
     align-items: center;
 
-    height: 100px;
+    height: 60px;
     font-weight: $logo-font-weight;
     font-size: $logo-font-size;
 }
@@ -32,7 +32,6 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-
     input, textarea {
         outline: 0;
         border: 3px solid $default-lightblue;
@@ -65,7 +64,10 @@
     text-indent: 10px;
 
     p.problems-errors{
-        margin-top: 5px;
+        color: $default-lightblue;
+        font-size: $error-font-size;
+        margin-top: -5px;
+        margin-bottom: 5px;
     }
 }
 
@@ -110,6 +112,8 @@
 
     input {
         border: 0px;
+        margin: 0;
+        margin-bottom: 3px;
     }
 
     div {
@@ -121,6 +125,7 @@
         label {
             margin-right: 5px;
             margin-bottom: 5px;
+            width: fit-content;
         }
     }
 }
@@ -137,11 +142,4 @@
     &:hover {
         filter: brightness(0.7);
     }
-}
-
-p.problems-errors{
-    color: $default-lightblue;
-    font-size: $error-font-size;
-    margin-top: -5px;
-    margin-bottom: 5px;
 }
