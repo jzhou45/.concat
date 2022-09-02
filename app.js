@@ -59,9 +59,13 @@ io.on('connection', socket => {
     io.emit('codeChange', payload);
   });
 
-  socket.on('documentSaved', userId => {
-    io.emit('documentSaved', userId);
+  socket.on('documentSaved', payload => {
+    io.emit('documentSaved', payload);
   });
+
+  // socket.on('receiveResult', payload => {
+  //   io.emit('receiveResult', payload);
+  // });
 })
 
 // server.listen(8000, () => console.log('Websocket listening at port: 8000'))

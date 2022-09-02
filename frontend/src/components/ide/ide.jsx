@@ -5,7 +5,7 @@ import { fetchDocument, createDocument, updateDocument } from "../../actions/doc
 import io from 'socket.io-client';
 import { timeSince } from "../util/function_util";
 
-const socket = io('https://concat-mern.herokuapp.com/#/');
+const socket = io('https://concat-mern.herokuapp.com');
 
 export const IDE = props => {
     const {roomId, problemId, problem, fetchDocument, createDocument, updateDocument, user, document} = props;
@@ -81,10 +81,15 @@ export const IDE = props => {
             ((typeof funcReturn === 'string' || typeof funcReturn === 'number' || typeof funcReturn === 'boolean') &&
             funcReturn === parsedSolution)) {
                 setResult(['Correct Answer'].concat(resultArray));
+                // socket.emit('receiveResult', { result: ['Correct Answer'].concat(resultArray), roomId, problemId });
             }
-            else setResult(['Wrong Answer'].concat(resultArray));
+            else {
+                setResult(['Wrong Answer'].concat(resultArray));
+                // socket.emit('receiveResult', { result: ['Wrong Answer'].concat(resultArray), roomId, problemId });
+            }
         } catch (error) {
             setResult(errorArray(error));
+            // socket.emit('receiveResult', { result: errorArray(error), roomId, problemId });
         }
     };
 
@@ -109,14 +114,23 @@ export const IDE = props => {
             }
         });
 
-        socket.on('documentSaved', userId => {
-            if (user.id !== userId) fetchDocument(roomId, problemId);
-            setSaved(true);
+        socket.on('documentSaved', payload => {
+            if (roomId === payload.roomId && problemId === payload.problemId) {
+                if (user.id !== payload.userId) fetchDocument(roomId, problemId);
+                setSaved(true);
+            }
         });
+
+        // socket.on('receiveResult', payload => {
+        //     if (roomId === payload.roomId && problemId === payload.problemId) {
+        //         setResult(payload.result);
+        //     }
+        // });
 
         return () => {
             socket.off('codeChange');
             socket.off('documentSaved');
+            // socket.off('receiveResult');
         };
     }, []);
 
@@ -127,7 +141,7 @@ export const IDE = props => {
             createDocument(roomId, problemId, { body, lastEditor });
         }
 
-        socket.emit('documentSaved', user.id);
+        socket.emit('documentSaved', { userId: user.id, roomId, problemId });
     }, 2000)
 
     return (
