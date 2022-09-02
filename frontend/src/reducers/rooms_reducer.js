@@ -31,11 +31,13 @@ const roomsReducer = (state = {}, action) => {
         case REMOVE_ROOM: 
             delete nextState[action.roomId];
             return nextState
-        case RECEIVE_UNCHECKED: 
-            nextState[action.room.data._id] = action.room.data
+        case RECEIVE_UNCHECKED:
+            console.log(nextState)
+            nextState[action.room.data.id] = action.room.data
             return nextState
         case RECEIVE_CHECKED: 
-            nextState[action.room.data._id] = action.room.data
+            console.log(nextState)
+            nextState[action.room.data.id] = action.room.data
             return nextState
         default:
             return state;
