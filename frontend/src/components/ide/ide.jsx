@@ -89,7 +89,7 @@ export const IDE = props => {
     };
 
     const handleEditorChange = value => {
-        socket.emit('codeChange', {value, userId: user.id});
+        socket.emit('codeChange', {value, userId: user.id, roomId, problemId});
         setTestCode(value);
     };
 
@@ -97,14 +97,16 @@ export const IDE = props => {
         let timeoutId = null;
 
         socket.on('codeChange', payload => {
-            if (user.id === payload.userId) {
-                if (timeoutId) clearTimeout(timeoutId);
-                timeoutId = autosave(payload.value, user.username);
-            } else {
-                setCode(payload.value);
-                setTestCode(payload.value);
+            if (roomId === payload.roomId && problemId === payload.problemId) {
+                if (user.id === payload.userId) {
+                    if (timeoutId) clearTimeout(timeoutId);
+                    timeoutId = autosave(payload.value, user.username);
+                } else {
+                    setCode(payload.value);
+                    setTestCode(payload.value);
+                }
+                setSaved(false);
             }
-            setSaved(false);
         });
 
         socket.on('documentSaved', userId => {
