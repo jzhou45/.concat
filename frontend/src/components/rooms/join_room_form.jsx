@@ -15,6 +15,12 @@ const JoinRoomForm = (props) => {
         setClicked(true)
     }
 
+    setTimeout( ()=> {
+        if (clicked) {
+            setClicked(false)
+        }
+    }, 700)
+
     const content = () => {
         return (
             <div className="join room-form">
