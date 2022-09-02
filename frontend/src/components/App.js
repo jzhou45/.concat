@@ -5,7 +5,7 @@ import { Switch, Route} from 'react-router-dom';
 import Splash from './splash/splash';
 import Nav from './nav/nav'
 import Rooms from './rooms/rooms'
-import css from "../assets/stylesheets/App.scss"
+import "../assets/stylesheets/App.scss";
 import Problems from './problems/problems';
 import NewJoinContainer from './rooms/new_join'
 import ProblemItemContainer from './problems/problem_item';
