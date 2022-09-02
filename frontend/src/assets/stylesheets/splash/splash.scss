@@ -103,8 +103,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+    
     img {
+    object-fit: contain;
     height: 70%;
     width: 100%;
     } 
