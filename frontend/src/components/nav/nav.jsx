@@ -68,8 +68,6 @@ const LoggedInNav = (props) => {
         )
     }
 
-    console.log(location.pathname)
-
     if (Object.keys(rooms).length > 0) return currentUsersUsername && location.pathname !== "/about" 
         ? location.pathname !== "/rooms" && !roomIsUsers() 
         ? chat() : content() : ""

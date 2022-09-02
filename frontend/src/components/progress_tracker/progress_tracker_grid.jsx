@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux';
-import LoadingContainer from '../util/loading_container';
 import { fetchCreatedProblems } from '../../actions/problem_actions';
 import ProgressTrackerSquare from './progress_tracker_square';
 
@@ -32,8 +31,6 @@ const ProgressTrackerGrid = (props) => {
                 <div className='outer-grid-container'>
                     <div className="grid-container">
                         {   
-                            // allRoomProblems.map((problem, i) => console.log(completedProblems, completedProblems.includes(problem._id), problem._id===completedProblems[0])
-                            // )
                             allRoomProblems.map((problem, i) => <ProgressTrackerSquare
                             key={i}
                             problem={problem}

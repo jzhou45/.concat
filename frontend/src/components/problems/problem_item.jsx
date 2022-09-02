@@ -13,8 +13,6 @@ const ProblemItemContainer = (props) => {
     const [loading, setLoading] = useState(true);
     const history = useHistory()
 
-    console.log(rooms)
-
     useEffect( () => {
         if (Object.keys(rooms).length === 0) {
             fetchRooms()

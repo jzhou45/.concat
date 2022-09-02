@@ -32,11 +32,9 @@ const roomsReducer = (state = {}, action) => {
             delete nextState[action.roomId];
             return nextState
         case RECEIVE_UNCHECKED:
-            console.log(nextState)
             nextState[action.room.data.id] = action.room.data
             return nextState
         case RECEIVE_CHECKED: 
-            console.log(nextState)
             nextState[action.room.data.id] = action.room.data
             return nextState
         default:
