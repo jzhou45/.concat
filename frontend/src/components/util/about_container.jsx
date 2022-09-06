@@ -42,7 +42,7 @@ const AboutContainer = () => {
                                 <a href="https://www.linkedin.com/in/deborah-wei-163b10152/" target="_blank">
                                     <img src={Linkedin} alt="Deborah's LinkedIn" />
                                 </a>
-                                <a href="">
+                                <a href="https://angel.co/u/deborahwei">
                                     <img src={AngelList} alt="" />
                                 </a>
                                 <a href="">
@@ -59,10 +59,10 @@ const AboutContainer = () => {
                                 <a href="https://github.com/alexmalos" target="_blank">
                                     <img src={Github} alt="Alex's Github" />
                                 </a>
-                                <a href="">
+                                <a href="https://www.linkedin.com/in/alexander-malos/">
                                     <img src={Linkedin} alt="" />
                                 </a>
-                                <a href="">
+                                <a href="https://angel.co/u/alexander-malos">
                                     <img src={AngelList} alt="" />
                                 </a>
                                 <a href="">
@@ -84,7 +84,7 @@ const AboutContainer = () => {
                                 <a href="https://www.linkedin.com/in/jonathanzhou77/" target="_blank">
                                     <img src={Linkedin} alt="Jonathan's LinkedIn" />
                                 </a>
-                                <a href="">
+                                <a href="https://angel.co/u/jonathan-zhou-5">
                                     <img src={AngelList} alt="" />
                                 </a>
                                 <a href="">
@@ -104,7 +104,7 @@ const AboutContainer = () => {
                                 <a href="https://www.linkedin.com/in/victorhoang07/" target="_blank">
                                     <img src={Linkedin} alt="Victor's LinkedIn" />
                                 </a>
-                                <a href="">
+                                <a href="https://angel.co/u/victor-hoang-07">
                                     <img src={AngelList} alt="" />
                                 </a>
                                 <a href="">
