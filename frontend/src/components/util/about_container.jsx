@@ -42,11 +42,11 @@ const AboutContainer = () => {
                                 <a href="https://www.linkedin.com/in/deborah-wei-163b10152/" target="_blank">
                                     <img src={Linkedin} alt="Deborah's LinkedIn" />
                                 </a>
-                                <a href="https://angel.co/u/deborahwei">
-                                    <img src={AngelList} alt="" />
+                                <a href="https://angel.co/u/deborahwei" target="_blank">
+                                    <img src={AngelList} alt="Deborah's AngelList" />
                                 </a>
-                                <a href="">
-                                    <img src={PersonalSite} alt="" />
+                                <a href="https://deborahwei.dev/">
+                                    <img src={PersonalSite} alt="Deborah's Personal Site" />
                                 </a>
                             </div>
                         </div>
@@ -60,10 +60,10 @@ const AboutContainer = () => {
                                     <img src={Github} alt="Alex's Github" />
                                 </a>
                                 <a href="https://www.linkedin.com/in/alexander-malos/">
-                                    <img src={Linkedin} alt="" />
+                                    <img src={Linkedin} alt="Alex's LinkedIn" />
                                 </a>
-                                <a href="https://angel.co/u/alexander-malos">
-                                    <img src={AngelList} alt="" />
+                                <a href="https://angel.co/u/alexander-malos" target="_blank">
+                                    <img src={AngelList} alt="Alex's AngelList" />
                                 </a>
                                 <a href="">
                                     <img src={PersonalSite} alt="" />
@@ -84,11 +84,11 @@ const AboutContainer = () => {
                                 <a href="https://www.linkedin.com/in/jonathanzhou77/" target="_blank">
                                     <img src={Linkedin} alt="Jonathan's LinkedIn" />
                                 </a>
-                                <a href="https://angel.co/u/jonathan-zhou-5">
-                                    <img src={AngelList} alt="" />
+                                <a href="https://angel.co/u/jonathan-zhou-5" target="_blank">
+                                    <img src={AngelList} alt="Jonathan's AngelList" />
                                 </a>
-                                <a href="">
-                                    <img src={PersonalSite} alt="" />
+                                <a href="https://jzhou45.github.io/" target="_blank">
+                                    <img src={PersonalSite} alt="Jonathan's Personal Site" />
                                 </a>
                             </div>
                         </div>
@@ -104,8 +104,8 @@ const AboutContainer = () => {
                                 <a href="https://www.linkedin.com/in/victorhoang07/" target="_blank">
                                     <img src={Linkedin} alt="Victor's LinkedIn" />
                                 </a>
-                                <a href="https://angel.co/u/victor-hoang-07">
-                                    <img src={AngelList} alt="" />
+                                <a href="https://angel.co/u/victor-hoang-07" target="_blank">
+                                    <img src={AngelList} alt="Victor's AngelList" />
                                 </a>
                                 <a href="">
                                     <img src={PersonalSite} alt="" />
