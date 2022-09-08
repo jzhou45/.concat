@@ -45,7 +45,7 @@ const AboutContainer = () => {
                                 <a href="https://angel.co/u/deborahwei" target="_blank">
                                     <img src={AngelList} alt="Deborah's AngelList" />
                                 </a>
-                                <a href="https://deborahwei.dev/">
+                                <a href="https://deborahwei.dev/" target="_blank">
                                     <img src={PersonalSite} alt="Deborah's Personal Site" />
                                 </a>
                             </div>
