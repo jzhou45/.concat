@@ -31,10 +31,12 @@ const RoomItemContainer = (props) => {
         openModal("leaveroom", {roomId: room.id})
     }
 
+    const showMenu = (solo || roomName === "Create Room") ? "hide" : "";
+
     const content = () => {
         return (
             <div className={`${show ? "" : "hide"} room-container`}>
-                <div onClick={handleClick} className={`options-trigger ${solo? "hide" : ""}`}>
+                <div onClick={handleClick} className={`options-trigger ${showMenu}`}>
                     <div className={`${solo ? "hide" : ""}`}>
                         ...
                     </div>
