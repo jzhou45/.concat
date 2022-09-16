@@ -65,7 +65,7 @@ const AboutContainer = () => {
                                 <a href="https://angel.co/u/alexander-malos" target="_blank">
                                     <img src={AngelList} alt="Alex's AngelList" />
                                 </a>
-                                <a href="">
+                                <a href="https://alexmalos.dev/" target="_blank">
                                     <img src={PersonalSite} alt="" />
                                 </a>
                             </div>
@@ -107,7 +107,7 @@ const AboutContainer = () => {
                                 <a href="https://angel.co/u/victor-hoang-07" target="_blank">
                                     <img src={AngelList} alt="Victor's AngelList" />
                                 </a>
-                                <a href="">
+                                <a href="https://victorhoang.dev/" target="_blank">
                                     <img src={PersonalSite} alt="" />
                                 </a>
                             </div>
