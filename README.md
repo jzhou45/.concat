@@ -5,7 +5,7 @@
 
 ## Background 
 
-[.concat](https://concat-mern.herokuapp.com) is a MERN stack web application that is geared towards engineers to practice Leetcode questions collaboratively with their friends or classmates. Users would create rooms which they can invite their friends into with a unique room link. THere, they can either choose to use one of the default 75 questions or create their own questions. After selecting a question to work on, they can go into the problem's room where there will be live chat functionality that allows for easy communication as well as live share of IDE to make it easy to work together.    
+[.concat](https://concat.herokuapp.com) is a MERN stack web application that is geared towards engineers to practice Leetcode questions collaboratively with their friends or classmates. Users would create rooms which they can invite their friends into with a unique room link. THere, they can either choose to use one of the default 75 questions or create their own questions. After selecting a question to work on, they can go into the problem's room where there will be live chat functionality that allows for easy communication as well as live share of IDE to make it easy to work together.    
 
 ## Technologies Used
 
