@@ -59,7 +59,7 @@ const AboutContainer = () => {
                                 <a href="https://github.com/alexmalos" target="_blank">
                                     <img src={Github} alt="Alex's Github" />
                                 </a>
-                                <a href="https://www.linkedin.com/in/alexander-malos/">
+                                <a href="https://www.linkedin.com/in/alexander-malos/" target="_blank">
                                     <img src={Linkedin} alt="Alex's LinkedIn" />
                                 </a>
                                 <a href="https://angel.co/u/alexander-malos" target="_blank">
