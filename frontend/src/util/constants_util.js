@@ -12,6 +12,6 @@ export const instructionsText = [
 
 export const demoUsername = "demo user"
 
-export const linkPrefix = "https://concat-mern.herokuapp.com"
+export const linkPrefix = "https://concat.herokuapp.com"
 
 //localhost:3000

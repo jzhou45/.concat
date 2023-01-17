@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom'
 import { sendMessage } from "../../util/room_api_util"
 
 // const socket = io(process.env.PORT || 'http://localhost:3000')
-const socket = io('https://concat-mern.herokuapp.com')
+const socket = io('https://concat.herokuapp.com')
 
 const Chat = (props) => {
 
